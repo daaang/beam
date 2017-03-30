@@ -18,7 +18,7 @@
 from hamcrest import *
 import unittest
 
-from beam.emoji_lib import EMOJI_BY_NAME
+from beam.emoji_lib import EMOJI_BY_NAME, EMOJI_BY_CHAR
 
 EMOJI_SO_FAR = (
     ("⚡️", "zap"),
@@ -33,3 +33,7 @@ class TestNothing (unittest.TestCase):
     def test_emoji_by_name (self):
         for c, n in EMOJI_SO_FAR:
             assert_that(EMOJI_BY_NAME[n], is_(equal_to(c)))
+
+    def test_emoji_names_by_char (self):
+        for c, n in EMOJI_SO_FAR:
+            assert_that(EMOJI_BY_CHAR[c], is_(equal_to(n)))
