@@ -105,7 +105,7 @@ setup(
         " :: ".join(("Programming Language", "Python", "3", "Only")),
     ],
 
-    packages=["beam"],
+    packages=["beam", "beam.emoji_lib"],
     package_dir={"": "lib"},
     ext_modules=get_ext_modules("lib/beam"),
 )

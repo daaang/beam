@@ -18,6 +18,8 @@
 from hamcrest import *
 import unittest
 
+from beam.emoji_lib import EMOJI_BY_NAME
+
 class TestNothing (unittest.TestCase):
 
     def test_working_test_environment (self): pass
