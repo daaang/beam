@@ -20,6 +20,16 @@ import unittest
 
 from beam.emoji_lib import EMOJI_BY_NAME
 
+EMOJI_SO_FAR = (
+    ("⚡️", "zap"),
+    ("📚", "books"),
+    ("✅", "white_check_mark"),
+)
+
 class TestNothing (unittest.TestCase):
 
     def test_working_test_environment (self): pass
+
+    def test_emoji_by_name (self):
+        for c, n in EMOJI_SO_FAR:
+            assert_that(EMOJI_BY_NAME[n], is_(equal_to(c)))
