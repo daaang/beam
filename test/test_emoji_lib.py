@@ -24,6 +24,8 @@ EMOJI_SO_FAR = (
     ("⚡️", "zap"),
     ("📚", "books"),
     ("✅", "white_check_mark"),
+    ("🎨", "art"),
+    ("💚", "green_heart"),
 )
 
 class TestNothing (unittest.TestCase):
