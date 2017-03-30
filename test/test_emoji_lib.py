@@ -21,11 +21,11 @@ import unittest
 from beam.emoji_lib import EMOJI_BY_NAME, EMOJI_BY_CHAR
 
 EMOJI_SO_FAR = (
-    ("⚡️", "zap"),
-    ("📚", "books"),
-    ("✅", "white_check_mark"),
-    ("🎨", "art"),
-    ("💚", "green_heart"),
+    ("⚡️", "zap"),              # Initial commit
+    ("📚", "books"),            # Add data
+    ("✅", "white_check_mark"), # Add feature/test
+    ("🎨", "art"),              # Refactor tests
+    ("💚", "green_heart"),      # Continuous integration
 )
 
 class TestNothing (unittest.TestCase):
