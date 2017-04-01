@@ -28,6 +28,7 @@ class TestGitLogEmoji (unittest.TestCase):
         ("📚", "books"),            # Add data
         ("✅", "white_check_mark"), # Add feature/test
         ("🎨", "art"),              # Refactor tests
+        ("💪", "muscle"),           # Refactor code
         ("💚", "green_heart"),      # Continuous integration
         ("📝", "memo"),             # Documentation
     )
