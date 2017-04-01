@@ -40,3 +40,8 @@ class TestGitLogEmoji (unittest.TestCase):
     def test_emoji_names_by_char (self):
         for c, n in self.git_log_emoji:
             assert_that(EMOJI_BY_CHAR[c], is_(equal_to(n)))
+
+class TestSubEmoji (unittest.TestCase):
+
+    def test_degenerate (self):
+        result = sub_emoji("")
