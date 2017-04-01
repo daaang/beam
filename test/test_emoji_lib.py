@@ -46,3 +46,8 @@ class TestSubEmoji (unittest.TestCase):
     def test_empty_str_yields_empty_str (self):
         result = sub_emoji("")
         assert_that(result, is_(equal_to("")))
+
+    def test_str_without_emoji_stays_the_same (self):
+        result = sub_emoji("un deux trois mon chat est bleu")
+        assert_that(result,
+                    is_(equal_to("un deux trois mon chat est bleu")))
