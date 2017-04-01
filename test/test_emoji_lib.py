@@ -26,6 +26,7 @@ EMOJI_SO_FAR = (
     ("✅", "white_check_mark"), # Add feature/test
     ("🎨", "art"),              # Refactor tests
     ("💚", "green_heart"),      # Continuous integration
+    ("📝", "memo"),             # Documentation
 )
 
 class TestNothing (unittest.TestCase):

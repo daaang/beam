@@ -881,5 +881,8 @@ EMOJI_BY_CHAR = { }
 EMOJI_BY_NAME = { }
 
 for c, n in EMOJI_DUPLES:
-    EMOJI_BY_CHAR[c] = n
+    if c not in EMOJI_BY_CHAR:
+        EMOJI_BY_CHAR[c] = n
+
+    assert n not in EMOJI_BY_NAME
     EMOJI_BY_NAME[n] = c
