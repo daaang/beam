@@ -43,5 +43,6 @@ class TestGitLogEmoji (unittest.TestCase):
 
 class TestSubEmoji (unittest.TestCase):
 
-    def test_degenerate (self):
+    def test_empty_str_yields_empty_str (self):
         result = sub_emoji("")
+        assert_that(result, is_(equal_to("")))
