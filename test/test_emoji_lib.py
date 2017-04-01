@@ -51,3 +51,7 @@ class TestSubEmoji (unittest.TestCase):
         result = sub_emoji("un deux trois mon chat est bleu")
         assert_that(result,
                     is_(equal_to("un deux trois mon chat est bleu")))
+
+    def test_art_emoji (self):
+        result = sub_emoji(":art:")
+        assert_that(result, is_(equal_to("🎨")))
