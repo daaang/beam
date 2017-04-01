@@ -20,21 +20,21 @@ import unittest
 
 from beam.emoji_lib import EMOJI_BY_NAME, EMOJI_BY_CHAR
 
-EMOJI_SO_FAR = (
-    ("⚡️", "zap"),              # Initial commit
-    ("📚", "books"),            # Add data
-    ("✅", "white_check_mark"), # Add feature/test
-    ("🎨", "art"),              # Refactor tests
-    ("💚", "green_heart"),      # Continuous integration
-    ("📝", "memo"),             # Documentation
-)
+class TestGitLogEmoji (unittest.TestCase):
 
-class TestNothing (unittest.TestCase):
+    git_log_emoji = (
+        ("⚡️", "zap"),              # Initial commit
+        ("📚", "books"),            # Add data
+        ("✅", "white_check_mark"), # Add feature/test
+        ("🎨", "art"),              # Refactor tests
+        ("💚", "green_heart"),      # Continuous integration
+        ("📝", "memo"),             # Documentation
+    )
 
     def test_emoji_by_name (self):
-        for c, n in EMOJI_SO_FAR:
+        for c, n in self.git_log_emoji:
             assert_that(EMOJI_BY_NAME[n], is_(equal_to(c)))
 
     def test_emoji_names_by_char (self):
-        for c, n in EMOJI_SO_FAR:
+        for c, n in self.git_log_emoji:
             assert_that(EMOJI_BY_CHAR[c], is_(equal_to(n)))
