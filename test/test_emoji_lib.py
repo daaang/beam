@@ -18,7 +18,7 @@
 from hamcrest import *
 import unittest
 
-from beam.emoji_lib import EMOJI_BY_NAME, EMOJI_BY_CHAR
+from beam.emoji_lib import EMOJI_BY_NAME, EMOJI_BY_CHAR, sub_emoji
 
 class TestGitLogEmoji (unittest.TestCase):
 
