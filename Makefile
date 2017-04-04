@@ -17,6 +17,8 @@
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 PYTHON3=python3
 SETUP=$(PYTHON3) setup.py
+INSTALL=install
+bindir=~/bin
 
 build: setup.py
 	$(SETUP) build
@@ -29,6 +31,7 @@ dist: build
 
 install: build
 	$(SETUP) install
+	$(INSTALL) bin/* $(bindir)
 
 clean:
 	-rm -r lib/beam.egg-info build dist
