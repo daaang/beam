@@ -20,4 +20,5 @@ from re import compile as re_compile
 RE_EMOJI_NAME = re_compile(r":art:")
 
 def sub_emoji (text):
+    subbed = RE_EMOJI_NAME.sub("🎨", text)
     return text.replace(":art:", "🎨")
