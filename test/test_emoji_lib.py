@@ -59,3 +59,5 @@ class TestSubEmoji (unittest.TestCase):
     def test_not_all_colons_are_emoji (self):
         assert_that(sub_emoji(":mattmattmatt:"),
                     is_(equal_to(":mattmattmatt:")))
+        assert_that(sub_emoji(":hellohello:"),
+                    is_(equal_to(":hellohello:")))
