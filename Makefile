@@ -39,4 +39,5 @@ test: clean build
 	(for libdir in build/lib*; do \
 	  echo "PYTHONPATH=\"$$libdir\""; \
 	  PYTHONPATH="$$libdir" $(PYTHON3) -m unittest || exit; done)
+	find test -name '*.bats' | xargs bats
 	$(MAKE) clean
