@@ -27,4 +27,5 @@ cdef str emoji_repl (match):
 def sub_emoji (text):
     return RE_EMOJI_NAME.sub(emoji_repl, text)
 
-sub_emoji_term_io = None
+def sub_emoji_term_io (text):
+    pass
