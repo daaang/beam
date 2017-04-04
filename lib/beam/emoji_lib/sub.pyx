@@ -22,7 +22,7 @@ from .duples import EMOJI_BY_NAME
 cdef RE_EMOJI_NAME = re_compile(r":([a-z]+):")
 
 cdef str emoji_repl (match):
-    return EMOJI_BY_NAME[match.group(1)]
+    return EMOJI_BY_NAME.get(match.group(1), ":mattmattmatt:")
 
 def sub_emoji (text):
     return RE_EMOJI_NAME.sub(emoji_repl, text)
