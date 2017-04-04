@@ -16,7 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
-from beam.emoji_lib import sub_emoji
+from beam.emoji_lib import sub_emoji_term_io
 from subprocess import Popen, PIPE
 from sys import argv, stdin
 
@@ -27,4 +27,4 @@ else:
     stream = Popen(["git", "log", "--color=always"] + argv[1:], stdout=PIPE, universal_newlines=True).stdout
 
 for line in stream:
-    print(sub_emoji(line.rstrip("\n")))
+    print(sub_emoji_term_io(line))
