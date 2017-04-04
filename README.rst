@@ -26,16 +26,16 @@ Commit emoji
 I've been trying to get into the habit of using emoji in my git commits.
 Here's my key:
 
-========= ======================= ==========================
-Character          Name                      Use
-========= ======================= ==========================
+========= ======================= ================================
+Character          Name                         Use
+========= ======================= ================================
 ⚡️        ``:zap:``               Initial commit
-📚        ``:books:``             Add data
 ✅        ``:white_check_mark:``  Add feature/test
 🎨        ``:art:``               Refactor tests
-💪        ``:muscle:``            Refactor code
-💚        ``:green_heart:``       Continuous integration
-📝        ``:memo:``              Documentation
-========= ======================= ==========================
+💪        ``:muscle:``            Refactor (or "flex") code
+📚        ``:books:``             Add data (i.e. without tests)
+💚        ``:green_heart:``       Mess with continuous integration
+📝        ``:memo:``              Write documentation
+========= ======================= ================================
 
 .. _COPYING: COPYING
