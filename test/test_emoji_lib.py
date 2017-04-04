@@ -69,3 +69,7 @@ class TestSubEmoji (unittest.TestCase):
     def test_emoji_with_underscore_in_name (self):
         assert_that(sub_emoji(":white_check_mark:"),
                     is_(equal_to("✅")))
+
+    def test_emoji_with_numbers_in_name (self):
+        assert_that(sub_emoji(":star2:"),
+                    is_(equal_to("🌟")))
