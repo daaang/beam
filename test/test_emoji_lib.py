@@ -44,17 +44,12 @@ class TestGitLogEmoji (unittest.TestCase):
 class TestSubEmoji (unittest.TestCase):
 
     def test_empty_str_yields_empty_str (self):
-        assert_that(sub_emoji(""), is_(equal_to("")))
+        assert_that(sub_emoji(""),
+                    is_(equal_to("")))
 
     def test_str_without_emoji_stays_the_same (self):
         assert_that(sub_emoji("un deux trois mon chat est bleu"),
                     is_(equal_to("un deux trois mon chat est bleu")))
-
-    def test_art_emoji (self):
-        assert_that(sub_emoji(":art:"), is_(equal_to("🎨")))
-
-    def test_muscle_emoji (self):
-        assert_that(sub_emoji(":muscle:"), is_(equal_to("💪")))
 
     def test_not_all_colons_are_emoji (self):
         assert_that(sub_emoji(":mattmattmatt:"),
@@ -62,9 +57,13 @@ class TestSubEmoji (unittest.TestCase):
         assert_that(sub_emoji(":hellohello:"),
                     is_(equal_to(":hellohello:")))
 
-    def test_emoji_and_text (self):
-        assert_that(sub_emoji("both :art: and :muscle: at once"),
-                    is_(equal_to("both 🎨 and 💪 at once")))
+    def test_art_emoji (self):
+        assert_that(sub_emoji(":art:"),
+                    is_(equal_to("🎨")))
+
+    def test_muscle_emoji (self):
+        assert_that(sub_emoji(":muscle:"),
+                    is_(equal_to("💪")))
 
     def test_emoji_with_underscore_in_name (self):
         assert_that(sub_emoji(":white_check_mark:"),
@@ -81,3 +80,7 @@ class TestSubEmoji (unittest.TestCase):
     def test_emoji_with_minus_in_name (self):
         assert_that(sub_emoji(":-1:"),
                     is_(equal_to("👎")))
+
+    def test_emoji_and_text (self):
+        assert_that(sub_emoji("both :art: and :muscle: at once"),
+                    is_(equal_to("both 🎨 and 💪 at once")))
