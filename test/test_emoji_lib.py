@@ -43,9 +43,12 @@ class TestGitLogEmoji (unittest.TestCase):
 
 class TestSubEmoji (unittest.TestCase):
 
+    def assert_sub_emoji (self, input_string, expected_result):
+        assert_that(sub_emoji(input_string),
+                    is_(equal_to(expected_result)))
+
     def assert_does_not_change (self, s):
-        assert_that(sub_emoji(s),
-                    is_(equal_to(s)))
+        self.assert_sub_emoji(s, s)
 
     def test_empty_str_yields_empty_str (self):
         self.assert_does_not_change("")
