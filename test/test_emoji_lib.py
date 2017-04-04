@@ -24,13 +24,13 @@ from beam.emoji_lib.duples import EMOJI_BY_NAME, EMOJI_BY_CHAR
 class TestGitLogEmoji (unittest.TestCase):
 
     git_log_emoji = (
-        ("⚡️", "zap"),              # Initial commit
-        ("📚", "books"),            # Add data
-        ("✅", "white_check_mark"), # Add feature/test
-        ("🎨", "art"),              # Refactor tests
-        ("💪", "muscle"),           # Refactor code
-        ("💚", "green_heart"),      # Continuous integration
-        ("📝", "memo"),             # Documentation
+        ("⚡️", "zap"),
+        ("📚", "books"),
+        ("✅", "white_check_mark"),
+        ("🎨", "art"),
+        ("💪", "muscle"),
+        ("💚", "green_heart"),
+        ("📝", "memo"),
     )
 
     def test_emoji_by_name (self):

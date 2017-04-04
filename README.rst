@@ -20,4 +20,22 @@ under the GPLv3.
 
 For more information, see COPYING_.
 
+Commit emoji
+------------
+
+I've been trying to get into the habit of using emoji in my git commits.
+Here's my key:
+
+========= =================== ==========================
+Character        Name                    Use
+========= =================== ==========================
+⚡️        :zap:               Initial commit
+📚        :books:             Add data
+✅        :white_check_mark:  Add feature/test
+🎨        :art:               Refactor tests
+💪        :muscle:            Refactor code
+💚        :green_heart:       Continuous integration
+📝        :memo:              Documentation
+========= =================== ==========================
+
 .. _COPYING: COPYING
