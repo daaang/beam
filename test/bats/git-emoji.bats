@@ -22,7 +22,7 @@ git_emoji() {
   done
 }
 
-@test "Plaintext stdin goes right to stdout" {
+@test "git-emoji pipes plaintext stdin to stdout" {
   run git_emoji - <<EOF
 Hi, Matt!
 EOF
