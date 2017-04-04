@@ -61,3 +61,7 @@ class TestSubEmoji (unittest.TestCase):
                     is_(equal_to(":mattmattmatt:")))
         assert_that(sub_emoji(":hellohello:"),
                     is_(equal_to(":hellohello:")))
+
+    def test_emoji_and_text (self):
+        assert_that(sub_emoji("both :art: and :muscle: at once"),
+                    is_(equal_to("both 🎨 and 💪 at once")))
