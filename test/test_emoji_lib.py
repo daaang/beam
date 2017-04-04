@@ -91,3 +91,6 @@ class TestSubEmojiTermIO (unittest.TestCase):
     def test_adds_space_to_emoji (self):
         self.assert_sub_emoji("both :art: and :muscle: at once",
                               "both 🎨  and 💪  at once")
+
+    def test_strips_trailing_newlines (self):
+        self.assert_sub_emoji("hey\n", "hey")

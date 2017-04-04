@@ -36,4 +36,4 @@ def sub_emoji (text):
     return RE_EMOJI_NAME.sub(emoji_repl, text)
 
 def sub_emoji_term_io (text):
-    return RE_EMOJI_NAME.sub(spaced_emoji_repl, text)
+    return RE_EMOJI_NAME.sub(spaced_emoji_repl, text.rstrip("\n"))
