@@ -17,7 +17,7 @@
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 from re import compile as re_compile
 
-RE_EMOJI_NAME = re_compile(r":art:")
+cdef RE_EMOJI_NAME = re_compile(r":art:")
 
 def sub_emoji (text):
     return RE_EMOJI_NAME.sub("🎨", text)
