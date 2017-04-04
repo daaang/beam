@@ -6,6 +6,10 @@ python:
 - "3.5"
 - "3.6"
 - "nightly"
+before_install:
+- sudo add-apt-repository ppa:duggan/bats --yes
+- sudo apt-get update -qq
+- sudo apt-get install -qq bats
 install:
 - pip install PyHamcrest # needed for tests only
 - pip install Cython --install-option="--no-cython-compile"
