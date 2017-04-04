@@ -61,29 +61,23 @@ class TestSubEmoji (unittest.TestCase):
         self.assert_does_not_change(":hellohello:")
 
     def test_art_emoji (self):
-        assert_that(sub_emoji(":art:"),
-                    is_(equal_to("🎨")))
+        self.assert_sub_emoji(":art:", "🎨")
 
     def test_muscle_emoji (self):
-        assert_that(sub_emoji(":muscle:"),
-                    is_(equal_to("💪")))
+        self.assert_sub_emoji(":muscle:", "💪")
 
     def test_emoji_with_underscore_in_name (self):
-        assert_that(sub_emoji(":white_check_mark:"),
-                    is_(equal_to("✅")))
+        self.assert_sub_emoji(":white_check_mark:", "✅")
 
     def test_emoji_with_numbers_in_name (self):
-        assert_that(sub_emoji(":star2:"),
-                    is_(equal_to("🌟")))
+        self.assert_sub_emoji(":star2:", "🌟")
 
     def test_emoji_with_plus_in_name (self):
-        assert_that(sub_emoji(":+1:"),
-                    is_(equal_to("👍")))
+        self.assert_sub_emoji(":+1:", "👍")
 
     def test_emoji_with_minus_in_name (self):
-        assert_that(sub_emoji(":-1:"),
-                    is_(equal_to("👎")))
+        self.assert_sub_emoji(":-1:", "👎")
 
     def test_emoji_and_text (self):
-        assert_that(sub_emoji("both :art: and :muscle: at once"),
-                    is_(equal_to("both 🎨 and 💪 at once")))
+        self.assert_sub_emoji("both :art: and :muscle: at once",
+                              "both 🎨 and 💪 at once")
