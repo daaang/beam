@@ -84,5 +84,10 @@ class TestSubEmoji (unittest.TestCase):
 
 class TestSubEmojiTermIO (unittest.TestCase):
 
-    def test_can_call_function (self):
-        r = sub_emoji_term_io("")
+    def assert_sub_emoji (self, input_string, expected_result):
+        assert_that(sub_emoji_term_io(input_string),
+                    is_(equal_to(expected_result)))
+
+    def test_adds_space_to_emoji (self):
+        self.assert_sub_emoji("both :art: and :muscle: at once",
+                              "both 🎨  and 💪  at once")
