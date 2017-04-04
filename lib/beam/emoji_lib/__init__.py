@@ -15,6 +15,4 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
-from .sub import sub_emoji
-
-sub_emoji_term_io = None
+from .sub import sub_emoji, sub_emoji_term_io
