@@ -17,10 +17,12 @@
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 from re import compile as re_compile
 
-cdef RE_EMOJI_NAME = re_compile(r":art:")
+from .duples import EMOJI_BY_NAME
+
+cdef RE_EMOJI_NAME = re_compile(r":([a-z]+):")
 
 cdef str emoji_repl (match):
-    return "🎨"
+    return EMOJI_BY_NAME[match.group(1)]
 
 def sub_emoji (text):
     return RE_EMOJI_NAME.sub(emoji_repl, text)

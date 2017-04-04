@@ -52,3 +52,6 @@ class TestSubEmoji (unittest.TestCase):
 
     def test_art_emoji (self):
         assert_that(sub_emoji(":art:"), is_(equal_to("🎨")))
+
+    def test_muscle_emoji (self):
+        assert_that(sub_emoji(":muscle:"), is_(equal_to("💪")))
