@@ -16,15 +16,43 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
+from argparse import ArgumentParser
 from beam.emoji_lib import sub_emoji_term_io
 from subprocess import Popen, PIPE
 from sys import argv, stdin
 
-if len(argv) > 1 and argv[1] == "-":
-    stream = stdin
+def sub_emoji_in_each_line (stream):
+    for line in stream:
+        print(sub_emoji_term_io(line))
+
+args = list(argv[1:])
+try:
+    i = args.index("--")
+
+except ValueError:
+    log_args = [ ]
 
 else:
-    stream = Popen(["git", "log", "--color=always"] + argv[1:], stdout=PIPE, universal_newlines=True).stdout
+    log_args = args[i+1:]
+    args = args[:i]
 
-for line in stream:
-    print(sub_emoji_term_io(line))
+parser = ArgumentParser()
+
+parser.add_argument("input_file",
+                    default="",
+                    help="defaults to stdout of git log")
+
+args = parser.parse_args(args)
+
+if args.input_file == "":
+    stream = Popen(["git", "log", "--color=always"] + log_args,
+                   stdout=PIPE,
+                   universal_newlines=True).stdout
+    sub_emoji_in_each_line(stream)
+
+elif args.input_file == "-":
+    sub_emoji_in_each_line(stdin)
+
+else:
+    with open(args.input_file, "r") as stream:
+        sub_emoji_in_each_line(stream)
