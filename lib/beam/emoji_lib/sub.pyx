@@ -19,7 +19,7 @@ from re import compile as re_compile
 
 from .duples import EMOJI_BY_NAME
 
-cdef RE_EMOJI_NAME = re_compile(r":([0-9a-z_]+):")
+cdef RE_EMOJI_NAME = re_compile(r":([-+_0-9a-z]+):")
 
 cdef str emoji_repl (match):
     return EMOJI_BY_NAME.get(match.group(1), match.group(0))

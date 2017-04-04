@@ -73,3 +73,9 @@ class TestSubEmoji (unittest.TestCase):
     def test_emoji_with_numbers_in_name (self):
         assert_that(sub_emoji(":star2:"),
                     is_(equal_to("🌟")))
+
+    def test_emoji_with_plus_or_minus_in_name (self):
+        assert_that(sub_emoji(":+1:"),
+                    is_(equal_to("👍")))
+        assert_that(sub_emoji(":-1:"),
+                    is_(equal_to("👎")))
