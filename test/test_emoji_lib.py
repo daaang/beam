@@ -43,19 +43,19 @@ class TestGitLogEmoji (unittest.TestCase):
 
 class TestSubEmoji (unittest.TestCase):
 
+    def assert_does_not_change (self, s):
+        assert_that(sub_emoji(s),
+                    is_(equal_to(s)))
+
     def test_empty_str_yields_empty_str (self):
-        assert_that(sub_emoji(""),
-                    is_(equal_to("")))
+        self.assert_does_not_change("")
 
     def test_str_without_emoji_stays_the_same (self):
-        assert_that(sub_emoji("un deux trois mon chat est bleu"),
-                    is_(equal_to("un deux trois mon chat est bleu")))
+        self.assert_does_not_change("un deux trois mon chat est bleu")
 
     def test_not_all_colons_are_emoji (self):
-        assert_that(sub_emoji(":mattmattmatt:"),
-                    is_(equal_to(":mattmattmatt:")))
-        assert_that(sub_emoji(":hellohello:"),
-                    is_(equal_to(":hellohello:")))
+        self.assert_does_not_change(":mattmattmatt:")
+        self.assert_does_not_change(":hellohello:")
 
     def test_art_emoji (self):
         assert_that(sub_emoji(":art:"),
