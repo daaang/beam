@@ -4,11 +4,6 @@ git_emoji() {
   done
 }
 
-@test "Can run git-emoji -h" {
-  run git_emoji -h
-  [ "$status" = 0 ]
-}
-
 @test "Plaintext stdin goes right to stdout" {
   run git_emoji <<EOF
 Hi, Matt!
