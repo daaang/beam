@@ -23,4 +23,4 @@ cdef emoji_repl (match):
     return "🎨"
 
 def sub_emoji (text):
-    return RE_EMOJI_NAME.sub("🎨", text)
+    return RE_EMOJI_NAME.sub(emoji_repl, text)
