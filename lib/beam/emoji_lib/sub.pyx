@@ -19,5 +19,8 @@ from re import compile as re_compile
 
 cdef RE_EMOJI_NAME = re_compile(r":art:")
 
+cdef emoji_repl (match):
+    return "🎨"
+
 def sub_emoji (text):
     return RE_EMOJI_NAME.sub("🎨", text)
