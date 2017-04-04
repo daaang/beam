@@ -29,3 +29,11 @@ EOF
   [ "$status" = 0 ]
   [ "$output" = "Hi, Matt!" ]
 }
+
+@test "git-emoji matches emoji by name" {
+  run git_emoji - <<EOF
+Can deal with :muscle: and :white_check_mark: at least
+EOF
+  [ "$status" = 0 ]
+  [ "$output" = "Can deal with 💪 and ✅ at least" ]
+}
