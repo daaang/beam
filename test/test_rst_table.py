@@ -25,6 +25,9 @@ class Helpers (unittest.TestCase):
     def assert_table (self, *args):
         assert_that(self.table, *args)
 
+    def assert_no_header (self):
+        assert_that(self.table.header, is_(none()))
+
 class GivenSingleLeftColumnTable (Helpers):
 
     def setUp (self):
@@ -43,16 +46,16 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
         self.assert_table(has_length(0))
 
     def test_has_no_header (self):
-        assert_that(self.table.header, is_(none()))
+        self.assert_no_header()
 
 class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
 
     def test_is_empty (self):
-        assert_that(self.table, has_length(0))
+        self.assert_table(has_length(0))
 
     def test_header_is_set (self):
         assert_that(self.table.header, is_(equal_to(("hello",))))
 
     def test_has_no_header_after_deleting_header (self):
         del self.table.header
-        assert_that(self.table.header, is_(none()))
+        self.assert_no_header()
