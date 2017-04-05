@@ -82,6 +82,9 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
         del self.table.header
         self.assert_no_header()
 
+    def test_str_is_empty (self):
+        assert_that(str(self.table), is_(equal_to("")))
+
 class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
     def test_is_empty (self):
@@ -90,3 +93,6 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
     def test_cannot_add_one_column_header (self):
         assert_that(calling(self.table.add_header).with_args("hey"),
                     raises(TypeError))
+
+    def test_str_is_empty (self):
+        assert_that(str(self.table), is_(equal_to("")))
