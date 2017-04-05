@@ -16,10 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
-class RstTable:
+cdef class RstTable:
+
+    cdef tuple c_header
 
     def __init__ (self, spec):
-        pass
+        self.c_header = None
 
     @property
     def header (self):
