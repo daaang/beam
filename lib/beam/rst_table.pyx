@@ -33,8 +33,12 @@ cdef class RstTable:
     def header (self):
         self.c_header = None
 
-    def add_header (self, value):
-        self.c_header = (value,)
+    def add_header (self, *fields):
+        if len(fields) == 1:
+            self.c_header = fields
+
+        else:
+            raise TypeError
 
     def __len__ (self):
         return 0
