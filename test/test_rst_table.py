@@ -55,6 +55,15 @@ class GivenTwoLeftColumnTable (TableHelpers):
     def setUp (self):
         self.table = RstTable("<<")
 
+class TestGivenNothing (TableHelpers):
+
+    def test_can_set_ragged_left_column (self):
+        self.table = RstTable("><<")
+        self.table.add_header("One", "Two", "Three")
+        self.table.add_data("1", "Matt", "LaChance")
+
+        assert_that(str(self.table), contains_string("\n  1 Matt"))
+
 class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
 
     def test_is_empty (self):
