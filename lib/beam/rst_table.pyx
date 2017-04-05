@@ -68,7 +68,7 @@ cdef class RstTable:
 
     cdef void assert_width_at_least (self, int x):
         if x > self.width:
-            self.width = x
+            self.width = x+1 if self.is_even(x) else x
 
     cdef str generate_str (self):
         if self.header is None:
@@ -83,7 +83,7 @@ cdef class RstTable:
                     data="\n".join(self.data))
 
     cdef str get_rule (self):
-        return "=" * self.get_width()
+        return "=" * self.width
 
     cdef int get_width (self):
         cdef int width = self.get_max_data_len()
