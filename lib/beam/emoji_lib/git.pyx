@@ -15,6 +15,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
+from re import compile as re_compile, MULTILINE
+
 from .duples import EMOJI_BY_CHAR
 from ..rst_table import RstTable
 
@@ -29,6 +31,8 @@ cdef GIT_EMOJI_KEY = (
     ("📝", "Documentation", "Write documentation"),
 )
 
+cdef RE_START_OF_LINE = re_compile(r"^", MULTILINE)
+
 def get_rst_table():
     table = RstTable("<<<")
     table.add_header("Character", "Name", "Use")
@@ -40,3 +44,15 @@ def get_rst_table():
                        description)
 
     return str(table)
+
+def get_commit_table():
+    table = RstTable("><<<")
+    table.force_width(0, 2)
+
+    for emoji, keyword, description in GIT_EMOJI_KEY:
+        arg = "-" + keyword[0]
+        name = ":{}:".format(EMOJI_BY_CHAR[emoji])
+
+        table.add_data(emoji, arg, name, description)
+
+    return RE_START_OF_LINE.sub("# ", str(table))

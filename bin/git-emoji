@@ -18,7 +18,7 @@
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 from argparse import ArgumentParser
 from beam.emoji_lib import sub_emoji_term_io
-from beam.emoji_lib.git import get_rst_table
+from beam.emoji_lib.git import get_rst_table, get_commit_table
 from subprocess import Popen, PIPE
 from sys import argv, stdin
 
@@ -60,14 +60,23 @@ parser.add_argument("input_file",
 
 parser.add_argument("--show-rst-table",
                     dest="rst_table",
-                    action="store_true",
-                    default=False,
+                    action="store_const",
+                    const="rst",
+                    default="",
                     help="print emoji table for README.rst")
+
+parser.add_argument("--show-commit-table",
+                    dest="rst_table",
+                    action="store_const",
+                    const="commit",
+                    help="print emoji table for git-commit")
 
 args = parser.parse_args(args)
 
 if args.rst_table:
-    print(get_rst_table())
+    print({"rst": get_rst_table(),
+           "commit": get_commit_table(),
+          }[args.rst_table])
 
 else:
     filter_emoji(args, log_args)
