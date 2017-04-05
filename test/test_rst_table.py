@@ -132,3 +132,6 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
         self.table.add_data("hi", "hi")
         assert_that(str(self.table), contains_string("\nhi    hi\n"))
+
+        self.table.add_header("a", "b")
+        assert_that(str(self.table), contains_string("\n  a      b\n"))

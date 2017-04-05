@@ -91,7 +91,8 @@ cdef class RstTable:
                                        self.get_data_str())
 
     cdef str get_header_str (self):
-        return self.get_header_cell(0).rstrip(" ")
+        return " ".join(self.get_header_cell(i)
+                        for i in range(self.column_count)).rstrip(" ")
 
     cdef str get_header_cell (self, int index):
         return "{{:^{:d}}}" \
