@@ -53,6 +53,9 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
     def test_is_empty (self):
         self.assert_table(has_length(0))
 
+    def test_iterates_into_empty_list (self):
+        assert_that(list(self.table), is_(equal_to([])))
+
     def test_has_no_header (self):
         self.assert_no_header()
 
