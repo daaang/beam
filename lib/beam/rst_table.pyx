@@ -64,6 +64,10 @@ cdef class RstTable:
     def __repr__ (self):
         return "<{}>".format(self.__class__.__name__)
 
+    cdef void assert_width_at_least (self, int x):
+        if x > self.width:
+            self.width = x
+
     cdef str generate_str (self):
         if self.header is None:
             return "{rule}\n{data}\n{rule}".format(
