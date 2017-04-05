@@ -78,11 +78,14 @@ cdef class RstTable:
             return self.get_data_str()
 
         else:
-            return "\n".join((self.get_rule(),
-                              "{{:^{:d}}}".format(self.width)
-                                          .format(self.header[0])
-                                          .rstrip(" "),
-                              self.get_data_str()))
+            return "{}\n{}".format(self.get_header_str(),
+                                   self.get_data_str())
+
+    cdef str get_header_str (self):
+        return "{{}}\n{{:^{:d}}}" \
+                .format(self.width) \
+                .format(self.get_rule(), self.header[0]) \
+                .rstrip(" ")
 
     cdef str get_data_str (self):
         return "{rule}\n{data}\n{rule}".format(
