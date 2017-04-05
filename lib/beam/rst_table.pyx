@@ -54,6 +54,9 @@ cdef class RstTable:
         self.data.append(fields)
         self.assert_width_at_least(fields)
 
+    def force_width (self, col, width):
+        pass
+
     def __len__ (self):
         return 0
 

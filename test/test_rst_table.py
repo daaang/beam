@@ -144,3 +144,6 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
         self.table.add_header("a", "b")
         assert_that(str(self.table), contains_string("\n  a      b\n"))
+
+    def test_can_force_a_col_width (self):
+        self.table.force_width(0, 1)
