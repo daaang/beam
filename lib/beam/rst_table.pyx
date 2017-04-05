@@ -54,10 +54,13 @@ cdef class RstTable:
 
     def __str__ (self):
         if self.data:
-            return "===\none\n==="
+            return "{rule}\none\n{rule}".format(rule=self.rule())
 
         else:
             return ""
 
     def __repr__ (self):
         return "<{}>".format(self.__class__.__name__)
+
+    cdef str rule (self):
+        return "==="
