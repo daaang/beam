@@ -20,7 +20,9 @@ import unittest
 
 from beam.rst_table import RstTable
 
-class GivenNothing (unittest.TestCase):
+class GivenSingleLeftColumnTable (unittest.TestCase):
 
-    def test_can_create_rst_table (self):
-        table = RstTable()
+    def setUp (self):
+        self.table = RstTable("l")
+
+    def test_can_create_rst_table (self): pass

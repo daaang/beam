@@ -17,4 +17,6 @@
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
 class RstTable:
-    pass
+
+    def __init__ (self, spec):
+        pass
