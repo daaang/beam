@@ -25,6 +25,13 @@ class GivenSingleLeftColumnTable (unittest.TestCase):
     def setUp (self):
         self.table = RstTable("l")
 
+class GivenSingleLeftColumnWithHeader (GivenSingleLeftColumnTable):
+
+    def setUp (self):
+        super().setUp()
+
+        self.table.add_header("hello")
+
 class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
 
     def test_is_empty (self):
