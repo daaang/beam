@@ -90,15 +90,6 @@ cdef class RstTable:
                                        self.get_header_str(),
                                        self.get_data_str())
 
-    cdef str get_header_str (self):
-        return " ".join(self.get_header_cell(i)
-                        for i in range(self.column_count)).rstrip(" ")
-
-    cdef str get_header_cell (self, int index):
-        return "{{:^{:d}}}" \
-                .format(self.widths[index]) \
-                .format(self.header[index])
-
     cdef str get_data_str (self):
         return "{rule}\n{data}\n{rule}".format(
                 rule=self.get_rule(),
@@ -114,3 +105,12 @@ cdef class RstTable:
 
     cdef str get_rule (self):
         return " ".join("=" * w for w in self.widths)
+
+    cdef str get_header_str (self):
+        return " ".join(self.get_header_cell(i)
+                        for i in range(self.column_count)).rstrip(" ")
+
+    cdef str get_header_cell (self, int index):
+        return "{{:^{:d}}}" \
+                .format(self.widths[index]) \
+                .format(self.header[index])
