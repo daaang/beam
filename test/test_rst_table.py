@@ -25,6 +25,12 @@ class TableHelpers (unittest.TestCase):
     def init (self, spec):
         self.table = RstTable(spec)
 
+    def add_header (self, *args):
+        self.table.add_header(*args)
+
+    def add_data (self, *args):
+        self.table.add_data(*args)
+
     def assert_table (self, *args):
         assert_that(self.table, *args)
 
@@ -44,14 +50,14 @@ class GivenSingleLeftColumnWithHeader (GivenSingleLeftColumnTable):
     def setUp (self):
         super().setUp()
 
-        self.table.add_header("hello")
+        self.add_header("hello")
 
 class GivenSingleLeftColumnWithOneRow (GivenSingleLeftColumnTable):
 
     def setUp (self):
         super().setUp()
 
-        self.table.add_data("one")
+        self.add_data("one")
 
 class GivenTwoLeftColumnTable (TableHelpers):
 
@@ -62,8 +68,8 @@ class TestGivenNothing (TableHelpers):
 
     def test_can_set_ragged_left_column (self):
         self.init("><<")
-        self.table.add_header("One", "Two", "Three")
-        self.table.add_data("1", "Matt", "LaChance")
+        self.add_header("One", "Two", "Three")
+        self.add_data("1", "Matt", "LaChance")
 
         assert_that(str(self.table), contains_string("\n  1 Matt"))
 
@@ -79,7 +85,7 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
         self.assert_no_header()
 
     def test_cannot_add_two_column_header (self):
-        assert_that(calling(self.table.add_header).with_args("hey",
+        assert_that(calling(self.add_header).with_args("hey",
                                                              "what"),
                     raises(TypeError))
 
@@ -102,12 +108,12 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
         assert_that(str(self.table), is_(equal_to("")))
 
     def test_str_exists_when_given_data (self):
-        self.table.add_data("example")
+        self.add_data("example")
         assert_that(str(self.table),
                     is_(equal_to("=======\n hello\n=======\nexample\n=======")))
 
     def test_rule_factors_in_header (self):
-        self.table.add_data("a")
+        self.add_data("a")
         assert_that(str(self.table),
                     is_(equal_to("=====\nhello\n=====\na\n=====")))
 
@@ -117,11 +123,11 @@ class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
         assert_that(str(self.table), is_(equal_to("===\none\n===")))
 
     def test_new_data_changes_str (self):
-        self.table.add_data("second")
+        self.add_data("second")
         assert_that(str(self.table),
                     is_(equal_to("=======\none\nsecond\n=======")))
 
-        self.table.add_data("third")
+        self.add_data("third")
         assert_that(str(self.table),
                 is_(equal_to("=======\none\nsecond\nthird\n=======")))
 
@@ -131,21 +137,21 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
         self.assert_table(has_length(0))
 
     def test_cannot_add_one_column_header (self):
-        assert_that(calling(self.table.add_header).with_args("hey"),
+        assert_that(calling(self.add_header).with_args("hey"),
                     raises(TypeError))
 
     def test_str_is_empty (self):
         assert_that(str(self.table), is_(equal_to("")))
 
     def test_str_exists_with_data (self):
-        self.table.add_data("first", "second")
+        self.add_data("first", "second")
         assert_that(str(self.table),
                 is_(equal_to("===== =======\nfirst second\n===== =======")))
 
-        self.table.add_data("hi", "hi")
+        self.add_data("hi", "hi")
         assert_that(str(self.table), contains_string("\nhi    hi\n"))
 
-        self.table.add_header("a", "b")
+        self.add_header("a", "b")
         assert_that(str(self.table), contains_string("\n  a      b\n"))
 
     def test_can_force_a_col_width (self):
