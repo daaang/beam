@@ -71,7 +71,9 @@ cdef class RstTable:
             return ""
 
     def __repr__ (self):
-        return "<{}>".format(self.__class__.__name__)
+        return "<{} {} {}>".format(self.__class__.__name__,
+                                   repr(self.header),
+                                   repr(list(self.data)))
 
     cdef void assert_width_at_least (self, tuple t):
         cdef int i, w
