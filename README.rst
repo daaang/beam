@@ -31,6 +31,7 @@ Character          Name                         Use
 ========= ======================= ================================
 ⚡️        ``:zap:``               Initial commit
 ✅        ``:white_check_mark:``  Add feature/test
+🚧        ``:construction:``      Add failing (skipped) test
 🎨        ``:art:``               Refactor tests
 💪        ``:muscle:``            Refactor (or "flex") code
 📚        ``:books:``             Add data (i.e. without tests)
