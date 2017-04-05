@@ -94,6 +94,12 @@ class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
     def test_str_contains_data (self):
         assert_that(str(self.table), is_(equal_to("===\none\n===")))
 
+    @unittest.skip
+    def test_new_data_changes_str (self):
+        self.table.add_data("second")
+        assert_that(str(self.table),
+                    is_(equal_to("=======\none\nsecond\n=======")))
+
 class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
     def test_is_empty (self):
