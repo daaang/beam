@@ -67,9 +67,12 @@ cdef class RstTable:
         return "=" * self.get_width()
 
     cdef int get_width (self):
-        cdef int width = max(map(len, self.data))
+        cdef int width = self.max_data_len()
 
         return width + 1 if self.is_even(width) else width
+
+    cdef int max_data_len (self):
+        return max(map(len, self.data))
 
     cdef bint is_even (self, int x):
         return x % 2 == 0
