@@ -64,9 +64,12 @@ cdef class RstTable:
         return "<{}>".format(self.__class__.__name__)
 
     cdef str rule (self):
+        return "=" * self.get_width()
+
+    cdef int get_width (self):
         cdef int width = max(map(len, self.data))
 
         if width % 2 == 0:
-            width += 1
+            return width + 1
 
-        return "=" * width
+        return width
