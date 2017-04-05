@@ -27,3 +27,6 @@ class GivenSingleLeftColumnTable (unittest.TestCase):
 
     def test_is_empty (self):
         assert_that(self.table, has_length(0))
+
+    def test_can_add_header (self):
+        self.table.add_header("hello")

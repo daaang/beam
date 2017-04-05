@@ -21,6 +21,9 @@ class RstTable:
     def __init__ (self, spec):
         pass
 
+    def add_header (self, *fields):
+        pass
+
     def __len__ (self):
         return 0
 
