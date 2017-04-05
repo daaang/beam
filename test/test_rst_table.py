@@ -42,8 +42,11 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
 
 class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
 
+    def test_is_empty (self):
+        assert_that(self.table, has_length(0))
+
     def test_header_is_set (self):
         assert_that(self.table.header, is_(equal_to(("hello",))))
 
-    def test_is_empty (self):
-        assert_that(self.table, has_length(0))
+    def test_can_delete_header (self):
+        del self.table.header
