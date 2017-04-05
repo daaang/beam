@@ -94,7 +94,7 @@ cdef class RstTable:
 
     cdef str get_header_str (self):
         return "{{}}\n{{:^{:d}}}" \
-                .format(self.width) \
+                .format(self.widths[0]) \
                 .format(self.get_rule(), self.header[0]) \
                 .rstrip(" ")
 
@@ -107,4 +107,4 @@ cdef class RstTable:
         return row[0]
 
     cdef str get_rule (self):
-        return "=" * self.width
+        return " ".join("=" * w for w in self.widths)
