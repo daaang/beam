@@ -63,8 +63,16 @@ cdef class RstTable:
         return "<{}>".format(self.__class__.__name__)
 
     cdef str generate_str (self):
-        return "{rule}\n{data}\n{rule}".format(rule=self.get_rule(),
-                                            data="\n".join(self.data))
+        if self.header is None:
+            return "{rule}\n{data}\n{rule}".format(
+                    rule=self.get_rule(),
+                    data="\n".join(self.data))
+
+        else:
+            return "{rule}\n{head}\n{rule}\n{data}\n{rule}".format(
+                    rule=self.get_rule(),
+                    head=self.header[0],
+                    data="\n".join(self.data))
 
     cdef str get_rule (self):
         return "=" * self.get_width()

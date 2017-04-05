@@ -89,6 +89,11 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
     def test_str_is_empty (self):
         assert_that(str(self.table), is_(equal_to("")))
 
+    def test_str_exists_when_given_data (self):
+        self.table.add_data("example")
+        assert_that(str(self.table),
+                    is_(equal_to("=======\nhello\n=======\nexample\n=======")))
+
 class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
 
     def test_str_contains_data (self):
