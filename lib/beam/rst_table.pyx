@@ -49,5 +49,8 @@ cdef class RstTable:
     def __iter__ (self):
         return iter(())
 
+    def __str__ (self):
+        return ""
+
     def __repr__ (self):
         return "<{}>".format(self.__class__.__name__)

@@ -67,6 +67,9 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
     def test_can_add_data_row (self):
         self.table.add_data("one")
 
+    def test_str_is_empty (self):
+        assert_that(str(self.table), is_(equal_to("")))
+
 class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
 
     def test_is_empty (self):
