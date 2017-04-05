@@ -94,6 +94,10 @@ class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
     def test_can_add_data_row (self):
         pass
 
+    @unittest.skip
+    def test_str_contains_data (self):
+        assert_that(str(self.table), is_(equal_to("===\none\n===")))
+
 class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
     def test_is_empty (self):
