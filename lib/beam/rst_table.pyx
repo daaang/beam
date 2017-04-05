@@ -69,7 +69,4 @@ cdef class RstTable:
     cdef int get_width (self):
         cdef int width = max(map(len, self.data))
 
-        if width % 2 == 0:
-            return width + 1
-
-        return width
+        return width + 1 if width % 2 == 0 else width
