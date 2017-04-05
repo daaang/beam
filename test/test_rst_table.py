@@ -34,7 +34,7 @@ class TableHelpers (unittest.TestCase):
 class GivenSingleLeftColumnTable (TableHelpers):
 
     def setUp (self):
-        self.table = RstTable("l")
+        self.table = RstTable("<")
 
 class GivenSingleLeftColumnWithHeader (GivenSingleLeftColumnTable):
 
@@ -53,7 +53,7 @@ class GivenSingleLeftColumnWithOneRow (GivenSingleLeftColumnTable):
 class GivenTwoLeftColumnTable (TableHelpers):
 
     def setUp (self):
-        self.table = RstTable("ll")
+        self.table = RstTable("<<")
 
 class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
 
