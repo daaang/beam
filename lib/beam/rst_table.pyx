@@ -18,10 +18,12 @@
 
 class RstTable:
 
-    header = None
-
     def __init__ (self, spec):
         pass
+
+    @property
+    def header (self):
+        return None
 
     def add_header (self, *fields):
         pass
