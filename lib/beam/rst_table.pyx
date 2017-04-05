@@ -44,7 +44,7 @@ cdef class RstTable:
             raise TypeError
 
     def add_data (self, value):
-        self.data.append("one")
+        self.data.append(value)
 
     def __len__ (self):
         return 0
@@ -54,8 +54,8 @@ cdef class RstTable:
 
     def __str__ (self):
         if self.data:
-            return "{rule}\n{datum}\n{rule}".format(rule=self.rule(),
-                                                    datum=self.data[0])
+            return "{rule}\n{data}\n{rule}".format(rule=self.rule(),
+                                                   data="\n".join(self.data))
 
         else:
             return ""
@@ -64,4 +64,9 @@ cdef class RstTable:
         return "<{}>".format(self.__class__.__name__)
 
     cdef str rule (self):
-        return "==="
+        cdef int width = max(map(len, self.data))
+
+        if width % 2 == 0:
+            width += 1
+
+        return "=" * width
