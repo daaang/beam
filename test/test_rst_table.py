@@ -25,4 +25,5 @@ class GivenSingleLeftColumnTable (unittest.TestCase):
     def setUp (self):
         self.table = RstTable("l")
 
-    def test_can_create_rst_table (self): pass
+    def test_is_empty (self):
+        assert_that(self.table, has_length(0))

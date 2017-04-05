@@ -20,3 +20,9 @@ class RstTable:
 
     def __init__ (self, spec):
         pass
+
+    def __len__ (self):
+        return 0
+
+    def __repr__ (self):
+        return "<{}>".format(self.__class__.__name__)
