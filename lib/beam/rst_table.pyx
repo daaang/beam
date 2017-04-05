@@ -88,10 +88,12 @@ cdef class RstTable:
                                        self.get_data_str())
 
     cdef str get_header_str (self):
+        return self.get_header_cell(0).rstrip(" ")
+
+    cdef str get_header_cell (self, int index):
         return "{{:^{:d}}}" \
-                .format(self.widths[0]) \
-                .format(self.header[0]) \
-                .rstrip(" ")
+                .format(self.widths[index]) \
+                .format(self.header[index])
 
     cdef str get_data_str (self):
         return "{rule}\n{data}\n{rule}".format(
