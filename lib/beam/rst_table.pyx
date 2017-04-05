@@ -41,6 +41,7 @@ cdef class RstTable:
     def add_header (self, *fields):
         if len(fields) == self.column_count:
             self.c_header = fields
+            self.assert_width_at_least(len(fields[0]))
 
         else:
             raise TypeError
