@@ -78,7 +78,6 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
     def test_is_empty (self):
         self.assert_table(has_length(0))
 
-    @unittest.skip
     def test_cannot_add_one_column_header (self):
         assert_that(calling(self.table.add_header).with_args("hey"),
                     raises(TypeError))

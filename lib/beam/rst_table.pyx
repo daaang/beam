@@ -34,7 +34,7 @@ cdef class RstTable:
         self.c_header = None
 
     def add_header (self, *fields):
-        if len(fields) == 1:
+        if len(fields) == self.column_count:
             self.c_header = fields
 
         else:
