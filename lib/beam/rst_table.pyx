@@ -15,16 +15,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
+from collections import deque
 
 cdef class RstTable:
 
     cdef tuple c_header
     cdef int column_count
     cdef str c_str
+    cdef object data
 
     def __init__ (self, spec):
         del self.header
         self.c_str = ""
+        self.data = deque()
         self.column_count = len(spec)
 
     @property
