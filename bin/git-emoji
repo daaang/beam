@@ -18,12 +18,27 @@
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 from argparse import ArgumentParser
 from beam.emoji_lib import sub_emoji_term_io
+from beam.emoji_lib.git import get_rst_table
 from subprocess import Popen, PIPE
 from sys import argv, stdin
 
 def sub_emoji_in_each_line (stream):
     for line in stream:
         print(sub_emoji_term_io(line))
+
+def filter_emoji (args, log_args):
+    if args.input_file == "":
+        stream = Popen(["git", "log", "--color=always"] + log_args,
+                       stdout=PIPE,
+                       universal_newlines=True).stdout
+        sub_emoji_in_each_line(stream)
+
+    elif args.input_file == "-":
+        sub_emoji_in_each_line(stdin)
+
+    else:
+        with open(args.input_file, "r") as stream:
+            sub_emoji_in_each_line(stream)
 
 args = list(argv[1:])
 try:
@@ -43,17 +58,16 @@ parser.add_argument("input_file",
                     default="",
                     help="defaults to stdout of git log")
 
+parser.add_argument("--show-rst-table",
+                    dest="rst_table",
+                    action="store_true",
+                    default=False,
+                    help="print emoji table for README.rst")
+
 args = parser.parse_args(args)
 
-if args.input_file == "":
-    stream = Popen(["git", "log", "--color=always"] + log_args,
-                   stdout=PIPE,
-                   universal_newlines=True).stdout
-    sub_emoji_in_each_line(stream)
-
-elif args.input_file == "-":
-    sub_emoji_in_each_line(stdin)
+if args.rst_table:
+    print(get_rst_table())
 
 else:
-    with open(args.input_file, "r") as stream:
-        sub_emoji_in_each_line(stream)
+    filter_emoji(args, log_args)

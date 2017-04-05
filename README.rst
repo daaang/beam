@@ -29,9 +29,9 @@ Commit emoji
 I've been trying to get into the habit of using emoji in my git commits.
 Here's my key:
 
-========= ======================= ================================
-Character          Name                         Use
-========= ======================= ================================
+========= ======================= =================================
+Character          Name                          Use
+========= ======================= =================================
 ⚡️        ``:zap:``               Initial commit
 ✅        ``:white_check_mark:``  Add feature/test
 🚧        ``:construction:``      Add failing (skipped) test
@@ -40,6 +40,6 @@ Character          Name                         Use
 📚        ``:books:``             Add data (i.e. without tests)
 💚        ``:green_heart:``       Mess with continuous integration
 📝        ``:memo:``              Write documentation
-========= ======================= ================================
+========= ======================= =================================
 
 .. _COPYING: COPYING
