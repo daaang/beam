@@ -51,6 +51,11 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
     def test_has_no_header (self):
         self.assert_no_header()
 
+    def test_cannot_add_two_column_header (self):
+        assert_that(calling(self.table.add_header).with_args("hey",
+                                                             "what"),
+                    raises(TypeError))
+
 class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
 
     def test_is_empty (self):
