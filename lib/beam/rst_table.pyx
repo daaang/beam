@@ -21,12 +21,10 @@ cdef class RstTable:
 
     cdef tuple c_header
     cdef int column_count
-    cdef str c_str
     cdef object data
 
     def __init__ (self, spec):
         del self.header
-        self.c_str = ""
         self.data = deque()
         self.column_count = len(spec)
 
@@ -47,7 +45,6 @@ cdef class RstTable:
 
     def add_data (self, value):
         self.data.append("one")
-        self.c_str = "===\none\n==="
 
     def __len__ (self):
         return 0
