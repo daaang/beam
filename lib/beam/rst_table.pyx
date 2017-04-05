@@ -48,6 +48,7 @@ cdef class RstTable:
 
     def add_data (self, value):
         self.data.append(value)
+        self.assert_width_at_least(len(value))
 
     def __len__ (self):
         return 0
