@@ -21,7 +21,9 @@ import unittest
 from beam.rst_table import RstTable
 
 class Helpers (unittest.TestCase):
-    pass
+
+    def assert_table (self, *args):
+        assert_that(self.table, *args)
 
 class GivenSingleLeftColumnTable (Helpers):
 
@@ -38,7 +40,7 @@ class GivenSingleLeftColumnWithHeader (GivenSingleLeftColumnTable):
 class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
 
     def test_is_empty (self):
-        assert_that(self.table, has_length(0))
+        self.assert_table(has_length(0))
 
     def test_has_no_header (self):
         assert_that(self.table.header, is_(none()))
