@@ -48,5 +48,6 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
     def test_header_is_set (self):
         assert_that(self.table.header, is_(equal_to(("hello",))))
 
-    def test_can_delete_header (self):
+    def test_has_no_header_after_deleting_header (self):
         del self.table.header
+        assert_that(self.table.header, is_(none()))

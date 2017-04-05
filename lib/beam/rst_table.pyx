@@ -29,7 +29,7 @@ cdef class RstTable:
 
     @header.deleter
     def header (self):
-        pass
+        self.c_header = None
 
     def add_header (self, *fields):
         self.c_header = fields
