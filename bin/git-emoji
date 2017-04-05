@@ -71,6 +71,10 @@ parser.add_argument("--show-commit-table",
                     const="commit",
                     help="print emoji table for git-commit")
 
+parser.add_argument("--ed-commit-msg",
+                    action="store_true",
+                    default=False)
+
 args = parser.parse_args(args)
 
 if args.rst_table:
