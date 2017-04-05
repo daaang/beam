@@ -46,6 +46,7 @@ cdef class RstTable:
             raise TypeError
 
     def add_data (self, value):
+        self.data.append("one")
         self.c_str = "===\none\n==="
 
     def __len__ (self):
@@ -55,7 +56,11 @@ cdef class RstTable:
         return iter(())
 
     def __str__ (self):
-        return self.c_str
+        if self.data:
+            return self.c_str
+
+        else:
+            return ""
 
     def __repr__ (self):
         return "<{}>".format(self.__class__.__name__)
