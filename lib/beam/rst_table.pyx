@@ -21,12 +21,14 @@ cdef class RstTable:
 
     cdef tuple c_header
     cdef int column_count
+    cdef int width
     cdef object data
 
     def __init__ (self, spec):
         del self.header
         self.data = deque()
         self.column_count = len(spec)
+        self.width = 0
 
     @property
     def header (self):
