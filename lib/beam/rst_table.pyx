@@ -18,6 +18,8 @@
 
 class RstTable:
 
+    header = None
+
     def __init__ (self, spec):
         pass
 
