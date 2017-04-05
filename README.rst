@@ -1,7 +1,8 @@
 Beam
 ====
 
-`|Travis CI status banner| <https://travis-ci.org/daaang/beam>`_
+.. image:: https://travis-ci.org/daaang/beam.svg?branch=master
+    :target: https://travis-ci.org/daaang/beam
 
 I've been copying and pasting my own scripts around like a chump, and
 it's time I grew up. Hello.
@@ -42,4 +43,3 @@ Character          Name                         Use
 ========= ======================= ================================
 
 .. _COPYING: COPYING
-.. |Travis CI status banner| image:: https://travis-ci.org/daaang/beam.svg?branch=master
