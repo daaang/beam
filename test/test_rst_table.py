@@ -43,3 +43,8 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
     def test_can_add_header (self):
         self.table.add_header("hello")
         assert_that(self.table.header, is_(equal_to(("hello",))))
+
+class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
+
+    def test_header_is_set (self):
+        assert_that(self.table.header, is_(equal_to(("hello",))))
