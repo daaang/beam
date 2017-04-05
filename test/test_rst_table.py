@@ -125,7 +125,6 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
     def test_str_is_empty (self):
         assert_that(str(self.table), is_(equal_to("")))
 
-    @unittest.skip
     def test_str_exists_with_data (self):
         self.table.add_data("first", "second")
         assert_that(str(self.table),
