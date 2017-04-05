@@ -99,6 +99,10 @@ class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
         assert_that(str(self.table),
                     is_(equal_to("=======\none\nsecond\n=======")))
 
+        self.table.add_data("third")
+        assert_that(str(self.table),
+                is_(equal_to("=======\none\nsecond\nthird\n=======")))
+
 class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
     def test_is_empty (self):
