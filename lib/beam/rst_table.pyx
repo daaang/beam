@@ -54,7 +54,7 @@ cdef class RstTable:
 
     def __str__ (self):
         if self.data:
-            return "{rule}\n{data}\n{rule}".format(rule=self.rule(),
+            return "{rule}\n{data}\n{rule}".format(rule=self.get_rule(),
                                                    data="\n".join(self.data))
 
         else:
@@ -63,15 +63,15 @@ cdef class RstTable:
     def __repr__ (self):
         return "<{}>".format(self.__class__.__name__)
 
-    cdef str rule (self):
+    cdef str get_rule (self):
         return "=" * self.get_width()
 
     cdef int get_width (self):
-        cdef int width = self.max_data_len()
+        cdef int width = self.get_max_data_len()
 
         return width + 1 if self.is_even(width) else width
 
-    cdef int max_data_len (self):
+    cdef int get_max_data_len (self):
         return max(map(len, self.data))
 
     cdef bint is_even (self, int x):
