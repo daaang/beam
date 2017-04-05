@@ -92,7 +92,10 @@ cdef class RstTable:
     cdef str get_data_str (self):
         return "{rule}\n{data}\n{rule}".format(
                 rule=self.get_rule(),
-                data="\n".join(t[0] for t in self.data))
+                data="\n".join(self.generate_row(r) for r in self.data))
+
+    cdef str generate_row (self, tuple row):
+        return row[0]
 
     cdef str get_rule (self):
         return "=" * self.width
