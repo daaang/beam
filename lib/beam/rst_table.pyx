@@ -57,7 +57,7 @@ cdef class RstTable:
 
     def __str__ (self):
         if self.data:
-            return self.c_str
+            return "===\none\n==="
 
         else:
             return ""
