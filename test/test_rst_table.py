@@ -129,3 +129,6 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
         self.table.add_data("first", "second")
         assert_that(str(self.table),
                 is_(equal_to("===== =======\nfirst second\n===== =======")))
+
+        self.table.add_data("hi", "hi")
+        assert_that(str(self.table), contains_string("\nhi    hi\n"))
