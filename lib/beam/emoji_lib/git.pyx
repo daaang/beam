@@ -56,3 +56,20 @@ def get_commit_table():
         table.add_data(emoji, arg, name, description)
 
     return RE_START_OF_LINE.sub("# ", str(table))
+
+def add_emoji_commit_args (parser):
+    group = parser.add_argument_group("emoji category")
+    group = group.add_mutually_exclusive_group()
+
+    for emoji, keyword, description in GIT_EMOJI_KEY:
+        short_arg = "-" + keyword[0]
+        long_arg = "--" + keyword.lower()
+        name = ":{}:".format(EMOJI_BY_CHAR[emoji])
+
+        group.add_argument(short_arg,
+                           long_arg,
+                           action="store_const",
+                           const=name,
+                           dest="emoji_category",
+                           default="",
+                           help=description)
