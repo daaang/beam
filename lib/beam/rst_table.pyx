@@ -54,7 +54,8 @@ cdef class RstTable:
 
     def __str__ (self):
         if self.data:
-            return "{rule}\none\n{rule}".format(rule=self.rule())
+            return "{rule}\n{datum}\n{rule}".format(rule=self.rule(),
+                                                    datum=self.data[0])
 
         else:
             return ""
