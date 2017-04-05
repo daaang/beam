@@ -70,6 +70,9 @@ cdef class RstTable:
         if x > self.width:
             self.width = x+1 if self.is_even(x) else x
 
+    cdef bint is_even (self, int x):
+        return x % 2 == 0
+
     cdef str generate_str (self):
         if self.header is None:
             return "{rule}\n{data}\n{rule}".format(
@@ -84,18 +87,3 @@ cdef class RstTable:
 
     cdef str get_rule (self):
         return "=" * self.width
-
-    cdef int get_width (self):
-        cdef int width = self.get_max_data_len()
-
-        if self.header is not None:
-            if len(self.header[0]) > width:
-                width = len(self.header[0])
-
-        return width + 1 if self.is_even(width) else width
-
-    cdef int get_max_data_len (self):
-        return max(map(len, self.data))
-
-    cdef bint is_even (self, int x):
-        return x % 2 == 0
