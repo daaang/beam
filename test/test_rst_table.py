@@ -43,6 +43,13 @@ class GivenSingleLeftColumnWithHeader (GivenSingleLeftColumnTable):
 
         self.table.add_header("hello")
 
+class GivenSingleLeftColumnWithOneRow (GivenSingleLeftColumnTable):
+
+    def setUp (self):
+        super().setUp()
+
+        self.table.add_data("one")
+
 class GivenTwoLeftColumnTable (TableHelpers):
 
     def setUp (self):
@@ -64,9 +71,6 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
                                                              "what"),
                     raises(TypeError))
 
-    def test_can_add_data_row (self):
-        self.table.add_data("one")
-
     def test_str_is_empty (self):
         assert_that(str(self.table), is_(equal_to("")))
 
@@ -84,6 +88,11 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
 
     def test_str_is_empty (self):
         assert_that(str(self.table), is_(equal_to("")))
+
+class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
+
+    def test_can_add_data_row (self):
+        pass
 
 class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
