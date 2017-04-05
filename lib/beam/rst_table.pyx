@@ -47,7 +47,7 @@ cdef class RstTable:
             raise TypeError
 
     def add_data (self, *fields):
-        self.data.append(fields[0])
+        self.data.append(fields)
         self.assert_width_at_least(fields)
 
     def __len__ (self):
@@ -92,7 +92,7 @@ cdef class RstTable:
     cdef str get_data_str (self):
         return "{rule}\n{data}\n{rule}".format(
                 rule=self.get_rule(),
-                data="\n".join(self.data))
+                data="\n".join(t[0] for t in self.data))
 
     cdef str get_rule (self):
         return "=" * self.width
