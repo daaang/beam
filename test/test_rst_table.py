@@ -20,7 +20,7 @@ import unittest
 
 from beam.rst_table import RstTable
 
-class Helpers (unittest.TestCase):
+class TableHelpers (unittest.TestCase):
 
     def assert_table (self, *args):
         assert_that(self.table, *args)
@@ -31,7 +31,7 @@ class Helpers (unittest.TestCase):
     def assert_header_is (self, *args):
         assert_that(self.table.header, is_(equal_to(args)))
 
-class GivenSingleLeftColumnTable (Helpers):
+class GivenSingleLeftColumnTable (TableHelpers):
 
     def setUp (self):
         self.table = RstTable("l")
