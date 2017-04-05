@@ -46,9 +46,9 @@ cdef class RstTable:
         else:
             raise TypeError
 
-    def add_data (self, value):
-        self.data.append(value)
-        self.assert_width_at_least(len(value))
+    def add_data (self, *fields):
+        self.data.append(fields[0])
+        self.assert_width_at_least(len(fields[0]))
 
     def __len__ (self):
         return 0
