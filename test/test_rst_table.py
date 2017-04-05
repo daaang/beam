@@ -92,7 +92,7 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
     def test_str_exists_when_given_data (self):
         self.table.add_data("example")
         assert_that(str(self.table),
-                    is_(equal_to("=======\nhello\n=======\nexample\n=======")))
+                    is_(equal_to("=======\n hello\n=======\nexample\n=======")))
 
     def test_rule_factors_in_header (self):
         self.table.add_data("a")
