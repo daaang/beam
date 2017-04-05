@@ -72,3 +72,8 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
     def test_has_no_header_after_deleting_header (self):
         del self.table.header
         self.assert_no_header()
+
+class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
+
+    def test_is_empty (self):
+        self.assert_table(has_length(0))
