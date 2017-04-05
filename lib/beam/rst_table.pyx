@@ -21,7 +21,7 @@ cdef class RstTable:
     cdef tuple c_header
 
     def __init__ (self, spec):
-        self.c_header = None
+        del self.header
 
     @property
     def header (self):
