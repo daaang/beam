@@ -19,3 +19,8 @@ from hamcrest import *
 import unittest
 
 from beam.rst_table import RstTable
+
+class GivenNothing (unittest.TestCase):
+
+    def test_can_create_rst_table (self):
+        table = RstTable()
