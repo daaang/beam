@@ -73,7 +73,10 @@ cdef class RstTable:
             w = len(t[i])
 
             if w > self.widths[i]:
-                self.widths[i] = w+1 if self.is_even(w) else w
+                self.widths[i] = self.round_up_to_odd(w)
+
+    cdef int round_up_to_odd (self, int x):
+        return x + 1 if self.is_even(x) else x
 
     cdef bint is_even (self, int x):
         return x % 2 == 0
