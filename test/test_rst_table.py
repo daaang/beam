@@ -43,6 +43,11 @@ class GivenSingleLeftColumnWithHeader (GivenSingleLeftColumnTable):
 
         self.table.add_header("hello")
 
+class GivenTwoLeftColumnTable (TableHelpers):
+
+    def setUp (self):
+        self.table = RstTable("ll")
+
 class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
 
     def test_is_empty (self):
