@@ -19,9 +19,11 @@
 cdef class RstTable:
 
     cdef tuple c_header
+    cdef int column_count
 
     def __init__ (self, spec):
         del self.header
+        self.column_count = len(spec)
 
     @property
     def header (self):
