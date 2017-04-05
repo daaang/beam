@@ -22,6 +22,9 @@ from beam.rst_table import RstTable
 
 class TableHelpers (unittest.TestCase):
 
+    def init (self, spec):
+        self.table = RstTable(spec)
+
     def assert_table (self, *args):
         assert_that(self.table, *args)
 
@@ -34,7 +37,7 @@ class TableHelpers (unittest.TestCase):
 class GivenSingleLeftColumnTable (TableHelpers):
 
     def setUp (self):
-        self.table = RstTable("<")
+        self.init("<")
 
 class GivenSingleLeftColumnWithHeader (GivenSingleLeftColumnTable):
 
@@ -53,12 +56,12 @@ class GivenSingleLeftColumnWithOneRow (GivenSingleLeftColumnTable):
 class GivenTwoLeftColumnTable (TableHelpers):
 
     def setUp (self):
-        self.table = RstTable("<<")
+        self.init("<<")
 
 class TestGivenNothing (TableHelpers):
 
     def test_can_set_ragged_left_column (self):
-        self.table = RstTable("><<")
+        self.init("><<")
         self.table.add_header("One", "Two", "Three")
         self.table.add_data("1", "Matt", "LaChance")
 
