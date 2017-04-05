@@ -33,3 +33,4 @@ class GivenSingleLeftColumnTable (unittest.TestCase):
 
     def test_can_add_header (self):
         self.table.add_header("hello")
+        assert_that(self.table.header, is_(equal_to(("hello",))))

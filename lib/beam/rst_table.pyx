@@ -25,10 +25,10 @@ cdef class RstTable:
 
     @property
     def header (self):
-        return None
+        return self.c_header
 
     def add_header (self, *fields):
-        pass
+        self.c_header = fields
 
     def __len__ (self):
         return 0
