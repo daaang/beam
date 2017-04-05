@@ -156,3 +156,6 @@ class TestTwoLeftColumnTable (GivenTwoLeftColumnTable):
 
     def test_can_force_a_col_width (self):
         self.table.force_width(0, 1)
+        self.add_data("hey", "what")
+        assert_that(str(self.table),
+                is_(equal_to("=== =====\nhey   what\n=== =====")))

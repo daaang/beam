@@ -55,7 +55,7 @@ cdef class RstTable:
         self.assert_width_at_least(fields)
 
     def force_width (self, col, width):
-        pass
+        self.forced_widths[col] = "x" * width
 
     def __len__ (self):
         return 0
@@ -109,9 +109,15 @@ cdef class RstTable:
                         for i in range(len(row))).rstrip(" ")
 
     cdef str get_cell_str (self, tuple row, int index):
+        cdef object forced = self.forced_widths[index]
         cdef str fmt_str = "{{:{}{:d}}}".format(self.spec[index],
                                                 self.widths[index])
-        return fmt_str.format(row[index])
+
+        if forced is None:
+            return fmt_str.format(row[index])
+
+        else:
+            return fmt_str.format(forced).replace(forced, row[index])
 
     cdef str get_rule (self):
         return " ".join("=" * w for w in self.widths)
