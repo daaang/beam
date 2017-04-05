@@ -41,14 +41,14 @@ cdef class RstTable:
     def add_header (self, *fields):
         if len(fields) == self.column_count:
             self.c_header = fields
-            self.assert_width_at_least(fields[0])
+            self.assert_width_at_least(fields)
 
         else:
             raise TypeError
 
     def add_data (self, *fields):
         self.data.append(fields[0])
-        self.assert_width_at_least(fields[0])
+        self.assert_width_at_least(fields)
 
     def __len__ (self):
         return 0
@@ -66,8 +66,8 @@ cdef class RstTable:
     def __repr__ (self):
         return "<{}>".format(self.__class__.__name__)
 
-    cdef void assert_width_at_least (self, str s):
-        cdef int w = len(s)
+    cdef void assert_width_at_least (self, tuple t):
+        cdef int w = len(t[0])
 
         if w > self.width:
             self.width = w+1 if self.is_even(w) else w
