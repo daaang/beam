@@ -40,6 +40,9 @@ cdef class RstTable:
         else:
             raise TypeError
 
+    def add_data (self, value):
+        pass
+
     def __len__ (self):
         return 0
 

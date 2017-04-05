@@ -61,6 +61,9 @@ class TestSingleLeftColumnTable (GivenSingleLeftColumnTable):
                                                              "what"),
                     raises(TypeError))
 
+    def test_can_add_data_row (self):
+        self.table.add_data("one")
+
 class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
 
     def test_is_empty (self):
