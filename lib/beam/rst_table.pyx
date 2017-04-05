@@ -80,6 +80,10 @@ cdef class RstTable:
     cdef int get_width (self):
         cdef int width = self.get_max_data_len()
 
+        if self.header is not None:
+            if len(self.header[0]) > width:
+                width = len(self.header[0])
+
         return width + 1 if self.is_even(width) else width
 
     cdef int get_max_data_len (self):

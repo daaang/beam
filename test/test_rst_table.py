@@ -94,6 +94,11 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
         assert_that(str(self.table),
                     is_(equal_to("=======\nhello\n=======\nexample\n=======")))
 
+    def test_rule_factors_in_header (self):
+        self.table.add_data("a")
+        assert_that(str(self.table),
+                    is_(equal_to("=====\nhello\n=====\na\n=====")))
+
 class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
 
     def test_str_contains_data (self):
