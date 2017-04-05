@@ -20,7 +20,10 @@ import unittest
 
 from beam.rst_table import RstTable
 
-class GivenSingleLeftColumnTable (unittest.TestCase):
+class Helpers (unittest.TestCase):
+    pass
+
+class GivenSingleLeftColumnTable (Helpers):
 
     def setUp (self):
         self.table = RstTable("l")
