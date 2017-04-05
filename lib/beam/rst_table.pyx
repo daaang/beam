@@ -23,12 +23,14 @@ cdef class RstTable:
     cdef int column_count
     cdef int width
     cdef object data
+    cdef list widths
 
     def __init__ (self, spec):
         del self.header
         self.data = deque()
         self.column_count = len(spec)
         self.width = 0
+        self.widths = [0] * self.column_count
 
     @property
     def header (self):
@@ -67,10 +69,17 @@ cdef class RstTable:
         return "<{}>".format(self.__class__.__name__)
 
     cdef void assert_width_at_least (self, tuple t):
+        cdef int i
         cdef int w = len(t[0])
 
         if w > self.width:
             self.width = w+1 if self.is_even(w) else w
+
+        for i in range(self.column_count):
+            w = len(t[i])
+
+            if w > self.widths[i]:
+                self.widths[i] = w+1 if self.is_even(w) else w
 
     cdef bint is_even (self, int x):
         return x % 2 == 0
