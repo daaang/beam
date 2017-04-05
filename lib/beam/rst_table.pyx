@@ -24,6 +24,7 @@ cdef class RstTable:
     cdef object data
     cdef list widths
     cdef str spec
+    cdef list forced_widths
 
     def __init__ (self, spec):
         del self.header
@@ -31,6 +32,7 @@ cdef class RstTable:
         self.column_count = len(spec)
         self.widths = [0] * self.column_count
         self.spec = spec
+        self.forced_widths = [None] * self.column_count
 
     @property
     def header (self):
@@ -102,9 +104,9 @@ cdef class RstTable:
                         for i in range(len(row))).rstrip(" ")
 
     cdef str get_cell_str (self, tuple row, int index):
-        return "{{:{}{:d}}}".format(self.spec[index],
-                                    self.widths[index]) \
-                            .format(row[index])
+        cdef str fmt_str = "{{:{}{:d}}}".format(self.spec[index],
+                                                self.widths[index])
+        return fmt_str.format(row[index])
 
     cdef str get_rule (self):
         return " ".join("=" * w for w in self.widths)
