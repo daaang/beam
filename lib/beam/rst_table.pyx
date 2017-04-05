@@ -43,7 +43,7 @@ cdef class RstTable:
             raise TypeError
 
     def add_data (self, value):
-        pass
+        self.c_str = "===\none\n==="
 
     def __len__ (self):
         return 0

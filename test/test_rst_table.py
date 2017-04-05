@@ -91,7 +91,6 @@ class TestSingleLeftColumnWithHeader (GivenSingleLeftColumnWithHeader):
 
 class TestSingleLeftColumnWithOneRow (GivenSingleLeftColumnWithOneRow):
 
-    @unittest.skip
     def test_str_contains_data (self):
         assert_that(str(self.table), is_(equal_to("===\none\n===")))
 
