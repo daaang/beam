@@ -20,9 +20,11 @@ cdef class RstTable:
 
     cdef tuple c_header
     cdef int column_count
+    cdef str c_str
 
     def __init__ (self, spec):
         del self.header
+        self.c_str = ""
         self.column_count = len(spec)
 
     @property
@@ -50,7 +52,7 @@ cdef class RstTable:
         return iter(())
 
     def __str__ (self):
-        return ""
+        return self.c_str
 
     def __repr__ (self):
         return "<{}>".format(self.__class__.__name__)
