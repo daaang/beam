@@ -44,3 +44,10 @@ EOF
   [ "$status" = 0 ]
   [ `echo "$output" | awk "$awk"` = 3 ]
 }
+
+@test "git-emoji --show-commit-table shows a comment table" {
+  run git_emoji --show-commit-table
+  awk='/^# =+ =+ =+ =+$/ { count++ } END{ print count }'
+  [ "$status" = 0 ]
+  [ `echo "$output" | awk "$awk"` = 2 ]
+}
