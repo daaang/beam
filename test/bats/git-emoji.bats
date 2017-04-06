@@ -51,3 +51,8 @@ EOF
   [ "$status" = 0 ]
   [ `echo "$output" | awk "$awk"` = 2 ]
 }
+
+@test "git-emoji --ed-commit-msg fails without a filename" {
+  run git_emoji --ed-commit-msg
+  [ "$status" = 2 ]
+}
