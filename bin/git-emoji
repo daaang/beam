@@ -71,13 +71,32 @@ parser.add_argument("--show-commit-table",
                     const="commit",
                     help="print emoji table for git-commit")
 
-parser.add_argument("--ed-commit-msg",
-                    action="store_true",
-                    default=False)
+parser.add_argument("--ed-commit-msg", default="")
 
 args = parser.parse_args(args)
 
-if args.rst_table:
+if args.ed_commit_msg:
+    insert_after = "\n# Everything below will be removed.\n"
+
+    with open(args.ed_commit_msg, "r") as f:
+        msg = f.read()
+
+    if insert_after in msg:
+        msg = msg.replace(insert_after,
+                          "{}#\n{}\n".format(insert_after,
+                                             get_commit_table()),
+                          1)
+
+    elif msg.endswith("\n"):
+        msg += "#\n{}\n".format(get_commit_table())
+
+    else:
+        msg += "\n#\n{}".format(get_commit_table())
+
+    with open(args.ed_commit_msg, "w") as f:
+        f.write(msg)
+
+elif args.rst_table:
     print({"rst": get_rst_table(),
            "commit": get_commit_table(),
           }[args.rst_table])
