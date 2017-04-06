@@ -37,3 +37,10 @@ EOF
   [ "$status" = 0 ]
   [ "$output" = "Can deal with 💪  and ✅  at least" ]
 }
+
+@test "git-emoji --show-rst-table shows an ReST table" {
+  run git_emoji --show-rst-table
+  awk='/^=+ =+ =+$/ { count++ } END{ print count }'
+  [ "$status" = 0 ]
+  [ `echo "$output" | awk "$awk"` = 3 ]
+}
