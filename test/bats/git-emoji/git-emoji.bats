@@ -16,11 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
-git_emoji() {
-  for lib in build/lib*; do
-    PYTHONPATH="$lib" ./bin/git-emoji "$@"
-  done
-}
+source test/bats/git-emoji/includes.sh
 
 @test "git-emoji pipes plaintext stdin to stdout" {
   run git_emoji - <<EOF
