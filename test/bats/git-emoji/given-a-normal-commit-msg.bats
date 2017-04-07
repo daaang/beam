@@ -48,3 +48,8 @@ teardown() {
 @test "git-emoji --ed-commit-msg doesn't change the last line" {
   [ "`tail -n 1 $filename`" = "maybe some diff stuff here" ]
 }
+
+@test "git-emoji --ed-commit-msg doesn't change the first ten lines" {
+  run cat "$filename"
+  [ "${lines[9]}" = "# Everything below will be removed." ]
+}
