@@ -26,7 +26,6 @@ class TestShellLiteral (unittest.TestCase):
         literal = ShellLiteral("")
         assert_that(literal, has_string("''"))
 
-    @unittest.skip
     def test_strings_of_text_are_put_between_apostrophes (self):
         literal = ShellLiteral("matt")
         assert_that(literal, has_string("'matt'"))
