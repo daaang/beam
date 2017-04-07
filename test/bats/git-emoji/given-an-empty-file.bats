@@ -42,4 +42,5 @@ maybe some diff stuff here
 EOF
   run git_emoji --ed-commit-msg "$filename"
   [ "$status" = 0 ]
+  [ "`tail -n 1 $filename`" = "maybe some diff stuff here" ]
 }
