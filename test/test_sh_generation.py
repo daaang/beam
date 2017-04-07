@@ -33,3 +33,7 @@ class TestShellLiteral (unittest.TestCase):
     def test_apostrophes_have_no_special_characters (self):
         literal = ShellLiteral('\\ "" $var')
         assert_that(literal, has_string("""'\\ "" $var'"""))
+
+    def test_text_containing_apostrophes_needs_double_quotes (self):
+        literal = ShellLiteral("li'l configure")
+        assert_that(literal, has_string('"li\'l configure"'))

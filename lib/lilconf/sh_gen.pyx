@@ -24,7 +24,11 @@ cdef class ShellLiteral:
         self.value = value
 
     def __str__ (self):
-        return "'{}'".format(self.value)
+        if "'" in self.value:
+            return '"{}"'.format(self.value)
+
+        else:
+            return "'{}'".format(self.value)
 
     def __repr__ (self):
         return "<{} {}>".format(self.__class__.__name__, str(self))
