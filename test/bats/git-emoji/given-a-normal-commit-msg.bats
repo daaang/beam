@@ -53,3 +53,9 @@ teardown() {
   run cat "$filename"
   [ "${lines[9]}" = "# Everything below will be removed." ]
 }
+
+@test "git-emoji --ed-commit-msg does add the table" {
+  run cat "$filename"
+  pattern='# =* =* =* =*'
+  [[ ${lines[11]} =~ $pattern ]]
+}
