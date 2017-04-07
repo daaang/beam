@@ -27,6 +27,9 @@ cdef class ShellLiteral:
     def __init__ (self, value):
         self.value = str(value)
 
+    def raw (self):
+        pass
+
     def __str__ (self):
         if self.single_quote_is_in_value():
             return self.double_quote()

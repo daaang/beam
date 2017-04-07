@@ -58,3 +58,6 @@ class GivenAllNonAlphaNum (unittest.TestCase):
     def test_defaults_to_double_quotes (self):
         assert_that(self.literal, has_string(
                 '" !\\"#\\$%&\'()*+,-./:;<=>?@[\\\\]^_`{|}~"'))
+
+    def test_can_represent_without_quotes (self):
+        raw = self.literal.raw()
