@@ -32,10 +32,7 @@ cdef class ShellLiteral:
         self.value = str(value)
 
     def raw (self):
-        if self.contains_linefeed():
-            raise ValueError(
-                    "cannot represent linefeeds in raw literals")
-
+        self.assert_we_can_generate_a_raw_literal()
         return self.escape(RE_RAW_ESCAPES)
 
     def __str__ (self):
@@ -50,6 +47,11 @@ cdef class ShellLiteral:
 
     def __repr__ (self):
         return "<{} {}>".format(self.__class__.__name__, str(self))
+
+    cdef assert_we_can_generate_a_raw_literal (self):
+        if self.contains_linefeed():
+            raise ValueError(
+                    "cannot represent linefeeds in raw literals")
 
     cdef bint contains_linefeed (self):
         return "\n" in self.value
