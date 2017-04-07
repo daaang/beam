@@ -58,6 +58,9 @@ class TestShellLiteral (unittest.TestCase):
     def test_numbers_do_not_end_with_dots (self):
         self.assert_str("1.", "'1.'")
 
+    def test_floats_can_have_multiple_decimals (self):
+        self.assert_str("123.456", "123.456")
+
     def test_tab_can_be_escaped (self):
         self.assert_str("\t", "'\t'")
 
