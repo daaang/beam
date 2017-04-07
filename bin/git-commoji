@@ -21,7 +21,7 @@ from beam.emoji_lib.git import add_emoji_commit_args
 from subprocess import Popen
 
 def parse_args():
-    parser = ArgumentParser()
+    parser = ArgumentParser(description="git-commit with emoji")
     add_emoji_commit_args(parser)
     return parser.parse_args()
 
@@ -36,5 +36,5 @@ def execute (command):
     raise SystemExit(Popen(command, shell=True).wait())
 
 args = parse_args()
-get_command(args.emoji_category)
+command = get_command(args.emoji_category)
 execute(command)
