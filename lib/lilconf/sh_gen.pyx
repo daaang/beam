@@ -16,10 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 
-class ShellLiteral:
+cdef class ShellLiteral:
+
+    cdef str value
 
     def __init__ (self, value):
-        pass
+        self.value = value
 
     def __str__ (self):
         return "''"
