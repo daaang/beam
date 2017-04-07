@@ -26,9 +26,9 @@ def sub_emoji_in_each_line (stream):
     for line in stream:
         print(sub_emoji_term_io(line))
 
-def filter_emoji (args, log_args):
+def filter_emoji (args, args_to_pass):
     if args.input_file == "":
-        stream = Popen(["git", "log", "--color=always"] + log_args,
+        stream = Popen(["git", "log", "--color=always"] + args_to_pass,
                        stdout=PIPE,
                        universal_newlines=True).stdout
         sub_emoji_in_each_line(stream)
@@ -41,7 +41,7 @@ def filter_emoji (args, log_args):
             sub_emoji_in_each_line(stream)
 
 def separate_arg_sets (sys_argv):
-    args = list(argv[1:])
+    args = list(sys_argv[1:])
     try:
         i = args.index("--")
 
@@ -51,7 +51,7 @@ def separate_arg_sets (sys_argv):
     else:
         return args[:i], args[i+1:]
 
-args, log_args = separate_arg_sets(argv)
+our_args, args_to_pass = separate_arg_sets(argv)
 
 parser = ArgumentParser()
 
@@ -75,7 +75,7 @@ parser.add_argument("--show-commit-table",
 
 parser.add_argument("--ed-commit-msg", default="")
 
-args = parser.parse_args(args)
+args = parser.parse_args(our_args)
 
 if args.ed_commit_msg:
     insert_after = "\n# Everything below will be removed.\n"
@@ -104,4 +104,4 @@ elif args.rst_table:
           }[args.rst_table])
 
 else:
-    filter_emoji(args, log_args)
+    filter_emoji(args, args_to_pass)
