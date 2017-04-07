@@ -49,6 +49,11 @@ class TestShellLiteral (unittest.TestCase):
         literal = ShellLiteral(81)
         assert_that(literal, has_string("81"))
 
+    def test_tab_can_be_escaped (self):
+        literal = ShellLiteral("\t")
+        assert_that(literal, has_string("'\t'"))
+        assert_that(literal.raw(), is_(equal_to("\\\t")))
+
 class GivenAllNonAlphaNum (unittest.TestCase):
 
     def setUp (self):
