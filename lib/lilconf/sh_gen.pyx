@@ -16,4 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 
-ShellLiteral = None
+class ShellLiteral:
+
+    def __init__ (self, value):
+        pass
