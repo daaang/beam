@@ -40,16 +40,18 @@ def filter_emoji (args, log_args):
         with open(args.input_file, "r") as stream:
             sub_emoji_in_each_line(stream)
 
-args = list(argv[1:])
-try:
-    i = args.index("--")
+def separate_arg_sets (sys_argv):
+    args = list(argv[1:])
+    try:
+        i = args.index("--")
 
-except ValueError:
-    log_args = [ ]
+    except ValueError:
+        return args, [ ]
 
-else:
-    log_args = args[i+1:]
-    args = args[:i]
+    else:
+        return args[:i], args[i+1:]
+
+args, log_args = separate_arg_sets(argv)
 
 parser = ArgumentParser()
 
