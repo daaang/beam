@@ -22,5 +22,6 @@ from lilconf.sh_gen import ShellLiteral
 
 class TestShellLiteral (unittest.TestCase):
 
-    def test_is_class (self):
-        literal = ShellLiteral("matt")
+    def test_degenerate (self):
+        literal = ShellLiteral("")
+        assert_that(literal, has_string("''"))
