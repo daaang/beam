@@ -32,6 +32,10 @@ cdef class ShellLiteral:
         self.value = str(value)
 
     def raw (self):
+        if "\n" in self.value:
+            raise ValueError(
+                    "cannot represent linefeeds in raw literals")
+
         return self.escape(RE_RAW_ESCAPES)
 
     def __str__ (self):

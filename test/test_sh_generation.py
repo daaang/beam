@@ -54,6 +54,11 @@ class TestShellLiteral (unittest.TestCase):
         assert_that(literal, has_string("'\t'"))
         assert_that(literal.raw(), is_(equal_to("\\\t")))
 
+    def test_newline_cannot_be_raw (self):
+        literal = ShellLiteral("\n")
+        assert_that(literal, has_string("'\n'"))
+        assert_that(calling(literal.raw), raises(ValueError))
+
 class GivenAllNonAlphaNum (unittest.TestCase):
 
     def setUp (self):
