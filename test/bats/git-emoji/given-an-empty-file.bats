@@ -39,8 +39,12 @@ teardown() {
   rm "$filename"
 }
 
-@test "git-emoji --ed-commit-msg adds table to file" {
+@test "git-emoji --ed-commit-msg succeeds" {
   run git_emoji --ed-commit-msg "$filename"
   [ "$status" = 0 ]
+}
+
+@test "git-emoji --ed-commit-msg doesn't change the last line" {
+  run git_emoji --ed-commit-msg "$filename"
   [ "`tail -n 1 $filename`" = "maybe some diff stuff here" ]
 }
