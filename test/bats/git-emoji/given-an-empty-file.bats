@@ -39,3 +39,11 @@ EOF
   [ "${lines[3]}" = "maybe some diff stuff here" ]
   [[ ${lines[5]} =~ $pattern ]]
 }
+
+@test "git-emoji --ed-commit-msg can deal with noeol files" {
+  echo -n "no trailing newline" > "$filename"
+  git_emoji --ed-commit-msg "$filename"
+  run cat "$filename"
+  [ "${lines[0]}" = "no trailing newline" ]
+  [ "${lines[1]}" = "#" ]
+}
