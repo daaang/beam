@@ -15,8 +15,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
+from re import compile as re_compile
 
 cdef DOUBLE_QUOTE_ESCAPES = ("\\", '"', "$")
+cdef RE_NUMBER = re_compile(r"^[0-9]+$")
 
 cdef class ShellLiteral:
 
@@ -29,8 +31,8 @@ cdef class ShellLiteral:
         if "'" in self.value:
             return self.double_quote()
 
-        elif self.value == "4":
-            return "4"
+        elif RE_NUMBER.match(self.value):
+            return self.value
 
         else:
             return self.single_quote()
