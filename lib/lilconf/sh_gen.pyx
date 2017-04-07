@@ -17,8 +17,44 @@
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 from re import compile as re_compile
 
-cdef DOUBLE_QUOTE_ESCAPES = ("\\", '"', "$")
 cdef RE_NUMBER = re_compile(r"^[0-9]+$")
+cdef DOUBLE_QUOTE_ESCAPES = ("\\", '"', "$")
+cdef ALL_ESCAPES = (
+    "\\",
+    "\t",
+    " ",
+    "!",
+    '"',
+    "#",
+    "$",
+    #"%",
+    "&",
+    "'",
+    "(",
+    ")",
+    "*",
+    #"+",
+    ",",
+    #"-",
+    #".",
+    #"/",
+    ":",
+    ";",
+    "<",
+    #"=",
+    ">",
+    "?",
+    #"@",
+    "[",
+    "]",
+    "^",
+    #"_",
+    "`",
+    "{",
+    "|",
+    "}",
+    "~",
+)
 
 cdef class ShellLiteral:
 
@@ -28,7 +64,12 @@ cdef class ShellLiteral:
         self.value = str(value)
 
     def raw (self):
-        pass
+        cdef str result = self.value
+
+        for c in ALL_ESCAPES:
+            result = result.replace(c, "\\" + c)
+
+        return result
 
     def __str__ (self):
         if self.single_quote_is_in_value():
