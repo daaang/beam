@@ -15,28 +15,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
-PYTHON3=python3
-SETUP=$(PYTHON3) setup.py
+from hamcrest import *
+import unittest
 
-build: setup.py
-	$(SETUP) build
+from lilconf.envtest import hello
 
-dist: build
-	$(SETUP) sdist
-	$(SETUP) bdist_wheel
+class TestEnvironment (unittest.TestCase):
 
-.PHONY: install clean test
-
-install: build
-	$(SETUP) install
-
-clean:
-	-rm -r lib/*.egg-info build dist
-	-find . -name '*.c' | xargs rm
-	-find . -name __pycache__ | xargs rm -r
-
-test: clean build
-	(for libdir in build/lib*; do \
-	  echo "PYTHONPATH=\"$$libdir\""; \
-	  PYTHONPATH="$$libdir" $(PYTHON3) -m unittest || exit; done)
-	$(MAKE) clean
+    def test_working_cython_environment (self):
+        assert_that(hello, is_(equal_to("Hi, Matt!")))

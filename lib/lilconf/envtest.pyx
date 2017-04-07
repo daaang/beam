@@ -15,28 +15,5 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
-PYTHON3=python3
-SETUP=$(PYTHON3) setup.py
 
-build: setup.py
-	$(SETUP) build
-
-dist: build
-	$(SETUP) sdist
-	$(SETUP) bdist_wheel
-
-.PHONY: install clean test
-
-install: build
-	$(SETUP) install
-
-clean:
-	-rm -r lib/*.egg-info build dist
-	-find . -name '*.c' | xargs rm
-	-find . -name __pycache__ | xargs rm -r
-
-test: clean build
-	(for libdir in build/lib*; do \
-	  echo "PYTHONPATH=\"$$libdir\""; \
-	  PYTHONPATH="$$libdir" $(PYTHON3) -m unittest || exit; done)
-	$(MAKE) clean
+hello = "Hi, Matt!"
