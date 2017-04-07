@@ -20,16 +20,17 @@ from argparse import ArgumentParser
 from beam.emoji_lib.git import add_emoji_commit_args
 from subprocess import Popen
 
+def execute (command):
+    raise SystemExit(Popen(command, shell=True).wait())
+
 parser = ArgumentParser()
 add_emoji_commit_args(parser)
 args = parser.parse_args()
 
 if args.emoji_category:
-    proc = Popen(" ".join(["git", "commit", "-vem", args.emoji_category]),
-                 shell=True)
+    command = "git commit -vem " + args.emoji_category
 
 else:
-    proc = Popen(" ".join(["git", "commit", "-v"]),
-                 shell=True)
+    command = "git commit -v"
 
-raise SystemExit(proc.wait())
+execute(command)
