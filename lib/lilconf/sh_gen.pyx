@@ -28,7 +28,7 @@ cdef class ShellLiteral:
         self.value = str(value)
 
     def __str__ (self):
-        if "'" in self.value:
+        if self.single_quote_is_in_value():
             return self.double_quote()
 
         elif RE_NUMBER.match(self.value):
@@ -39,6 +39,9 @@ cdef class ShellLiteral:
 
     def __repr__ (self):
         return "<{} {}>".format(self.__class__.__name__, str(self))
+
+    cdef bint single_quote_is_in_value (self):
+        return "'" in self.value
 
     cdef str double_quote (self):
         cdef str result = self.value
