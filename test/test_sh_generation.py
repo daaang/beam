@@ -52,6 +52,9 @@ class TestShellLiteral (unittest.TestCase):
     def test_floats_default_to_raw (self):
         self.assert_str("3.5", "3.5")
 
+    def test_numbers_do_not_begin_with_dots (self):
+        self.assert_str(".4", "'.4'")
+
     def test_tab_can_be_escaped (self):
         self.assert_str("\t", "'\t'")
 

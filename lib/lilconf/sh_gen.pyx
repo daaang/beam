@@ -17,7 +17,7 @@
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 from re import compile as re_compile
 
-cdef RE_NUMBER = re_compile(r"^[0-9.]+$")
+cdef RE_NUMBER = re_compile(r"^[0-9][0-9.]*$")
 cdef RE_DOUBLE_QUOTE_ESCAPES = re_compile(r'["$]')
 cdef RE_RAW_ESCAPES = re_compile(r"[^-+%./=@\\_0-9A-Za-z]")
 
