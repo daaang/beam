@@ -18,7 +18,7 @@
 from re import compile as re_compile
 
 cdef RE_NUMBER = re_compile(r"^[0-9]+$")
-cdef DOUBLE_QUOTE_ESCAPES = ("\\", '"', "$")
+cdef DOUBLE_QUOTE_ESCAPES = ('"', "$")
 cdef ALL_ESCAPES = (
     "\\",
     "\t",
@@ -91,7 +91,7 @@ cdef class ShellLiteral:
         return RE_NUMBER.match(self.value)
 
     cdef str double_quote (self):
-        cdef str result = self.value
+        cdef str result = self.value.replace("\\", "\\\\")
 
         for c in DOUBLE_QUOTE_ESCAPES:
             result = result.replace(c, "\\" + c)
