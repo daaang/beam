@@ -48,3 +48,13 @@ class TestShellLiteral (unittest.TestCase):
 
         literal = ShellLiteral(81)
         assert_that(literal, has_string("81"))
+
+class GivenAllNonAlphaNum (unittest.TestCase):
+
+    def setUp (self):
+        self.literal = ShellLiteral(
+                " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
+
+    def test_defaults_to_double_quotes (self):
+        assert_that(self.literal, has_string(
+                '" !\\"#\\$%&\'()*+,-./:;<=>?@[\\\\]^_`{|}~"'))
