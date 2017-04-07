@@ -20,13 +20,6 @@ source test/bats/git-emoji/includes.sh
 
 setup() {
   filename="`mktemp XXXXXX.txt`"
-}
-
-teardown() {
-  rm "$filename"
-}
-
-@test "git-emoji --ed-commit-msg adds table to file" {
   cat <<EOF > "$filename"
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
@@ -40,6 +33,13 @@ teardown() {
 # Everything below will be removed.
 maybe some diff stuff here
 EOF
+}
+
+teardown() {
+  rm "$filename"
+}
+
+@test "git-emoji --ed-commit-msg adds table to file" {
   run git_emoji --ed-commit-msg "$filename"
   [ "$status" = 0 ]
   [ "`tail -n 1 $filename`" = "maybe some diff stuff here" ]
