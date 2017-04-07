@@ -21,42 +21,9 @@ cdef RE_NUMBER = re_compile(r"^[0-9]+$")
 
 cdef RE_DOUBLE_QUOTE_ESCAPES = re_compile(r'["$]')
 
-cdef ALL_ESCAPES = (
-    "\\",
-    "\t",
-    " ",
-    "!",
-    '"',
-    "#",
-    "$",
-    #"%",
-    "&",
-    "'",
-    "(",
-    ")",
-    "*",
-    #"+",
-    ",",
-    #"-",
-    #".",
-    #"/",
-    ":",
-    ";",
-    "<",
-    #"=",
-    ">",
-    "?",
-    #"@",
-    "[",
-    "]",
-    "^",
-    #"_",
-    "`",
-    "{",
-    "|",
-    "}",
-    "~",
-)
+# All ascii symbols except %+-./=@\_
+cdef RE_RAW_ESCAPES = re_compile(
+        r"""[\t !"#$&'()*,:;<>?[\]^`{|}~]""")
 
 cdef escape_char (match):
     return "\\" + match.group(0)
@@ -69,12 +36,8 @@ cdef class ShellLiteral:
         self.value = str(value)
 
     def raw (self):
-        cdef str result = self.value
-
-        for c in ALL_ESCAPES:
-            result = result.replace(c, "\\" + c)
-
-        return result
+        cdef str result = self.value.replace("\\", "\\\\")
+        return RE_RAW_ESCAPES.sub(escape_char, result)
 
     def __str__ (self):
         if self.single_quote_is_in_value():
