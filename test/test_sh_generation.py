@@ -44,3 +44,4 @@ class TestShellLiteral (unittest.TestCase):
 
     def test_integers_default_to_no_quotes (self):
         literal = ShellLiteral(4)
+        assert_that(literal, has_string("4"))

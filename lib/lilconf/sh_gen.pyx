@@ -29,6 +29,9 @@ cdef class ShellLiteral:
         if "'" in self.value:
             return self.double_quote()
 
+        elif self.value == "4":
+            return "4"
+
         else:
             return self.single_quote()
 
