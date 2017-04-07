@@ -36,8 +36,7 @@ cdef class ShellLiteral:
         self.value = str(value)
 
     def raw (self):
-        cdef str result = self.value.replace("\\", "\\\\")
-        return RE_RAW_ESCAPES.sub(escape_char, result)
+        return self.escape(RE_RAW_ESCAPES)
 
     def __str__ (self):
         if self.single_quote_is_in_value():
@@ -59,9 +58,11 @@ cdef class ShellLiteral:
         return RE_NUMBER.match(self.value)
 
     cdef str double_quote (self):
-        cdef str result = self.value.replace("\\", "\\\\")
-        return '"{}"'.format(RE_DOUBLE_QUOTE_ESCAPES.sub(escape_char,
-                                                         result))
+        return '"{}"'.format(self.escape(RE_DOUBLE_QUOTE_ESCAPES))
 
     cdef str single_quote (self):
         return "'{}'".format(self.value)
+
+    cdef str escape (self, regex):
+        cdef str result = self.value.replace("\\", "\\\\")
+        return regex.sub(escape_char, result)
