@@ -39,6 +39,7 @@ Character          Name                          Use
 💪        ``:muscle:``            Refactor (or "flex") code
 📚        ``:books:``             Add data (i.e. without tests)
 💚        ``:green_heart:``       Mess with continuous integration
+🏠        ``:house:``             Mess with repository structure
 📝        ``:memo:``              Write documentation
 ========= ======================= =================================
 

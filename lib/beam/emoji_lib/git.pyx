@@ -28,6 +28,7 @@ cdef GIT_EMOJI_KEY = (
     ("💪", "flex",          'Refactor (or "flex") code'),
     ("📚", "data",          "Add data (i.e. without tests)"),
     ("💚", "ci",            "Mess with continuous integration"),
+    ("🏠", "git-repo",      "Mess with repository structure"),
     ("📝", "Documentation", "Write documentation"),
 )
 
