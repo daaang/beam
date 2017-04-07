@@ -41,6 +41,7 @@ Character          Name                          Use
 💚        ``:green_heart:``       Mess with continuous integration
 🏠        ``:house:``             Mess with repository structure
 📝        ``:memo:``              Write documentation
+🔪        ``:hocho:``             Remove feature/test
 ========= ======================= =================================
 
 .. _COPYING: COPYING

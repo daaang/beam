@@ -30,6 +30,7 @@ cdef GIT_EMOJI_KEY = (
     ("💚", "ci",            "Mess with continuous integration"),
     ("🏠", "git-repo",      "Mess with repository structure"),
     ("📝", "Documentation", "Write documentation"),
+    ("🔪", "kill",          "Remove feature/test"),
 )
 
 cdef RE_START_OF_LINE = re_compile(r"^", MULTILINE)
