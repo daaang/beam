@@ -77,21 +77,21 @@ args = parser.parse_args(args)
 
 if args.ed_commit_msg:
     insert_after = "\n# Everything below will be removed.\n"
+    table = "#\n" + get_commit_table()
 
     with open(args.ed_commit_msg, "r") as f:
         msg = f.read()
 
     if insert_after in msg:
         msg = msg.replace(insert_after,
-                          "{}#\n{}\n".format(insert_after,
-                                             get_commit_table()),
+                          "{}{}\n".format(insert_after, table),
                           1)
 
     elif msg.endswith("\n"):
-        msg += "#\n{}\n".format(get_commit_table())
+        msg += "{}\n".format(table)
 
     else:
-        msg += "\n#\n{}".format(get_commit_table())
+        msg += "\n{}".format(table)
 
     with open(args.ed_commit_msg, "w") as f:
         f.write(msg)
