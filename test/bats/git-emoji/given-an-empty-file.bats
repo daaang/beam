@@ -35,7 +35,7 @@ maybe some diff stuff here
 EOF
   git_emoji --ed-commit-msg "$filename"
   run cat "$filename"
-  pattern='# =* =* =* =*'
+  pattern='^# =* =* =* =*$'
   [ "${lines[3]}" = "maybe some diff stuff here" ]
   [[ ${lines[5]} =~ $pattern ]]
 }

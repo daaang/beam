@@ -56,6 +56,6 @@ teardown() {
 
 @test "git-emoji --ed-commit-msg does add the table" {
   run cat "$filename"
-  pattern='# =* =* =* =*'
+  pattern='^# =* =* =* =*$'
   [[ ${lines[11]} =~ $pattern ]]
 }
