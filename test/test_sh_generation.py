@@ -29,3 +29,7 @@ class TestShellLiteral (unittest.TestCase):
     def test_strings_of_text_are_put_between_apostrophes (self):
         literal = ShellLiteral("matt")
         assert_that(literal, has_string("'matt'"))
+
+    def test_apostrophes_have_no_special_characters (self):
+        literal = ShellLiteral('\\ "" $var')
+        assert_that(literal, has_string("""'\\ "" $var'"""))
