@@ -26,11 +26,14 @@ def sub_emoji_in_each_line (stream):
     for line in stream:
         print(sub_emoji_term_io(line))
 
+def run_git_log (args):
+    return Popen(["git", "log", "--color=always"] + args,
+                 stdout=PIPE,
+                 universal_newlines=True)
+
 def filter_emoji (args, args_to_pass):
     if args.input_file == "":
-        stream = Popen(["git", "log", "--color=always"] + args_to_pass,
-                       stdout=PIPE,
-                       universal_newlines=True).stdout
+        stream = run_git_log(args_to_pass).stdout
         sub_emoji_in_each_line(stream)
 
     elif args.input_file == "-":
