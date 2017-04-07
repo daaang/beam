@@ -54,31 +54,34 @@ def separate_arg_sets (sys_argv):
     else:
         return args[:i], args[i+1:]
 
+def parse_args (args):
+    parser = ArgumentParser()
+
+    parser.add_argument("input_file",
+                        nargs="?",
+                        default="",
+                        help="defaults to stdout of git log")
+
+    parser.add_argument("--show-rst-table",
+                        dest="rst_table",
+                        action="store_const",
+                        const="rst",
+                        default="",
+                        help="print emoji table for README.rst")
+
+    parser.add_argument("--show-commit-table",
+                        dest="rst_table",
+                        action="store_const",
+                        const="commit",
+                        help="print emoji table for git-commit")
+
+    parser.add_argument("--ed-commit-msg", default="")
+
+    return parser.parse_args(args)
+
 our_args, args_to_pass = separate_arg_sets(argv)
 
-parser = ArgumentParser()
-
-parser.add_argument("input_file",
-                    nargs="?",
-                    default="",
-                    help="defaults to stdout of git log")
-
-parser.add_argument("--show-rst-table",
-                    dest="rst_table",
-                    action="store_const",
-                    const="rst",
-                    default="",
-                    help="print emoji table for README.rst")
-
-parser.add_argument("--show-commit-table",
-                    dest="rst_table",
-                    action="store_const",
-                    const="commit",
-                    help="print emoji table for git-commit")
-
-parser.add_argument("--ed-commit-msg", default="")
-
-args = parser.parse_args(our_args)
+args = parse_args(our_args)
 
 if args.ed_commit_msg:
     insert_after = "\n# Everything below will be removed.\n"
