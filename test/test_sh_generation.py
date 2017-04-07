@@ -42,12 +42,16 @@ class TestShellLiteral (unittest.TestCase):
         literal = ShellLiteral("""\\ " ' $var""")
         assert_that(literal, has_string('"\\\\ \\" \' \\$var"'))
 
-    def test_integers_default_to_no_quotes (self):
+    def test_integers_default_to_raw (self):
         literal = ShellLiteral(4)
         assert_that(literal, has_string("4"))
 
         literal = ShellLiteral(81)
         assert_that(literal, has_string("81"))
+
+    def test_floats_default_to_raw (self):
+        literal = ShellLiteral("3.5")
+        assert_that(literal, has_string("3.5"))
 
     def test_tab_can_be_escaped (self):
         literal = ShellLiteral("\t")
