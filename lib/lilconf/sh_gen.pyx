@@ -30,7 +30,7 @@ cdef class ShellLiteral:
             return self.double_quote()
 
         else:
-            return "'{}'".format(self.value)
+            return self.single_quote()
 
     def __repr__ (self):
         return "<{} {}>".format(self.__class__.__name__, str(self))
@@ -42,3 +42,6 @@ cdef class ShellLiteral:
             result = result.replace(c, "\\" + c)
 
         return '"{}"'.format(result)
+
+    cdef str single_quote (self):
+        return "'{}'".format(self.value)
