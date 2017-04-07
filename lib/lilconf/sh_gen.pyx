@@ -31,7 +31,7 @@ cdef class ShellLiteral:
         if self.single_quote_is_in_value():
             return self.double_quote()
 
-        elif RE_NUMBER.match(self.value):
+        elif self.is_number():
             return self.value
 
         else:
@@ -42,6 +42,9 @@ cdef class ShellLiteral:
 
     cdef bint single_quote_is_in_value (self):
         return "'" in self.value
+
+    cdef bint is_number (self):
+        return RE_NUMBER.match(self.value)
 
     cdef str double_quote (self):
         cdef str result = self.value
