@@ -25,15 +25,16 @@ def parse_args():
     add_emoji_commit_args(parser)
     return parser.parse_args()
 
-args = parse_args()
+def get_command (emoji_category):
+    if emoji_category:
+        return "git commit -vem " + emoji_category
 
-if args.emoji_category:
-    command = "git commit -vem " + args.emoji_category
-
-else:
-    command = "git commit -v"
+    else:
+        return "git commit -v"
 
 def execute (command):
     raise SystemExit(Popen(command, shell=True).wait())
 
+args = parse_args()
+get_command(args.emoji_category)
 execute(command)
