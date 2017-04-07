@@ -22,45 +22,46 @@ from lilconf.sh_gen import ShellLiteral
 
 class TestShellLiteral (unittest.TestCase):
 
+    def assert_str (self, init, expected_str):
+        literal = ShellLiteral(init)
+        assert_that(literal, has_string(expected_str))
+
     def test_empty_string_becomes_two_apostrophes (self):
-        literal = ShellLiteral("")
-        assert_that(literal, has_string("''"))
+        self.assert_str("", "''")
 
     def test_strings_of_text_are_put_between_apostrophes (self):
-        literal = ShellLiteral("matt")
-        assert_that(literal, has_string("'matt'"))
+        self.assert_str("matt", "'matt'")
 
     def test_apostrophes_have_no_special_characters (self):
-        literal = ShellLiteral('\\ "" $var')
-        assert_that(literal, has_string("""'\\ "" $var'"""))
+        self.assert_str('\\ "" $var',
+                        """'\\ "" $var'""")
 
     def test_text_containing_apostrophes_needs_double_quotes (self):
-        literal = ShellLiteral("li'l configure")
-        assert_that(literal, has_string('"li\'l configure"'))
+        self.assert_str("li'l configure",
+                        '"li\'l configure"')
 
     def test_double_quotes_do_have_special_characters (self):
-        literal = ShellLiteral("""\\ " ' $var""")
-        assert_that(literal, has_string('"\\\\ \\" \' \\$var"'))
+        self.assert_str("""\\ " ' $var""",
+                        '"\\\\ \\" \' \\$var"')
 
     def test_integers_default_to_raw (self):
-        literal = ShellLiteral(4)
-        assert_that(literal, has_string("4"))
+        self.assert_str(4, "4")
 
-        literal = ShellLiteral(81)
-        assert_that(literal, has_string("81"))
+        self.assert_str(81, "81")
 
     def test_floats_default_to_raw (self):
-        literal = ShellLiteral("3.5")
-        assert_that(literal, has_string("3.5"))
+        self.assert_str("3.5", "3.5")
 
     def test_tab_can_be_escaped (self):
+        self.assert_str("\t", "'\t'")
+
         literal = ShellLiteral("\t")
-        assert_that(literal, has_string("'\t'"))
         assert_that(literal.raw(), is_(equal_to("\\\t")))
 
     def test_newline_cannot_be_raw (self):
+        self.assert_str("\n", "'\n'")
+
         literal = ShellLiteral("\n")
-        assert_that(literal, has_string("'\n'"))
         assert_that(calling(literal.raw), raises(ValueError))
 
 class GivenAllNonAlphaNum (unittest.TestCase):
