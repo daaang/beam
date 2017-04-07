@@ -41,3 +41,6 @@ class TestShellLiteral (unittest.TestCase):
     def test_double_quotes_do_have_special_characters (self):
         literal = ShellLiteral("""\\ " ' $var""")
         assert_that(literal, has_string('"\\\\ \\" \' \\$var"'))
+
+    def test_integers_default_to_no_quotes (self):
+        literal = ShellLiteral(4)
