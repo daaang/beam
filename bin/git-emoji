@@ -79,11 +79,7 @@ def parse_args (args):
 
     return parser.parse_args(args)
 
-our_args, args_to_pass = separate_arg_sets(argv)
-
-args = parse_args(our_args)
-
-if args.ed_commit_msg:
+def ed_commit_msg (args):
     insert_after = "\n# Everything below will be removed.\n"
     table = "#\n" + get_commit_table()
 
@@ -103,6 +99,12 @@ if args.ed_commit_msg:
 
     with open(args.ed_commit_msg, "w") as f:
         f.write(msg)
+
+our_args, args_to_pass = separate_arg_sets(argv)
+args = parse_args(our_args)
+
+if args.ed_commit_msg:
+    ed_commit_msg(args)
 
 elif args.rst_table:
     print({"rst": get_rst_table(),
