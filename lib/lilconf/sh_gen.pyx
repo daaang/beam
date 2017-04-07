@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 
+cdef DOUBLE_QUOTE_ESCAPES = ("\\", '"', "$")
+
 cdef class ShellLiteral:
 
     cdef str value
@@ -25,10 +27,18 @@ cdef class ShellLiteral:
 
     def __str__ (self):
         if "'" in self.value:
-            return '"{}"'.format(self.value)
+            return self.double_quote()
 
         else:
             return "'{}'".format(self.value)
 
     def __repr__ (self):
         return "<{} {}>".format(self.__class__.__name__, str(self))
+
+    cdef str double_quote (self):
+        cdef str result = self.value
+
+        for c in DOUBLE_QUOTE_ESCAPES:
+            result = result.replace(c, "\\" + c)
+
+        return '"{}"'.format(result)
