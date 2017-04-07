@@ -18,12 +18,8 @@
 from re import compile as re_compile
 
 cdef RE_NUMBER = re_compile(r"^[0-9]+$")
-
 cdef RE_DOUBLE_QUOTE_ESCAPES = re_compile(r'["$]')
-
-# All ascii symbols except %+-./=@\_
-cdef RE_RAW_ESCAPES = re_compile(
-        r"""[\t !"#$&'()*,:;<>?[\]^`{|}~]""")
+cdef RE_RAW_ESCAPES = re_compile(r"[^-+%./=@\\_0-9A-Za-z]")
 
 cdef escape_char (match):
     return "\\" + match.group(0)
