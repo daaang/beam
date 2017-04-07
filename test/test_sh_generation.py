@@ -67,5 +67,5 @@ class GivenAllNonAlphaNum (unittest.TestCase):
     def test_can_represent_without_quotes (self):
         raw = self.literal.raw()
         assert_that(raw, is_(equal_to("\\ \\!\\\"\\#\\$%\\&\\'\\(\\)"
-                                      "\\*+\\,-./\\:\\;\\<=\\>\\?@\\[\\\\"
-                                      "\\]\\^_\\`\\{\\|\\}\\~")))
+                                      "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
+                                      "\\\\\\]\\^_\\`\\{\\|\\}\\~")))
