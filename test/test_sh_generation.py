@@ -53,7 +53,10 @@ class TestShellLiteral (unittest.TestCase):
         self.assert_str("3.5", "3.5")
 
     def test_numbers_do_not_begin_with_dots (self):
-        self.assert_str(".4", "'.4'")
+        self.assert_str(".2", "'.2'")
+
+    def test_numbers_do_not_end_with_dots (self):
+        self.assert_str("1.", "'1.'")
 
     def test_tab_can_be_escaped (self):
         self.assert_str("\t", "'\t'")
