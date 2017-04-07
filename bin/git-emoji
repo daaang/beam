@@ -55,7 +55,7 @@ def separate_arg_sets (sys_argv):
         return args[:i], args[i+1:]
 
 def parse_args (args):
-    parser = ArgumentParser()
+    parser = ArgumentParser(description="deal with emoji")
 
     parser.add_argument("input_file",
                         nargs="?",
