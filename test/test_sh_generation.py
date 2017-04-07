@@ -22,6 +22,6 @@ from lilconf.sh_gen import ShellLiteral
 
 class TestShellLiteral (unittest.TestCase):
 
-    def test_degenerate (self):
+    def test_empty_string_becomes_two_apostrophes (self):
         literal = ShellLiteral("")
         assert_that(literal, has_string("''"))
