@@ -26,7 +26,6 @@ class GivenNothing (unittest.TestCase):
         structure = Assignment("var", "'value'")
         assert_that(structure, has_string("var='value'"))
 
-    @unittest.skip
     def test_more_strs (self):
         structure = Assignment("hey", '"what\'s up"')
         assert_that(structure, has_string("hey=\"what's up\""))

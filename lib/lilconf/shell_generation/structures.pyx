@@ -26,4 +26,4 @@ cdef class Assignment:
         self.value = value
 
     def __str__ (self):
-        return "var='value'"
+        return "=".join((self.name, self.value))
