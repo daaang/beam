@@ -17,8 +17,10 @@
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 from re import compile as re_compile
 
-cdef RE_NUMBER = re_compile(r"^[0-9]+(?:\.[0-9]+)*$")
-cdef RE_ARG = re_compile(r"^-(?:[0-9A-Za-z]*|-[-=0-9A-Za-z]*)$")
+cdef RE_NUMBER_OR_ARG = re_compile(
+        r"^(?:[0-9]+(?:\.[0-9]+)*"
+        r"|-[0-9A-Za-z]*"
+        r"|--[-=0-9A-Za-z]*)$")
 cdef RE_DOUBLE_QUOTE_ESCAPES = re_compile(r'["$]')
 cdef RE_RAW_ESCAPES = re_compile(r"[^-+%./=@\\_0-9A-Za-z]")
 
@@ -68,7 +70,7 @@ cdef class ShellLiteral:
         return "'" in self.value
 
     cdef bint is_number_or_arg (self):
-        return RE_NUMBER.match(self.value) or RE_ARG.match(self.value)
+        return RE_NUMBER_OR_ARG.match(self.value)
 
     cdef str escape (self, regex):
         cdef str result = self.value.replace("\\", "\\\\")
