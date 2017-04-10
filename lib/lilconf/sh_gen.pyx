@@ -43,7 +43,7 @@ cdef class ShellLiteral:
         elif self.is_number():
             return self.raw()
 
-        elif RE_ARG.match(self.value):
+        elif self.is_arg():
             return self.raw()
 
         else:
@@ -65,6 +65,9 @@ cdef class ShellLiteral:
 
     cdef bint is_number (self):
         return RE_NUMBER.match(self.value)
+
+    cdef bint is_arg (self):
+        return RE_ARG.match(self.value)
 
     cdef str double_quote (self):
         return '"{}"'.format(self.escape(RE_DOUBLE_QUOTE_ESCAPES))
