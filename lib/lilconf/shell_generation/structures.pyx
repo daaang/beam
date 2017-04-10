@@ -36,7 +36,7 @@ cdef class ShellCommand:
         self.args = args
 
     def __str__ (self):
-        return "cat some_file.txt"
+        return " ".join(self.args)
 
 cdef class ShellSequence:
 
