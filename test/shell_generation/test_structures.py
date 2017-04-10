@@ -36,3 +36,4 @@ class SequenceTest (unittest.TestCase):
 
     def test_can_create_sequence (self):
         structure = ShellSequence("some line")
+        assert_that(structure, has_string("some line"))

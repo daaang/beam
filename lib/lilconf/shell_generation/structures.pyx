@@ -32,3 +32,6 @@ cdef class ShellSequence:
 
     def __init__ (self, line):
         pass
+
+    def __str__ (self):
+        return "some line"
