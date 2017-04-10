@@ -33,7 +33,11 @@ cdef class ShellSequence:
     cdef tuple lines
 
     def __init__ (self, *lines):
-        self.lines = lines
+        if lines:
+            self.lines = lines
+
+        else:
+            raise TypeError("expected at least one line")
 
     def __str__ (self):
         return "\n".join(self.lines)
