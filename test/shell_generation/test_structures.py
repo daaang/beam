@@ -22,6 +22,11 @@ from lilconf.shell_generation.structures import Assignment
 
 class GivenNothing (unittest.TestCase):
 
-    def test_assignment_takes_two_strs (self):
+    def test_simple_strs (self):
         structure = Assignment("var", "'value'")
         assert_that(structure, has_string("var='value'"))
+
+    @unittest.skip
+    def test_more_strs (self):
+        structure = Assignment("hey", '"what\'s up"')
+        assert_that(structure, has_string("hey=\"what's up\""))
