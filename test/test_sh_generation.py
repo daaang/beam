@@ -67,6 +67,9 @@ class TestShellLiteral (unittest.TestCase):
     def test_floats_cannot_have_multiple_dots_in_a_row (self):
         self.assert_str("123..789", "'123..789'")
 
+    def test_shortcut_args_are_raw_by_default (self):
+        self.assert_str("-t", "-t")
+
     def test_tab_can_be_escaped (self):
         self.assert_str("\t", "'\t'")
 

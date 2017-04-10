@@ -18,6 +18,7 @@
 from re import compile as re_compile
 
 cdef RE_NUMBER = re_compile(r"^[0-9]+(?:\.[0-9]+)*$")
+cdef RE_ARG = re_compile(r"^-t$")
 cdef RE_DOUBLE_QUOTE_ESCAPES = re_compile(r'["$]')
 cdef RE_RAW_ESCAPES = re_compile(r"[^-+%./=@\\_0-9A-Za-z]")
 
@@ -41,6 +42,9 @@ cdef class ShellLiteral:
 
         elif self.is_number():
             return self.value
+
+        elif RE_ARG.match(self.value):
+            return self.raw()
 
         else:
             return self.single_quote()
