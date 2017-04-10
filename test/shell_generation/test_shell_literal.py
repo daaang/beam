@@ -22,8 +22,8 @@ from lilconf.shell_generation.shell_literal import ShellLiteral
 
 class ShellLiteralTestCase (unittest.TestCase):
 
-    def init (self, value):
-        self.literal = ShellLiteral(value)
+    def setUp (self):
+        self.literal = ShellLiteral(self.value)
 
     def get_raw (self):
         return self.literal.raw()
@@ -114,8 +114,7 @@ class GivenNothing (unittest.TestCase):
 
 class GivenHorizontalTab (ShellLiteralTestCase):
 
-    def setUp (self):
-        self.init("\t")
+    value = "\t"
 
     def test_defaults_to_single_quotes (self):
         self.assert_defaults_to_single_quotes()
@@ -125,8 +124,7 @@ class GivenHorizontalTab (ShellLiteralTestCase):
 
 class GivenLineFeed (ShellLiteralTestCase):
 
-    def setUp (self):
-        self.init("\n")
+    value = "\n"
 
     def test_defaults_to_single_quotes (self):
         self.assert_defaults_to_single_quotes()
@@ -136,8 +134,7 @@ class GivenLineFeed (ShellLiteralTestCase):
 
 class GivenAllNonAlphaNum (ShellLiteralTestCase):
 
-    def setUp (self):
-        self.init(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
+    value = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 
     def test_defaults_to_double_quotes (self):
         self.assert_defaults_to_double_quotes()
@@ -153,8 +150,7 @@ class GivenAllNonAlphaNum (ShellLiteralTestCase):
 
 class GivenMyName (ShellLiteralTestCase):
 
-    def setUp (self):
-        self.init("Matt LaChance")
+    value = "Matt LaChance"
 
     def test_defaults_to_single_quotes (self):
         self.assert_defaults_to_single_quotes()
@@ -170,8 +166,7 @@ class GivenMyName (ShellLiteralTestCase):
 
 class GivenStrWithApostrophe (ShellLiteralTestCase):
 
-    def setUp (self):
-        self.init("Li'l Configure")
+    value = "Li'l Configure"
 
     def test_defaults_to_double_quotes (self):
         self.assert_defaults_to_double_quotes()
