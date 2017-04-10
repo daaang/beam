@@ -30,6 +30,9 @@ cdef class ShellAssignment:
 
 cdef class ShellCommand:
 
+    def __init__ (self, command, *args):
+        pass
+
     def __str__ (self):
         return "cat some_file.txt"
 
