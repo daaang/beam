@@ -21,7 +21,9 @@ import unittest
 from lilconf.shell_generation.shell_literal import ShellLiteral
 
 class ShellLiteralTestCase (unittest.TestCase):
-    pass
+
+    def init (self, value):
+        self.literal = ShellLiteral(value)
 
 class GivenNothing (unittest.TestCase):
 
@@ -108,10 +110,10 @@ class GivenAllNonAlphaNum (unittest.TestCase):
                                       "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
                                       "\\\\\\]\\^_\\`\\{\\|\\}\\~")))
 
-class GivenMyName (unittest.TestCase):
+class GivenMyName (ShellLiteralTestCase):
 
     def setUp (self):
-        self.literal = ShellLiteral("Matt LaChance")
+        self.init("Matt LaChance")
 
     def test_defaults_to_single_quotes (self):
         assert_that(self.literal, has_string("'Matt LaChance'"))
@@ -128,10 +130,10 @@ class GivenMyName (unittest.TestCase):
         assert_that(self.literal.single_quote(),
                     is_(equal_to("'Matt LaChance'")))
 
-class GivenStrWithApostrophe (unittest.TestCase):
+class GivenStrWithApostrophe (ShellLiteralTestCase):
 
     def setUp (self):
-        self.literal = ShellLiteral("Li'l Configure")
+        self.init("Li'l Configure")
 
     def test_defaults_to_double_quotes (self):
         assert_that(self.literal,
