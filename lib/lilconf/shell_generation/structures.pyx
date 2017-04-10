@@ -30,10 +30,10 @@ cdef class ShellAssignment:
 
 cdef class ShellSequence:
 
-    cdef str line
+    cdef tuple lines
 
-    def __init__ (self, line):
-        self.line = line
+    def __init__ (self, *lines):
+        self.lines = lines
 
     def __str__ (self):
-        return self.line
+        return self.lines[0]
