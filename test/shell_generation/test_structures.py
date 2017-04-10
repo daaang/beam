@@ -48,3 +48,11 @@ class SequenceTest (unittest.TestCase):
 
     def test_cannot_init_sequence_of_zero (self):
         assert_that(calling(ShellSequence), raises(TypeError))
+
+    def test_can_create_sequence_of_assignments (self):
+        structure = ShellSequence(
+                ShellAssignment("a", "'bibbity'"),
+                ShellAssignment("b", "'bobbity'"),
+                ShellAssignment("c", "'boo'"))
+        assert_that(structure,
+                    has_string("a='bibbity'\nb='bobbity'\nc='boo'"))

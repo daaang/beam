@@ -40,4 +40,4 @@ cdef class ShellSequence:
             raise TypeError("expected at least one line")
 
     def __str__ (self):
-        return "\n".join(self.lines)
+        return "\n".join(str(l) for l in self.lines)
