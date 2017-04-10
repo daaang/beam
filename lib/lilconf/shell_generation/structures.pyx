@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 
-cdef class Assignment:
+cdef class ShellAssignment:
 
     cdef str name
     cdef str value

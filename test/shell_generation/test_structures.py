@@ -18,14 +18,14 @@
 from hamcrest import *
 import unittest
 
-from lilconf.shell_generation.structures import Assignment
+from lilconf.shell_generation.structures import ShellAssignment
 
 class GivenNothing (unittest.TestCase):
 
     def test_simple_strs (self):
-        structure = Assignment("var", "'value'")
+        structure = ShellAssignment("var", "'value'")
         assert_that(structure, has_string("var='value'"))
 
     def test_more_strs (self):
-        structure = Assignment("hey", '"what\'s up"')
+        structure = ShellAssignment("hey", '"what\'s up"')
         assert_that(structure, has_string("hey=\"what's up\""))
