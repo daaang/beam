@@ -24,7 +24,7 @@ cdef RE_NUMBER_OR_ARG = re_compile(
 cdef RE_DOUBLE_QUOTE_ESCAPES = re_compile(r'["$]')
 cdef RE_RAW_ESCAPES = re_compile(r"[^-+%./=@\\_0-9A-Za-z]")
 
-cdef escape_char (match):
+cdef str escape_char (object match):
     return "\\" + match.group(0)
 
 cdef class ShellLiteral:
