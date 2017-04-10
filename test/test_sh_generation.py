@@ -69,6 +69,7 @@ class TestShellLiteral (unittest.TestCase):
 
     def test_shortcut_args_are_raw_by_default (self):
         self.assert_str("-t", "-t")
+        self.assert_str("-auND", "-auND")
 
     def test_tab_can_be_escaped (self):
         self.assert_str("\t", "'\t'")
