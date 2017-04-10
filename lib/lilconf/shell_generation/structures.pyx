@@ -51,3 +51,5 @@ cdef class ShellSequence:
 
     def __str__ (self):
         return "\n".join(str(l) for l in self.lines)
+
+ShellFunction = None

@@ -21,7 +21,8 @@ import unittest
 from lilconf.shell_generation.structures import \
         ShellAssignment, \
         ShellCommand, \
-        ShellSequence
+        ShellSequence, \
+        ShellFunction
 
 class AssignmentTest (unittest.TestCase):
 
