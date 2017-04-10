@@ -25,6 +25,18 @@ class ShellLiteralTestCase (unittest.TestCase):
     def init (self, value):
         self.literal = ShellLiteral(value)
 
+    def assert_default (self, value):
+        assert_that(self.literal, has_string(value))
+
+    def assert_defaults_to_raw (self):
+        self.assert_default(self.literal.raw())
+
+    def assert_defaults_to_single_quotes (self):
+        self.assert_default(self.literal.single_quote())
+
+    def assert_defaults_to_double_quotes (self):
+        self.assert_default(self.literal.double_quote())
+
 class GivenNothing (unittest.TestCase):
 
     def assert_defaults_to (self, init, expected_str):
@@ -94,14 +106,17 @@ class GivenNothing (unittest.TestCase):
         literal = ShellLiteral("\n")
         assert_that(calling(literal.raw), raises(ValueError))
 
-class GivenAllNonAlphaNum (ShellLiteral):
+class GivenAllNonAlphaNum (ShellLiteralTestCase):
 
     def setUp (self):
         self.init(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
 
     def test_defaults_to_double_quotes (self):
-        assert_that(self.literal, has_string(
-                '" !\\"#\\$%&\'()*+,-./:;<=>?@[\\\\]^_`{|}~"'))
+        self.assert_defaults_to_double_quotes()
+
+    def test_double_quotes_escape_only_a_few_chars (self):
+        self.assert_default(
+                '" !\\"#\\$%&\'()*+,-./:;<=>?@[\\\\]^_`{|}~"')
 
     def test_can_represent_without_quotes (self):
         raw = self.literal.raw()
@@ -115,7 +130,7 @@ class GivenMyName (ShellLiteralTestCase):
         self.init("Matt LaChance")
 
     def test_defaults_to_single_quotes (self):
-        assert_that(self.literal, has_string("'Matt LaChance'"))
+        self.assert_defaults_to_single_quotes()
 
     def test_raw_escapes_the_space (self):
         assert_that(self.literal.raw(),
@@ -135,8 +150,7 @@ class GivenStrWithApostrophe (ShellLiteralTestCase):
         self.init("Li'l Configure")
 
     def test_defaults_to_double_quotes (self):
-        assert_that(self.literal,
-                    has_string(self.literal.double_quote()))
+        self.assert_defaults_to_double_quotes()
 
     def test_single_quotes_wrap_around_apostrophe (self):
         assert_that(self.literal.single_quote(),
