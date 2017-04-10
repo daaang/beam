@@ -120,3 +120,7 @@ class GivenMyName (unittest.TestCase):
     def test_can_specify_double_quotes (self):
         assert_that(self.literal.double_quote(),
                     is_(equal_to('"Matt LaChance"')))
+
+    def test_can_specify_single_quotes (self):
+        assert_that(self.literal.single_quote(),
+                    is_(equal_to("'Matt LaChance'")))

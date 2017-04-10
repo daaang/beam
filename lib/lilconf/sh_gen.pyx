@@ -39,6 +39,9 @@ cdef class ShellLiteral:
     def double_quote (self):
         return '"{}"'.format(self.escape(RE_DOUBLE_QUOTE_ESCAPES))
 
+    def single_quote (self):
+        return "'{}'".format(self.value)
+
     def __str__ (self):
         if self.single_quote_is_in_value():
             return self.double_quote()
@@ -71,9 +74,6 @@ cdef class ShellLiteral:
 
     cdef bint is_arg (self):
         return RE_ARG.match(self.value)
-
-    cdef str single_quote (self):
-        return "'{}'".format(self.value)
 
     cdef str escape (self, regex):
         cdef str result = self.value.replace("\\", "\\\\")
