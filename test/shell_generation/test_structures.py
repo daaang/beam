@@ -39,6 +39,11 @@ class CommandTest (unittest.TestCase):
         structure = ShellCommand("cat", "some_file.txt")
         assert_that(structure, has_string("cat some_file.txt"))
 
+    @unittest.skip
+    def test_can_write_simple_true_command (self):
+        assert_that(ShellCommand("true"),
+                    has_string("true"))
+
 class SequenceTest (unittest.TestCase):
 
     def test_can_create_sequence (self):
