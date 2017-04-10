@@ -29,7 +29,9 @@ cdef class ShellAssignment:
         return "=".join((self.name, self.value))
 
 cdef class ShellCommand:
-    pass
+
+    def __str__ (self):
+        return "cat some_file.txt"
 
 cdef class ShellSequence:
 
