@@ -112,3 +112,7 @@ class GivenMyName (unittest.TestCase):
 
     def test_defaults_to_single_quotes (self):
         assert_that(self.literal, has_string("'Matt LaChance'"))
+
+    def test_raw_escapes_the_space (self):
+        assert_that(self.literal.raw(),
+                    is_(equal_to("Matt\\ LaChance")))
