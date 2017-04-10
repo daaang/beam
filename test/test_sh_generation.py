@@ -71,6 +71,9 @@ class TestShellLiteral (unittest.TestCase):
         self.assert_str("-t", "-t")
         self.assert_str("-auND", "-auND")
 
+    def test_optional_args_are_raw_by_default (self):
+        self.assert_str("--hey", "--hey")
+
     def test_tab_can_be_escaped (self):
         self.assert_str("\t", "'\t'")
 
