@@ -20,41 +20,6 @@ import unittest
 
 from lilconf.shell_generation.shell_literal import ShellLiteral
 
-class ShellLiteralTestCase (unittest.TestCase):
-
-    def setUp (self):
-        self.literal = ShellLiteral(self.value)
-
-    def get_raw (self):
-        return self.literal.raw()
-
-    def get_single_quote (self):
-        return self.literal.single_quote()
-
-    def get_double_quote (self):
-        return self.literal.double_quote()
-
-    def assert_default (self, value):
-        assert_that(self.literal, has_string(value))
-
-    def assert_defaults_to_raw (self):
-        self.assert_default(self.get_raw())
-
-    def assert_defaults_to_single_quotes (self):
-        self.assert_default(self.get_single_quote())
-
-    def assert_defaults_to_double_quotes (self):
-        self.assert_default(self.get_double_quote())
-
-    def assert_raw (self, value):
-        assert_that(self.get_raw(), is_(equal_to(value)))
-
-    def assert_single_quote (self, value):
-        assert_that(self.get_single_quote(), is_(equal_to(value)))
-
-    def assert_double_quote (self, value):
-        assert_that(self.get_double_quote(), is_(equal_to(value)))
-
 class GivenNothing (unittest.TestCase):
 
     def assert_defaults_to (self, init, expected_str):
@@ -112,6 +77,41 @@ class GivenNothing (unittest.TestCase):
     def test_equal_signs_can_be_in_optional_args (self):
         self.assert_defaults_to("--my-name=Matt", "--my-name=Matt")
 
+class ShellLiteralTestCase (unittest.TestCase):
+
+    def setUp (self):
+        self.literal = ShellLiteral(self.value)
+
+    def get_raw (self):
+        return self.literal.raw()
+
+    def get_single_quote (self):
+        return self.literal.single_quote()
+
+    def get_double_quote (self):
+        return self.literal.double_quote()
+
+    def assert_default_is (self, value):
+        assert_that(self.literal, has_string(value))
+
+    def assert_defaults_to_raw (self):
+        self.assert_default_is(self.get_raw())
+
+    def assert_defaults_to_single_quotes (self):
+        self.assert_default_is(self.get_single_quote())
+
+    def assert_defaults_to_double_quotes (self):
+        self.assert_default_is(self.get_double_quote())
+
+    def assert_raw_is (self, value):
+        assert_that(self.get_raw(), is_(equal_to(value)))
+
+    def assert_single_quote_is (self, value):
+        assert_that(self.get_single_quote(), is_(equal_to(value)))
+
+    def assert_double_quote_is (self, value):
+        assert_that(self.get_double_quote(), is_(equal_to(value)))
+
 class GivenHorizontalTab (ShellLiteralTestCase):
 
     value = "\t"
@@ -120,7 +120,7 @@ class GivenHorizontalTab (ShellLiteralTestCase):
         self.assert_defaults_to_single_quotes()
 
     def test_can_be_escaped_raw (self):
-        self.assert_raw("\\\t")
+        self.assert_raw_is("\\\t")
 
 class GivenLineFeed (ShellLiteralTestCase):
 
@@ -140,11 +140,11 @@ class GivenAllNonAlphaNum (ShellLiteralTestCase):
         self.assert_defaults_to_double_quotes()
 
     def test_double_quotes_escape_only_a_few_chars (self):
-        self.assert_double_quote(
+        self.assert_double_quote_is(
                 '" !\\"#\\$%&\'()*+,-./:;<=>?@[\\\\]^_`{|}~"')
 
     def test_can_represent_without_quotes (self):
-        self.assert_raw("\\ \\!\\\"\\#\\$%\\&\\'\\(\\)"
+        self.assert_raw_is("\\ \\!\\\"\\#\\$%\\&\\'\\(\\)"
                         "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
                         "\\\\\\]\\^_\\`\\{\\|\\}\\~")
 
@@ -156,13 +156,13 @@ class GivenMyName (ShellLiteralTestCase):
         self.assert_defaults_to_single_quotes()
 
     def test_raw_escapes_the_space (self):
-        self.assert_raw("Matt\\ LaChance")
+        self.assert_raw_is("Matt\\ LaChance")
 
     def test_can_specify_double_quotes (self):
-        self.assert_double_quote('"Matt LaChance"')
+        self.assert_double_quote_is('"Matt LaChance"')
 
     def test_can_specify_single_quotes (self):
-        self.assert_single_quote("'Matt LaChance'")
+        self.assert_single_quote_is("'Matt LaChance'")
 
 class GivenStrWithApostrophe (ShellLiteralTestCase):
 
@@ -172,10 +172,10 @@ class GivenStrWithApostrophe (ShellLiteralTestCase):
         self.assert_defaults_to_double_quotes()
 
     def test_single_quotes_wrap_around_apostrophe (self):
-        self.assert_single_quote("'Li'\\''l Configure'")
+        self.assert_single_quote_is("'Li'\\''l Configure'")
 
     def test_double_quotes_have_no_work_to_do (self):
-        self.assert_double_quote('"Li\'l Configure"')
+        self.assert_double_quote_is('"Li\'l Configure"')
 
     def test_raw_escapes_quote_and_space (self):
-        self.assert_raw("Li\\'l\\ Configure")
+        self.assert_raw_is("Li\\'l\\ Configure")
