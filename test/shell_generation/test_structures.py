@@ -37,3 +37,8 @@ class SequenceTest (unittest.TestCase):
     def test_can_create_sequence (self):
         structure = ShellSequence("some line")
         assert_that(structure, has_string("some line"))
+
+    @unittest.skip
+    def test_can_create_sequence_of_one (self):
+        structure = ShellSequence("cut -f1 some_file.txt")
+        assert_that(structure, has_string("cut -f1 some_file.txt"))
