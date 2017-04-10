@@ -68,3 +68,9 @@ class SequenceTest (unittest.TestCase):
                 ShellAssignment("c", "'boo'"))
         assert_that(structure,
                     has_string("a='bibbity'\nb='bobbity'\nc='boo'"))
+
+class FunctionTest (unittest.TestCase):
+
+    def test_function_blah (self):
+        func = ShellFunction("funcname",
+                ShellCommand("echo", '"$1"'))
