@@ -25,26 +25,35 @@ class ShellLiteralTestCase (unittest.TestCase):
     def init (self, value):
         self.literal = ShellLiteral(value)
 
+    def get_raw (self):
+        return self.literal.raw()
+
+    def get_single_quote (self):
+        return self.literal.single_quote()
+
+    def get_double_quote (self):
+        return self.literal.double_quote()
+
     def assert_default (self, value):
         assert_that(self.literal, has_string(value))
 
     def assert_defaults_to_raw (self):
-        self.assert_default(self.literal.raw())
+        self.assert_default(self.get_raw())
 
     def assert_defaults_to_single_quotes (self):
-        self.assert_default(self.literal.single_quote())
+        self.assert_default(self.get_single_quote())
 
     def assert_defaults_to_double_quotes (self):
-        self.assert_default(self.literal.double_quote())
+        self.assert_default(self.get_double_quote())
 
     def assert_raw (self, value):
-        assert_that(self.literal.raw(), is_(equal_to(value)))
+        assert_that(self.get_raw(), is_(equal_to(value)))
 
     def assert_single_quote (self, value):
-        assert_that(self.literal.single_quote(), is_(equal_to(value)))
+        assert_that(self.get_single_quote(), is_(equal_to(value)))
 
     def assert_double_quote (self, value):
-        assert_that(self.literal.double_quote(), is_(equal_to(value)))
+        assert_that(self.get_double_quote(), is_(equal_to(value)))
 
 class GivenNothing (unittest.TestCase):
 
@@ -103,17 +112,27 @@ class GivenNothing (unittest.TestCase):
     def test_equal_signs_can_be_in_optional_args (self):
         self.assert_defaults_to("--my-name=Matt", "--my-name=Matt")
 
-    def test_tab_can_be_escaped (self):
-        self.assert_defaults_to("\t", "'\t'")
+class GivenHorizontalTab (ShellLiteralTestCase):
 
-        literal = ShellLiteral("\t")
-        assert_that(literal.raw(), is_(equal_to("\\\t")))
+    def setUp (self):
+        self.init("\t")
+
+    def test_defaults_to_single_quotes (self):
+        self.assert_defaults_to_single_quotes()
+
+    def test_can_be_escaped_raw (self):
+        self.assert_raw("\\\t")
+
+class GivenLineFeed (ShellLiteralTestCase):
+
+    def setUp (self):
+        self.init("\n")
+
+    def test_defaults_to_single_quotes (self):
+        self.assert_defaults_to_single_quotes()
 
     def test_newline_cannot_be_raw (self):
-        self.assert_defaults_to("\n", "'\n'")
-
-        literal = ShellLiteral("\n")
-        assert_that(calling(literal.raw), raises(ValueError))
+        assert_that(calling(self.get_raw), raises(ValueError))
 
 class GivenAllNonAlphaNum (ShellLiteralTestCase):
 
