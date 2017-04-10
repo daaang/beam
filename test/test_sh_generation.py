@@ -130,6 +130,18 @@ class GivenStrWithApostrophe (unittest.TestCase):
     def setUp (self):
         self.literal = ShellLiteral("Li'l Configure")
 
+    def test_defaults_to_double_quotes (self):
+        assert_that(self.literal,
+                    has_string(self.literal.double_quote()))
+
     def test_single_quotes_wrap_around_apostrophe (self):
         assert_that(self.literal.single_quote(),
                     is_(equal_to("'Li'\\''l Configure'")))
+
+    def test_double_quotes_have_no_work_to_do (self):
+        assert_that(self.literal.double_quote(),
+                    is_(equal_to('"Li\'l Configure"')))
+
+    def test_raw_escapes_quote_and_space (self):
+        assert_that(self.literal.raw(),
+                    is_(equal_to("Li\\'l\\ Configure")))
