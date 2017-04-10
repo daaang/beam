@@ -105,7 +105,7 @@ setup(
         " :: ".join(("Programming Language", "Python", "3", "Only")),
     ],
 
-    packages=["lilconf"],
+    packages=["lilconf", "lilconf.shell_generation"],
     package_dir={"": "lib"},
     ext_modules=get_ext_modules("lib/lilconf"),
 )
