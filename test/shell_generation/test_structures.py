@@ -71,6 +71,11 @@ class SequenceTest (unittest.TestCase):
 
 class FunctionTest (unittest.TestCase):
 
-    def test_function_blah (self):
+    @unittest.skip
+    def test_functions_are_printed_where_needed (self):
         func = ShellFunction("funcname",
                 ShellCommand("echo", '"$1"'))
+        structure = ShellCommand(func, '"hi matt"')
+
+        assert_that(structure, has_string(
+                'funcname() {\n  echo "$1"\n}\n\nfunc "hi matt"'))
