@@ -18,7 +18,9 @@
 from hamcrest import *
 import unittest
 
-from lilconf.shell_generation.structures import ShellAssignment
+from lilconf.shell_generation.structures import \
+        ShellAssignment, \
+        ShellSequence
 
 class GivenNothing (unittest.TestCase):
 
