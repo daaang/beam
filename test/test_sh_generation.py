@@ -74,6 +74,9 @@ class TestShellLiteral (unittest.TestCase):
     def test_optional_args_are_raw_by_default (self):
         self.assert_str("--hey", "--hey")
 
+    def test_equal_signs_can_be_in_optional_args (self):
+        self.assert_str("--my-name=Matt", "--my-name=Matt")
+
     def test_tab_can_be_escaped (self):
         self.assert_str("\t", "'\t'")
 

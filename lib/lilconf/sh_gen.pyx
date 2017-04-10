@@ -18,7 +18,7 @@
 from re import compile as re_compile
 
 cdef RE_NUMBER = re_compile(r"^[0-9]+(?:\.[0-9]+)*$")
-cdef RE_ARG = re_compile(r"^-(?:[0-9A-Za-z]*|-[0-9A-Za-z]*)$")
+cdef RE_ARG = re_compile(r"^-(?:[0-9A-Za-z]*|-[-=0-9A-Za-z]*)$")
 cdef RE_DOUBLE_QUOTE_ESCAPES = re_compile(r'["$]')
 cdef RE_RAW_ESCAPES = re_compile(r"[^-+%./=@\\_0-9A-Za-z]")
 
