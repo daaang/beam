@@ -33,6 +33,11 @@ class AssignmentTest (unittest.TestCase):
         structure = ShellAssignment("hey", '"what\'s up"')
         assert_that(structure, has_string("hey=\"what's up\""))
 
+class CommandTest (unittest.TestCase):
+
+    def test_can_write_command (self):
+        structure = ShellCommand("cat", "some_file.txt")
+
 class SequenceTest (unittest.TestCase):
 
     def test_can_create_sequence (self):
