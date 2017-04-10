@@ -104,3 +104,11 @@ class GivenAllNonAlphaNum (unittest.TestCase):
         assert_that(raw, is_(equal_to("\\ \\!\\\"\\#\\$%\\&\\'\\(\\)"
                                       "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
                                       "\\\\\\]\\^_\\`\\{\\|\\}\\~")))
+
+class GivenMyName (unittest.TestCase):
+
+    def setUp (self):
+        self.literal = ShellLiteral("Matt LaChance")
+
+    def test_defaults_to_single_quotes (self):
+        assert_that(self.literal, has_string("'Matt LaChance'"))
