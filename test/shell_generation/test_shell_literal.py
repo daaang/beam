@@ -109,6 +109,12 @@ class ShellLiteralTestCase (unittest.TestCase):
     def assert_defaults_to_double_quotes (self):
         self.assert_default_is(self.get_double_quote())
 
+    def assert_arg_str_is (self, value):
+        assert_that(self.get_arg_str(), is_(equal_to(value)))
+
+    def assert_value_str_is (self, value):
+        assert_that(self.get_value_str(), is_(equal_to(value)))
+
     def assert_raw_is (self, value):
         assert_that(self.get_raw(), is_(equal_to(value)))
 
@@ -171,12 +177,10 @@ class GivenMyName (ShellLiteralTestCase):
         self.assert_single_quote_is("'Matt LaChance'")
 
     def test_arg_str_is_default (self):
-        assert_that(self.get_arg_str(),
-                    is_(equal_to("'Matt LaChance'")))
+        self.assert_arg_str_is("'Matt LaChance'")
 
     def test_value_str_is_default (self):
-        assert_that(self.get_value_str(),
-                    is_(equal_to("'Matt LaChance'")))
+        self.assert_arg_str_is("'Matt LaChance'")
 
 class GivenStrWithApostrophe (ShellLiteralTestCase):
 
