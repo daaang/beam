@@ -24,3 +24,4 @@ class GivenNothing (unittest.TestCase):
 
     def test_assignment_takes_two_strs (self):
         structure = Assignment("var", "'value'")
+        assert_that(structure, has_string("var='value'"))

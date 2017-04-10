@@ -20,3 +20,6 @@ cdef class Assignment:
 
     def __init__ (self, name, value):
         pass
+
+    def __str__ (self):
+        return "var='value'"
