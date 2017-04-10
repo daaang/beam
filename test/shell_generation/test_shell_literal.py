@@ -22,71 +22,71 @@ from lilconf.shell_generation.shell_literal import ShellLiteral
 
 class ShellLiteralTestCase (unittest.TestCase):
 
-    def assert_str (self, init, expected_str):
+    def assert_defaults_to (self, init, expected_str):
         literal = ShellLiteral(init)
         assert_that(literal, has_string(expected_str))
 
 class TestShellLiteral (ShellLiteralTestCase):
 
     def test_empty_string_becomes_two_apostrophes (self):
-        self.assert_str("", "''")
+        self.assert_defaults_to("", "''")
 
     def test_strings_of_text_are_put_between_apostrophes (self):
-        self.assert_str("matt", "'matt'")
+        self.assert_defaults_to("matt", "'matt'")
 
     def test_apostrophes_have_no_special_characters (self):
-        self.assert_str('\\ "" $var',
-                        """'\\ "" $var'""")
+        self.assert_defaults_to('\\ "" $var',
+                                """'\\ "" $var'""")
 
     def test_text_containing_apostrophes_needs_double_quotes (self):
-        self.assert_str("li'l configure",
-                        '"li\'l configure"')
+        self.assert_defaults_to("li'l configure",
+                                '"li\'l configure"')
 
     def test_double_quotes_do_have_special_characters (self):
-        self.assert_str("""\\ " ' $var""",
-                        '"\\\\ \\" \' \\$var"')
+        self.assert_defaults_to("""\\ " ' $var""",
+                                '"\\\\ \\" \' \\$var"')
 
     def test_integers_default_to_raw (self):
-        self.assert_str(4, "4")
+        self.assert_defaults_to(4, "4")
 
-        self.assert_str(81, "81")
+        self.assert_defaults_to(81, "81")
 
     def test_floats_default_to_raw (self):
-        self.assert_str("3.5", "3.5")
+        self.assert_defaults_to("3.5", "3.5")
 
     def test_numbers_do_not_begin_with_dots (self):
-        self.assert_str(".2", "'.2'")
+        self.assert_defaults_to(".2", "'.2'")
 
     def test_numbers_do_not_end_with_dots (self):
-        self.assert_str("1.", "'1.'")
+        self.assert_defaults_to("1.", "'1.'")
 
     def test_floats_can_have_multiple_decimals (self):
-        self.assert_str("123.456", "123.456")
+        self.assert_defaults_to("123.456", "123.456")
 
     def test_floats_can_have_multiple_dots (self):
-        self.assert_str("123.456.789", "123.456.789")
+        self.assert_defaults_to("123.456.789", "123.456.789")
 
     def test_floats_cannot_have_multiple_dots_in_a_row (self):
-        self.assert_str("123..789", "'123..789'")
+        self.assert_defaults_to("123..789", "'123..789'")
 
     def test_shortcut_args_are_raw_by_default (self):
-        self.assert_str("-t", "-t")
-        self.assert_str("-auND", "-auND")
+        self.assert_defaults_to("-t", "-t")
+        self.assert_defaults_to("-auND", "-auND")
 
     def test_optional_args_are_raw_by_default (self):
-        self.assert_str("--hey", "--hey")
+        self.assert_defaults_to("--hey", "--hey")
 
     def test_equal_signs_can_be_in_optional_args (self):
-        self.assert_str("--my-name=Matt", "--my-name=Matt")
+        self.assert_defaults_to("--my-name=Matt", "--my-name=Matt")
 
     def test_tab_can_be_escaped (self):
-        self.assert_str("\t", "'\t'")
+        self.assert_defaults_to("\t", "'\t'")
 
         literal = ShellLiteral("\t")
         assert_that(literal.raw(), is_(equal_to("\\\t")))
 
     def test_newline_cannot_be_raw (self):
-        self.assert_str("\n", "'\n'")
+        self.assert_defaults_to("\n", "'\n'")
 
         literal = ShellLiteral("\n")
         assert_that(calling(literal.raw), raises(ValueError))
