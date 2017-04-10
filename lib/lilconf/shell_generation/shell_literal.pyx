@@ -39,6 +39,9 @@ cdef class ShellLiteral:
     def arg_str (self):
         return self.single_quote()
 
+    def value_str (self):
+        return self.arg_str()
+
     def raw (self):
         self.assert_we_can_generate_a_raw_literal()
         return self.escape(RE_RAW_ESCAPES)

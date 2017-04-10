@@ -85,6 +85,9 @@ class ShellLiteralTestCase (unittest.TestCase):
     def get_arg_str (self):
         return self.literal.arg_str()
 
+    def get_value_str (self):
+        return self.literal.value_str()
+
     def get_raw (self):
         return self.literal.raw()
 
@@ -169,6 +172,10 @@ class GivenMyName (ShellLiteralTestCase):
 
     def test_arg_str_is_default (self):
         assert_that(self.get_arg_str(),
+                    is_(equal_to("'Matt LaChance'")))
+
+    def test_value_str_is_default (self):
+        assert_that(self.get_value_str(),
                     is_(equal_to("'Matt LaChance'")))
 
 class GivenStrWithApostrophe (ShellLiteralTestCase):
