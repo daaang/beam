@@ -37,6 +37,15 @@ class ShellLiteralTestCase (unittest.TestCase):
     def assert_defaults_to_double_quotes (self):
         self.assert_default(self.literal.double_quote())
 
+    def assert_raw (self, value):
+        assert_that(self.literal.raw(), is_(equal_to(value)))
+
+    def assert_single_quote (self, value):
+        assert_that(self.literal.single_quote(), is_(equal_to(value)))
+
+    def assert_double_quote (self, value):
+        assert_that(self.literal.double_quote(), is_(equal_to(value)))
+
 class GivenNothing (unittest.TestCase):
 
     def assert_defaults_to (self, init, expected_str):
@@ -115,14 +124,13 @@ class GivenAllNonAlphaNum (ShellLiteralTestCase):
         self.assert_defaults_to_double_quotes()
 
     def test_double_quotes_escape_only_a_few_chars (self):
-        self.assert_default(
+        self.assert_double_quote(
                 '" !\\"#\\$%&\'()*+,-./:;<=>?@[\\\\]^_`{|}~"')
 
     def test_can_represent_without_quotes (self):
-        raw = self.literal.raw()
-        assert_that(raw, is_(equal_to("\\ \\!\\\"\\#\\$%\\&\\'\\(\\)"
-                                      "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
-                                      "\\\\\\]\\^_\\`\\{\\|\\}\\~")))
+        self.assert_raw("\\ \\!\\\"\\#\\$%\\&\\'\\(\\)"
+                        "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
+                        "\\\\\\]\\^_\\`\\{\\|\\}\\~")
 
 class GivenMyName (ShellLiteralTestCase):
 
@@ -133,16 +141,13 @@ class GivenMyName (ShellLiteralTestCase):
         self.assert_defaults_to_single_quotes()
 
     def test_raw_escapes_the_space (self):
-        assert_that(self.literal.raw(),
-                    is_(equal_to("Matt\\ LaChance")))
+        self.assert_raw("Matt\\ LaChance")
 
     def test_can_specify_double_quotes (self):
-        assert_that(self.literal.double_quote(),
-                    is_(equal_to('"Matt LaChance"')))
+        self.assert_double_quote('"Matt LaChance"')
 
     def test_can_specify_single_quotes (self):
-        assert_that(self.literal.single_quote(),
-                    is_(equal_to("'Matt LaChance'")))
+        self.assert_single_quote("'Matt LaChance'")
 
 class GivenStrWithApostrophe (ShellLiteralTestCase):
 
@@ -153,13 +158,10 @@ class GivenStrWithApostrophe (ShellLiteralTestCase):
         self.assert_defaults_to_double_quotes()
 
     def test_single_quotes_wrap_around_apostrophe (self):
-        assert_that(self.literal.single_quote(),
-                    is_(equal_to("'Li'\\''l Configure'")))
+        self.assert_single_quote("'Li'\\''l Configure'")
 
     def test_double_quotes_have_no_work_to_do (self):
-        assert_that(self.literal.double_quote(),
-                    is_(equal_to('"Li\'l Configure"')))
+        self.assert_double_quote('"Li\'l Configure"')
 
     def test_raw_escapes_quote_and_space (self):
-        assert_that(self.literal.raw(),
-                    is_(equal_to("Li\\'l\\ Configure")))
+        self.assert_raw("Li\\'l\\ Configure")
