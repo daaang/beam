@@ -20,11 +20,13 @@ import unittest
 
 from lilconf.shell_generation.shell_literal import ShellLiteral
 
-class TestShellLiteral (unittest.TestCase):
+class ShellLiteralTestCase (unittest.TestCase):
 
     def assert_str (self, init, expected_str):
         literal = ShellLiteral(init)
         assert_that(literal, has_string(expected_str))
+
+class TestShellLiteral (ShellLiteralTestCase):
 
     def test_empty_string_becomes_two_apostrophes (self):
         self.assert_str("", "''")
