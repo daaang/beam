@@ -41,7 +41,7 @@ cdef class ShellLiteral:
             return self.double_quote()
 
         elif self.is_number():
-            return self.value
+            return self.raw()
 
         elif RE_ARG.match(self.value):
             return self.raw()
