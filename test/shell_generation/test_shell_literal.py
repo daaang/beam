@@ -94,11 +94,10 @@ class GivenNothing (unittest.TestCase):
         literal = ShellLiteral("\n")
         assert_that(calling(literal.raw), raises(ValueError))
 
-class GivenAllNonAlphaNum (unittest.TestCase):
+class GivenAllNonAlphaNum (ShellLiteral):
 
     def setUp (self):
-        self.literal = ShellLiteral(
-                " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
+        self.init(" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
 
     def test_defaults_to_double_quotes (self):
         assert_that(self.literal, has_string(
