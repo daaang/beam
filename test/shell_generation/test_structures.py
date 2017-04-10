@@ -44,3 +44,4 @@ class SequenceTest (unittest.TestCase):
 
     def test_can_have_a_sequence_of_two (self):
         structure = ShellSequence("first line", "second line")
+        assert_that(structure, has_string("first line\nsecond line"))

@@ -36,4 +36,4 @@ cdef class ShellSequence:
         self.lines = lines
 
     def __str__ (self):
-        return self.lines[0]
+        return "\n".join(self.lines)
