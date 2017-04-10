@@ -19,3 +19,8 @@ from hamcrest import *
 import unittest
 
 from lilconf.shell_generation.structures import Assignment
+
+class GivenNothing (unittest.TestCase):
+
+    def test_assignment_takes_two_strs (self):
+        structure = Assignment("var", "value")
