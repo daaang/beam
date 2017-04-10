@@ -47,10 +47,7 @@ cdef class ShellLiteral:
         if self.single_quote_is_in_value():
             return self.double_quote()
 
-        elif self.is_number():
-            return self.raw()
-
-        elif self.is_arg():
+        elif self.is_number_or_arg():
             return self.raw()
 
         else:
@@ -70,11 +67,8 @@ cdef class ShellLiteral:
     cdef bint single_quote_is_in_value (self):
         return "'" in self.value
 
-    cdef bint is_number (self):
-        return RE_NUMBER.match(self.value)
-
-    cdef bint is_arg (self):
-        return RE_ARG.match(self.value)
+    cdef bint is_number_or_arg (self):
+        return RE_NUMBER.match(self.value) or RE_ARG.match(self.value)
 
     cdef str escape (self, regex):
         cdef str result = self.value.replace("\\", "\\\\")
