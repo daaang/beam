@@ -36,6 +36,9 @@ cdef class ShellLiteral:
         self.assert_we_can_generate_a_raw_literal()
         return self.escape(RE_RAW_ESCAPES)
 
+    def double_quote (self):
+        return '"{}"'.format(self.escape(RE_DOUBLE_QUOTE_ESCAPES))
+
     def __str__ (self):
         if self.single_quote_is_in_value():
             return self.double_quote()
@@ -68,9 +71,6 @@ cdef class ShellLiteral:
 
     cdef bint is_arg (self):
         return RE_ARG.match(self.value)
-
-    cdef str double_quote (self):
-        return '"{}"'.format(self.escape(RE_DOUBLE_QUOTE_ESCAPES))
 
     cdef str single_quote (self):
         return "'{}'".format(self.value)

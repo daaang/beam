@@ -116,3 +116,7 @@ class GivenMyName (unittest.TestCase):
     def test_raw_escapes_the_space (self):
         assert_that(self.literal.raw(),
                     is_(equal_to("Matt\\ LaChance")))
+
+    def test_can_specify_double_quotes (self):
+        assert_that(self.literal.double_quote(),
+                    is_(equal_to('"Matt LaChance"')))
