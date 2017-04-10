@@ -40,7 +40,7 @@ cdef class ShellLiteral:
         return '"{}"'.format(self.escape(RE_DOUBLE_QUOTE_ESCAPES))
 
     def single_quote (self):
-        return "'{}'".format(self.value)
+        return "'{}'".format(self.value.replace("'", "'\\''"))
 
     def __str__ (self):
         if self.single_quote_is_in_value():

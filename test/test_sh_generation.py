@@ -124,3 +124,12 @@ class GivenMyName (unittest.TestCase):
     def test_can_specify_single_quotes (self):
         assert_that(self.literal.single_quote(),
                     is_(equal_to("'Matt LaChance'")))
+
+class GivenStrWithApostrophe (unittest.TestCase):
+
+    def setUp (self):
+        self.literal = ShellLiteral("Li'l Configure")
+
+    def test_single_quotes_wrap_around_apostrophe (self):
+        assert_that(self.literal.single_quote(),
+                    is_(equal_to("'Li'\\''l Configure'")))
