@@ -28,4 +28,7 @@ cdef class ShellAssignment:
     def __str__ (self):
         return "=".join((self.name, self.value))
 
-ShellSequence = None
+cdef class ShellSequence:
+
+    def __init__ (self, line):
+        pass

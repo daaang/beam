@@ -22,7 +22,7 @@ from lilconf.shell_generation.structures import \
         ShellAssignment, \
         ShellSequence
 
-class GivenNothing (unittest.TestCase):
+class AssignmentTest (unittest.TestCase):
 
     def test_simple_strs (self):
         structure = ShellAssignment("var", "'value'")
@@ -31,3 +31,8 @@ class GivenNothing (unittest.TestCase):
     def test_more_strs (self):
         structure = ShellAssignment("hey", '"what\'s up"')
         assert_that(structure, has_string("hey=\"what's up\""))
+
+class SequenceTest (unittest.TestCase):
+
+    def test_can_create_sequence (self):
+        structure = ShellSequence("some line")
