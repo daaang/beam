@@ -18,7 +18,7 @@
 from hamcrest import *
 import unittest
 
-from lilconf.sh_gen import ShellLiteral
+from lilconf.shell_literal import ShellLiteral
 
 class TestShellLiteral (unittest.TestCase):
 
