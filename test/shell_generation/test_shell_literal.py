@@ -82,6 +82,9 @@ class ShellLiteralTestCase (unittest.TestCase):
     def setUp (self):
         self.literal = ShellLiteral(self.value)
 
+    def get_arg_str (self):
+        return self.literal.arg_str()
+
     def get_raw (self):
         return self.literal.raw()
 
@@ -145,8 +148,8 @@ class GivenAllNonAlphaNum (ShellLiteralTestCase):
 
     def test_can_represent_without_quotes (self):
         self.assert_raw_is("\\ \\!\\\"\\#\\$%\\&\\'\\(\\)"
-                        "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
-                        "\\\\\\]\\^_\\`\\{\\|\\}\\~")
+                           "\\*+\\,-./\\:\\;\\<=\\>\\?@\\["
+                           "\\\\\\]\\^_\\`\\{\\|\\}\\~")
 
 class GivenMyName (ShellLiteralTestCase):
 
@@ -163,6 +166,10 @@ class GivenMyName (ShellLiteralTestCase):
 
     def test_can_specify_single_quotes (self):
         self.assert_single_quote_is("'Matt LaChance'")
+
+    def test_arg_str_is_default (self):
+        assert_that(self.get_arg_str(),
+                    is_(equal_to("'Matt LaChance'")))
 
 class GivenStrWithApostrophe (ShellLiteralTestCase):
 
