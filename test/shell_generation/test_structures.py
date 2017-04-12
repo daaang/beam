@@ -23,24 +23,16 @@ from lilconf.shell_generation.structures import BaseStructure
 class DummyStructure (BaseStructure):
     pass
 
-class StructureTest (unittest.TestCase):
-
-    def assert_structure (self, *args):
-        assert_that(self.structure, *args)
-
-    def assert_bool (self, *args):
-        assert_that(bool(self.structure), *args)
-
-class TestGivenDummyStructure (StructureTest):
+class TestGivenDummyStructure (unittest.TestCase):
 
     def setUp (self):
         self.structure = DummyStructure()
 
     def test_evaluates_to_false (self):
-        self.assert_bool(is_(equal_to(False)))
+        assert_that(bool(self.structure), is_(equal_to(False)))
 
     def test_str_is_empty (self):
-        self.assert_structure(has_string(""))
+        assert_that(self.structure, has_string(""))
 
     def test_default_indent_is_empty_str (self):
         assert_that(self.structure.get_indent(), is_(equal_to("")))
