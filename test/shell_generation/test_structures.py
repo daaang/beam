@@ -26,7 +26,7 @@ class ObjectWithStructure:
         assert_that(self.structure, has_string(expected_str))
 
     def get_indent (self):
-        return self.structure.get_indent()
+        return self.structure.indent
 
     def set_indent (self, value):
         self.structure.set_indent(value)

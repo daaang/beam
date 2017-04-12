@@ -23,7 +23,8 @@ cdef class BaseStructure:
     def __init__ (self):
         self.indent_str = ""
 
-    def get_indent (self):
+    @property
+    def indent (self):
         return self.indent_str
 
     def set_indent (self, indent):
