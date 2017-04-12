@@ -32,7 +32,7 @@ class ObjectWithStructure:
         self.structure.set_indent(value)
 
     def get_tab (self):
-        return self.structure.get_tab()
+        return self.structure.tab
 
     def set_tab (self, value):
         self.structure.set_tab(value)

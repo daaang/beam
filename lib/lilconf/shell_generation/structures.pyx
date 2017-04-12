@@ -30,7 +30,8 @@ cdef class BaseStructure:
     def set_indent (self, indent):
         self.indent_str = indent
 
-    def get_tab (self):
+    @property
+    def tab (self):
         return "  "
 
     def set_tab (self, tab):
