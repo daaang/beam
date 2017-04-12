@@ -67,3 +67,8 @@ class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
         assert_that(calling(delattr).with_args(self.structure,
                                                "indent"),
                     raises(NotImplementedError))
+
+    def test_cannot_delete_tab (self):
+        assert_that(calling(delattr).with_args(self.structure,
+                                               "tab"),
+                    raises(NotImplementedError))
