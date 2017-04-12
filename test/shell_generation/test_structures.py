@@ -25,6 +25,10 @@ class ObjectWithStructure:
     def assert_str (self, expected_str):
         assert_that(self.structure, has_string(expected_str))
 
+    def assert_cannot_delete (self, attr):
+        assert_that(calling(delattr).with_args(self.structure, attr),
+                    raises(NotImplementedError))
+
     def get_indent (self):
         return self.structure.indent
 
@@ -64,11 +68,7 @@ class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
         assert_that(self.get_tab(), is_(equal_to("\t")))
 
     def test_cannot_delete_indent (self):
-        assert_that(calling(delattr).with_args(self.structure,
-                                               "indent"),
-                    raises(NotImplementedError))
+        self.assert_cannot_delete("indent")
 
     def test_cannot_delete_tab (self):
-        assert_that(calling(delattr).with_args(self.structure,
-                                               "tab"),
-                    raises(NotImplementedError))
+        self.assert_cannot_delete("tab")
