@@ -18,9 +18,6 @@
 
 cdef class BaseStructure:
 
-    def get_str (self):
-        pass
-
     def __str__ (self):
         return ""
 
