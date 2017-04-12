@@ -20,7 +20,10 @@ import unittest
 
 from lilconf.shell_generation.structures import BaseStructure
 
-class TestBaseStructure (unittest.TestCase):
+class ObjectWithStructure:
+    pass
+
+class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
 
     def setUp (self):
         self.structure = BaseStructure()
