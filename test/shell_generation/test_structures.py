@@ -21,7 +21,9 @@ import unittest
 from lilconf.shell_generation.structures import BaseStructure
 
 class ObjectWithStructure:
-    pass
+
+    def assert_str (self, expected_str):
+        assert_that(self.structure, has_string(expected_str))
 
 class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
 
@@ -32,7 +34,7 @@ class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
         assert_that(bool(self.structure), is_(equal_to(False)))
 
     def test_str_is_empty (self):
-        assert_that(self.structure, has_string(""))
+        self.assert_str("")
 
     def test_default_indent_is_empty_str (self):
         assert_that(self.structure.get_indent(), is_(equal_to("")))
