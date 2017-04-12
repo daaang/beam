@@ -32,6 +32,9 @@ cdef class BaseStructure:
     def get_tab (self):
         return "  "
 
+    def set_tab (self, tab):
+        pass
+
     def __str__ (self):
         return ""
 

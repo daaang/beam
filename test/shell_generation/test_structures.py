@@ -41,3 +41,6 @@ class TestBaseStructure (unittest.TestCase):
         self.structure.set_indent("    ")
         assert_that(self.structure.get_indent(), is_(equal_to("    ")))
         assert_that(self.structure, has_string(""))
+
+    def test_can_set_tab (self):
+        self.structure.set_tab("\t")
