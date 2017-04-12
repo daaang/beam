@@ -18,6 +18,9 @@
 
 cdef class BaseStructure:
 
+    def get_indent (self):
+        return ""
+
     def __str__ (self):
         return ""
 
