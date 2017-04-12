@@ -34,6 +34,9 @@ class ObjectWithStructure:
     def get_tab (self):
         return self.structure.get_tab()
 
+    def set_tab (self, value):
+        self.structure.set_tab(value)
+
 class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
 
     def setUp (self):
@@ -57,4 +60,4 @@ class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
         self.assert_str("")
 
     def test_can_set_tab (self):
-        self.structure.set_tab("\t")
+        self.set_tab("\t")
