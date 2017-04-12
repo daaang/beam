@@ -28,6 +28,9 @@ class ObjectWithStructure:
     def get_indent (self):
         return self.structure.get_indent()
 
+    def set_indent (self, value):
+        self.structure.set_indent(value)
+
     def get_tab (self):
         return self.structure.get_tab()
 
@@ -49,7 +52,7 @@ class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
         assert_that(self.get_tab(), is_(equal_to("  ")))
 
     def test_when_setting_indent_str_is_still_empty (self):
-        self.structure.set_indent("    ")
+        self.set_indent("    ")
         assert_that(self.get_indent(), is_(equal_to("    ")))
         self.assert_str("")
 
