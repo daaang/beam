@@ -19,3 +19,6 @@ from hamcrest import *
 import unittest
 
 from lilconf.shell_generation.structures import BaseStructure
+
+class DummyStructure (BaseStructure):
+    pass
