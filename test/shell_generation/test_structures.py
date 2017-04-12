@@ -61,3 +61,4 @@ class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
 
     def test_can_set_tab (self):
         self.set_tab("\t")
+        assert_that(self.get_tab(), is_(equal_to("\t")))

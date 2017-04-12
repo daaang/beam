@@ -19,9 +19,11 @@
 cdef class BaseStructure:
 
     cdef str indent_str
+    cdef str tab_str
 
     def __init__ (self):
         self.indent_str = ""
+        self.tab_str = "  "
 
     @property
     def indent (self):
@@ -33,11 +35,11 @@ cdef class BaseStructure:
 
     @property
     def tab (self):
-        return "  "
+        return self.tab_str
 
     @tab.setter
     def tab (self, tab):
-        pass
+        self.tab_str = tab
 
     def __str__ (self):
         return ""
