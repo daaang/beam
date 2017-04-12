@@ -23,7 +23,10 @@ from lilconf.shell_generation.structures import BaseStructure
 class DummyStructure (BaseStructure):
     pass
 
-class TestGivenDummyStructure (unittest.TestCase):
+class StructureTest (unittest.TestCase):
+    pass
+
+class TestGivenDummyStructure (StructureTest):
 
     def setUp (self):
         self.structure = DummyStructure()
