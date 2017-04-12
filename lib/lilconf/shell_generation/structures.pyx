@@ -18,16 +18,16 @@
 
 cdef class BaseStructure:
 
-    cdef str indent
+    cdef str indent_str
 
     def __init__ (self):
-        self.indent = ""
+        self.indent_str = ""
 
     def get_indent (self):
-        return self.indent
+        return self.indent_str
 
     def set_indent (self, indent):
-        self.indent = indent
+        self.indent_str = indent
 
     def get_tab (self):
         return "  "
