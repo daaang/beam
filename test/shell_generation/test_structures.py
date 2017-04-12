@@ -20,13 +20,10 @@ import unittest
 
 from lilconf.shell_generation.structures import BaseStructure
 
-class DummyStructure (BaseStructure):
-    pass
-
-class TestGivenDummyStructure (unittest.TestCase):
+class TestBaseStructure (unittest.TestCase):
 
     def setUp (self):
-        self.structure = DummyStructure()
+        self.structure = BaseStructure()
 
     def test_evaluates_to_false (self):
         assert_that(bool(self.structure), is_(equal_to(False)))
