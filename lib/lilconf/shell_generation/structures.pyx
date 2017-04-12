@@ -15,7 +15,5 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
-from hamcrest import *
-import unittest
 
-from lilconf.shell_generation.structures import BaseStructure
+BaseStructure = None
