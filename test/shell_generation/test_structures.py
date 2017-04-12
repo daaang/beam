@@ -22,3 +22,8 @@ from lilconf.shell_generation.structures import BaseStructure
 
 class DummyStructure (BaseStructure):
     pass
+
+class TestDummyStructure (unittest.TestCase):
+
+    def test_can_init_dummy_structure (self):
+        structure = DummyStructure()
