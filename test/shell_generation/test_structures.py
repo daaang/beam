@@ -28,6 +28,9 @@ class StructureTest (unittest.TestCase):
     def assert_structure (self, *args):
         assert_that(self.structure, *args)
 
+    def assert_bool (self, *args):
+        assert_that(bool(self.structure), *args)
+
 class TestGivenDummyStructure (StructureTest):
 
     def setUp (self):
@@ -35,3 +38,6 @@ class TestGivenDummyStructure (StructureTest):
 
     def test_str_is_empty (self):
         self.assert_structure(has_string(""))
+
+    def test_evaluates_to_false (self):
+        self.assert_bool(is_(equal_to(False)))
