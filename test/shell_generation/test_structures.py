@@ -50,3 +50,4 @@ class TestGivenDummyStructure (StructureTest):
 
     def test_when_setting_indent_str_is_still_empty (self):
         self.structure.set_indent("    ")
+        assert_that(self.structure.get_indent(), is_(equal_to("    ")))
