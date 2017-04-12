@@ -17,4 +17,10 @@
 # along with lilconf. If not, see <http://www.gnu.org/licenses/>.
 
 cdef class BaseStructure:
-    pass
+
+    def __str__ (self):
+        return ""
+
+    def __repr__ (self):
+        return "<{} {}>".format(self.__class__.__name__,
+                                repr(str(self)))

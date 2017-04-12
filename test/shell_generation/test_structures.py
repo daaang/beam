@@ -25,5 +25,6 @@ class DummyStructure (BaseStructure):
 
 class TestDummyStructure (unittest.TestCase):
 
-    def test_can_init_dummy_structure (self):
+    def test_str_is_empty (self):
         structure = DummyStructure()
+        assert_that(structure, has_string(""))
