@@ -21,6 +21,9 @@ cdef class BaseStructure:
     def get_indent (self):
         return ""
 
+    def set_indent (self, indent):
+        pass
+
     def get_tab (self):
         return "  "
 
