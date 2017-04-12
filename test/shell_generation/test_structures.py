@@ -29,7 +29,7 @@ class ObjectWithStructure:
         return self.structure.indent
 
     def set_indent (self, value):
-        self.structure.set_indent(value)
+        self.structure.indent = value
 
     def get_tab (self):
         return self.structure.tab
