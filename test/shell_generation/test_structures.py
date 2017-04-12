@@ -23,8 +23,10 @@ from lilconf.shell_generation.structures import BaseStructure
 class DummyStructure (BaseStructure):
     pass
 
-class TestDummyStructure (unittest.TestCase):
+class TestGivenDummyStructure (unittest.TestCase):
+
+    def setUp (self):
+        self.structure = DummyStructure()
 
     def test_str_is_empty (self):
-        structure = DummyStructure()
-        assert_that(structure, has_string(""))
+        assert_that(self.structure, has_string(""))
