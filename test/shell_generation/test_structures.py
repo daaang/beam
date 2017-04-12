@@ -36,8 +36,11 @@ class TestGivenDummyStructure (StructureTest):
     def setUp (self):
         self.structure = DummyStructure()
 
+    def test_evaluates_to_false (self):
+        self.assert_bool(is_(equal_to(False)))
+
     def test_str_is_empty (self):
         self.assert_structure(has_string(""))
 
-    def test_evaluates_to_false (self):
-        self.assert_bool(is_(equal_to(False)))
+    def test_indented_str_is_none (self):
+        assert_that(self.structure.get_str(), is_(none()))
