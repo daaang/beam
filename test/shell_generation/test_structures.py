@@ -35,7 +35,7 @@ class ObjectWithStructure:
         return self.structure.tab
 
     def set_tab (self, value):
-        self.structure.set_tab(value)
+        self.structure.tab = value
 
 class TestBaseStructure (ObjectWithStructure, unittest.TestCase):
 
