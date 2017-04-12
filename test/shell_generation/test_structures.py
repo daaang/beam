@@ -24,7 +24,9 @@ class DummyStructure (BaseStructure):
     pass
 
 class StructureTest (unittest.TestCase):
-    pass
+
+    def assert_structure (self, *args):
+        assert_that(self.structure, *args)
 
 class TestGivenDummyStructure (StructureTest):
 
@@ -32,4 +34,4 @@ class TestGivenDummyStructure (StructureTest):
         self.structure = DummyStructure()
 
     def test_str_is_empty (self):
-        assert_that(self.structure, has_string(""))
+        self.assert_structure(has_string(""))
