@@ -42,5 +42,8 @@ class TestGivenDummyStructure (StructureTest):
     def test_str_is_empty (self):
         self.assert_structure(has_string(""))
 
-    def test_default_indent_is_two_spaces (self):
+    def test_default_indent_is_empty_str (self):
         assert_that(self.structure.get_indent(), is_(equal_to("")))
+
+    def test_default_tab_is_two_spaces (self):
+        assert_that(self.structure.get_tab(), is_(equal_to("  ")))

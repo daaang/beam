@@ -21,6 +21,9 @@ cdef class BaseStructure:
     def get_indent (self):
         return ""
 
+    def get_tab (self):
+        return "  "
+
     def __str__ (self):
         return ""
 
