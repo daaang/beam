@@ -38,6 +38,7 @@ Character          Name                          Use
 🎨        ``:art:``               Refactor tests
 💪        ``:muscle:``            Refactor (or "flex") code
 📚        ``:books:``             Add data (i.e. without tests)
+🙈        ``:see_no_evil:``       Add untested script code
 💚        ``:green_heart:``       Mess with continuous integration
 🏠        ``:house:``             Mess with repository structure
 📝        ``:memo:``              Write documentation
