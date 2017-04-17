@@ -18,11 +18,18 @@
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 from argparse import ArgumentParser
 
+WORK_TIME_IN_MINUTES = 25
+REST_TIME_IN_MINUTES = 5
+LONG_REST_TIME_IN_MINUTES = 15
+NUMBER_OF_TOMATOES_BETWEEN_LONG_RESTS = 4
+
 ATMOSPHERES = (
     ("01-the-perfect-storm",    "t"),
     ("02-travel-by-sea",        "s"),
     ("03-frozen-arctic",        "a"),
 )
+
+format_atmo = "ambient-mixer.com/ambient-atmospheres/{}.flac".format
 
 parser = ArgumentParser(description="Begin a tomato.")
 
@@ -38,19 +45,19 @@ parser.add_argument("-l", "--with-long-rest",
 
 parser.add_argument("-w", "--work-time",
                     type=int,
-                    default=25,
+                    default=WORK_TIME_IN_MINUTES,
                     help="minutes to work on tomato")
 parser.add_argument("-r", "--rest-time",
                     type=int,
-                    default=5,
+                    default=REST_TIME_IN_MINUTES,
                     help="minutes to rest after tomato")
 parser.add_argument("-L", "--long-rest-time",
                     type=int,
-                    default=15,
+                    default=LONG_REST_TIME_IN_MINUTES,
                     help="minutes in every fourth rest")
 parser.add_argument("-c", "--cycle-size",
                     type=int,
-                    default=4,
+                    default=NUMBER_OF_TOMATOES_BETWEEN_LONG_RESTS,
                     help="number of tomatoes in a cycle")
 
 group = parser.add_argument_group("atmosphere arguments")
@@ -65,3 +72,5 @@ for song, arg in ATMOSPHERES:
                        help="play {}.flac".format(song))
 
 args = parser.parse_args()
+
+print(format_atmo(args.atmosphere))
