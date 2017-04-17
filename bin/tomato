@@ -17,11 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 from argparse import ArgumentParser
+from datetime import datetime
 
 WORK_TIME_IN_MINUTES = 25
 REST_TIME_IN_MINUTES = 5
 LONG_REST_TIME_IN_MINUTES = 15
 NUMBER_OF_TOMATOES_BETWEEN_LONG_RESTS = 4
+NO_MESSAGE = "(no message)"
 
 ATMOSPHERES = (
     ("01-the-perfect-storm",    "t"),
@@ -34,6 +36,7 @@ format_atmo = "ambient-mixer.com/ambient-atmospheres/{}.flac".format
 parser = ArgumentParser(description="Begin a tomato.")
 
 parser.add_argument("log_message",
+                    default=(NO_MESSAGE,),
                     nargs="*",
                     help="description to be written to the log")
 
@@ -73,4 +76,7 @@ for song, arg in ATMOSPHERES:
 
 args = parser.parse_args()
 
-print(format_atmo(args.atmosphere))
+current_time = datetime.now()
+
+print("{} {}".format(current_time.strftime("%Y%m%d %H%M"),
+                     " ".join(args.log_message)))
