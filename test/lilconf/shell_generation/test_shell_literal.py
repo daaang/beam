@@ -18,7 +18,7 @@
 from hamcrest import *
 import unittest
 
-from lilconf.shell_generation.shell_literal import ShellLiteral
+from beam.lilconf.shell_generation.shell_literal import ShellLiteral
 
 class GivenNothing (unittest.TestCase):
 
