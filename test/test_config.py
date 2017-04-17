@@ -19,3 +19,8 @@ from hamcrest import *
 import unittest
 
 from beam.config import Configuration
+
+class ConfigurationTest (unittest.TestCase):
+
+    def test_can_create_configuration (self):
+        config = Configuration()
