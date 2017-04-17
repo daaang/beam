@@ -10,6 +10,46 @@ it's time I grew up. Hello.
 I don't expect anyone other than myself to ever care about any of this.
 I'm sure you've already got your own weird collection of scripts.
 
+Beginnings of Other Projects
+----------------------------
+
+I'm also using beam as a jumping point for any other projects of mine,
+as something of an incubator.
+
+Li'l Configure
+~~~~~~~~~~~~~~
+
+A program that generates a ``./configure`` script that generates a
+``./config.status`` script that generates a ``Makefile`` along with any
+other configurable files.
+
+It'll probably read a yaml file, but I'm nowhere near ready to start
+thinking about that part yet.
+
+Seems pretty... recursive?
+__________________________
+
+Yeah. Here's how I think about it:
+
+#.  I'm writing an **application.**
+#.  The application will read a **config file.**
+#.  The application will generate the ``./configure`` script based on
+    what it finds in the config file.
+#.  ``./configure`` will read command-line arguments and will create a
+    custom ``./config.status`` file.
+#.  While ``./config.status`` will be a script, it will be a very simple
+    one that does little more than run some static ``cat <<\EOF`` calls
+    (to a ``Makefile`` at the very least).
+
+So the ``./configure`` shell script may need to be complicated, but it
+won't need to generate anything dynamic in ``./config.status``.
+
+And, honestly, automating the generation of ``./configure`` is easier
+than writing it from scratch, since complicated shell scripts can
+necessitate a lot of repeating oneself. This way, I can minimize
+repetition, and I can even automate the ordering of such as function
+definitions.
+
 GNU General Public License v3 (GPLv3)
 -------------------------------------
 
