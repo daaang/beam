@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+# beam: Scripts for Me
+# Copyright 2017 Matt LaChance
+#
+# This file is part of beam.
+#
+# beam is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
+#
+# beam is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with beam. If not, see <http://www.gnu.org/licenses/>.
+from argparse import ArgumentParser
+
+ATMOSPHERES = (
+    ("01-the-perfect-storm",    "t"),
+    ("02-travel-by-sea",        "s"),
+    ("03-frozen-arctic",        "a"),
+)
+
+parser = ArgumentParser(description="Begin a tomato.")
+
+parser.add_argument("log_message",
+                    nargs="*",
+                    help="description to be written to the log")
+
+parser.add_argument("-l", "--with-long-rest",
+                    action="store_true",
+                    dest="long_rest",
+                    default=False,
+                    help="run with a long rest")
+
+parser.add_argument("-w", "--work-time",
+                    type=int,
+                    default=25,
+                    help="minutes to work on tomato")
+parser.add_argument("-r", "--rest-time",
+                    type=int,
+                    default=5,
+                    help="minutes to rest after tomato")
+parser.add_argument("-L", "--long-rest-time",
+                    type=int,
+                    default=15,
+                    help="minutes in every fourth rest")
+parser.add_argument("-c", "--cycle-size",
+                    type=int,
+                    default=4,
+                    help="number of tomatoes in a cycle")
+
+group = parser.add_argument_group("atmosphere arguments")
+group = group.add_mutually_exclusive_group(required=False)
+
+for song, arg in ATMOSPHERES:
+    group.add_argument("-" + arg, "--" + song[3:],
+                       dest="atmosphere",
+                       action="store_const",
+                       const=song,
+                       default=ATMOSPHERES[0][0],
+                       help="play {}.flac".format(song))
+
+args = parser.parse_args()
