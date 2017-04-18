@@ -69,10 +69,17 @@ def get_ext_modules(base_dir):
 
 def maybe_replace_collections_abc (path):
     contents = get_file_contents(path)
+    replaced = contents
 
-    if "collections.abc" in contents:
+    if "collections.abc" in replaced:
+        replaced = replaced.replace("collections.abc", "collections")
+
+    if "BrokenPipeError" in replaced:
+        replaced = replaced.replace("BrokenPipeError", "IOError")
+
+    if contents != replaced:
         with open(path, "w") as f:
-            f.write(contents.replace("collections.abc", "collections"))
+            f.write(replaced)
 
 def make_valid_for_3_2 (lib_dir):
     for source_file in all_python_source_files(lib_dir):
