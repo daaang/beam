@@ -78,6 +78,7 @@ def maybe_replace_collections_abc (path):
         replaced = replaced.replace("BrokenPipeError", "IOError")
 
     if contents != replaced:
+        print("Fixing {} ...".format(path))
         with open(path, "w") as f:
             f.write(replaced)
 
@@ -86,9 +87,11 @@ def make_valid_for_3_2 (lib_dir):
         maybe_replace_collections_abc(source_file)
 
 def make_backwards_compatible (base_dir):
-    if version_info < (3, 3):
+    if version_info < (3, 9):
         print("Making backwards compatible for <3.3 ...")
         make_valid_for_3_2(join(base_dir, "lib"))
+        for bin_file in all_files_under(join(base_dir, "bin")):
+            maybe_replace_collections_abc(bin_file)
 
 base_dir = get_path_to_base_directory()
 make_backwards_compatible(base_dir)
