@@ -27,7 +27,7 @@ teardown() {
 }
 
 @test "git-emoji --ed-commit-msg appends to weird commit messages" {
-  cat <<EOF > "$filename"
+  cat <<\EOF > "$filename"
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 # On branch master
@@ -46,4 +46,9 @@ EOF
   run cat "$filename"
   [ "${lines[0]}" = "no trailing newline" ]
   [ "${lines[1]}" = "#" ]
+}
+
+@test "git-emoji | head catches BrokenPipeError" {
+  git_emoji 2> "$filename" | head -n 1
+  ! [ -s "$filename" ]
 }
