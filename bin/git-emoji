@@ -22,15 +22,22 @@ from beam.emoji_lib.git import get_rst_table, get_commit_table
 from subprocess import Popen, PIPE
 from sys import argv, stdin, stderr
 
+def ignore_broken_pipe (func):
+    def result (*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+
+        except BrokenPipeError:
+            pass
+
+        stderr.close()
+
+    return result
+
+@ignore_broken_pipe
 def sub_emoji_in_each_line (stream):
-    try:
-        for line in stream:
-            print(sub_emoji_term_io(line))
-
-    except BrokenPipeError:
-        pass
-
-    stderr.close()
+    for line in stream:
+        print(sub_emoji_term_io(line))
 
 def run_git_log (args):
     return Popen(["git", "log", "--color=always"] + args,
