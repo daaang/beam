@@ -15,23 +15,26 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
-PYTHON3=python3
-SETUP=$(PYTHON3) setup.py
-INSTALL=install
-bindir=~/bin
+PYTHON3 = python3
+SETUP = $(PYTHON3) setup.py
+INSTALL = install
+bindir = ~/bin
 
-build: setup.py \
-  lib/beam/__init__.py \
-  lib/beam/config.pyx \
-  lib/beam/rst_table.pyx \
-  lib/beam/emoji_lib/__init__.py \
-  lib/beam/emoji_lib/duples.pyx \
-  lib/beam/emoji_lib/git.pyx \
-  lib/beam/emoji_lib/sub.pyx \
-  lib/beam/lilconf/__init__.py \
-  lib/beam/lilconf/shell_generation/__init__.py \
-  lib/beam/lilconf/shell_generation/shell_literal.pyx \
-  lib/beam/lilconf/shell_generation/structures.pyx
+PY_FILES = setup.py
+PY_FILES += lib/beam/__init__.py
+PY_FILES += lib/beam/emoji_lib/__init__.py
+PY_FILES += lib/beam/lilconf/__init__.py
+PY_FILES += lib/beam/lilconf/shell_generation/__init__.py
+
+PYX_FILES = lib/beam/config.pyx
+PYX_FILES += lib/beam/rst_table.pyx
+PYX_FILES += lib/beam/emoji_lib/duples.pyx
+PYX_FILES += lib/beam/emoji_lib/git.pyx
+PYX_FILES += lib/beam/emoji_lib/sub.pyx
+PYX_FILES += lib/beam/lilconf/shell_generation/shell_literal.pyx
+PYX_FILES += lib/beam/lilconf/shell_generation/structures.pyx
+
+build: setup.py $(PY_FILES) $(PYX_FILES)
 	$(SETUP) build
 
 dist: build
