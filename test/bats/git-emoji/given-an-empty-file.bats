@@ -50,5 +50,6 @@ EOF
 
 @test "git-emoji | head catches BrokenPipeError" {
   git_emoji 2> "$filename" | head -n 1
+  cat "$filename"
   ! [ -s "$filename" ]
 }
