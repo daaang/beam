@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 from subprocess import Popen, PIPE
+from sys import argv
 
 def changes_have_been_made():
     proc = Popen(["git", "status", "--porcelain"], stdout=PIPE)
@@ -30,11 +31,26 @@ def shell_success (sh_command):
 def show_history():
     shell_success("git emoji -- --oneline --graph | head -n 5")
 
+def sh_quote (s):
+    if "'" in s:
+        return '"{}"'.format(s.replace("\\", "\\\\")
+                              .replace('"', '\\"')
+                              .replace("`", "\\`")
+                              .replace("$", "\\$"))
+
+    else:
+        return "'{}'".format(s)
+
+def commit():
+    command = ["git commoji"]
+    command.extend(sh_quote(x) for x in argv[1:])
+    return shell_success(" ".join(command))
+
 if shell_success("make test"):
     if changes_have_been_made():
         shell_success("git add .")
 
-        if shell_success("git commit -v"):
+        if commit():
             shell_success("git vain")
             show_history()
             raise SystemExit(0)
