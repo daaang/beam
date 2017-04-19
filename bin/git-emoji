@@ -88,7 +88,10 @@ def parse_args (args):
                         const="commit",
                         help="print emoji table for git-commit")
 
-    parser.add_argument("--ed-commit-msg", default="")
+    parser.add_argument("--ed-commit-msg",
+                        default="",
+                        help="append emoji table to existing commit "
+                             "message")
 
     return parser.parse_args(args)
 
