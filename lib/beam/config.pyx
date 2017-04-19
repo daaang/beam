@@ -18,5 +18,4 @@
 
 cdef class Configuration:
 
-    def __bool__ (self):
-        return False
+    pass

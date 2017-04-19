@@ -24,7 +24,3 @@ class ConfigurationTest (unittest.TestCase):
 
     def test_can_create_configuration (self):
         config = Configuration()
-
-    def test_empty_configuration_is_false (self):
-        config = Configuration()
-        assert_that(bool(config), is_(equal_to(False)))
