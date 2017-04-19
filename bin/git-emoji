@@ -19,6 +19,9 @@
 from argparse import ArgumentParser
 from beam.emoji_lib import sub_emoji_term_io
 from beam.emoji_lib.git import get_rst_table, get_commit_table
+from os import chmod, stat as os_stat
+from os.path import exists, isdir, join as path_join
+from stat import S_IEXEC
 from subprocess import Popen, PIPE
 from sys import argv, stdin, stderr
 
@@ -93,6 +96,12 @@ def parse_args (args):
                         help="append emoji table to existing commit "
                              "message")
 
+    parser.add_argument("--add-hook",
+                        action="store_true",
+                        default=False,
+                        help="add a git hook to append emoji tables "
+                             "to all commit messages for this repo")
+
     return parser.parse_args(args)
 
 def ed_commit_msg (args):
@@ -116,11 +125,40 @@ def ed_commit_msg (args):
     with open(args.ed_commit_msg, "w") as f:
         f.write(msg)
 
+def add_hook():
+    proc = Popen(["git", "worktree", "list", "--porcelain"],
+                 stdout=PIPE,
+                 stderr=PIPE)
+    output = proc.communicate()
+    if proc.returncode != 0:
+        print(output[1].decode().strip())
+        raise SystemExit(proc.returncode)
+
+    output = output[0].decode()
+    assert output.startswith("worktree ")
+    base = output[9:output.find("\n")].strip()
+
+    hookdir = path_join(base, ".git", "hooks")
+    assert isdir(hookdir)
+    prep = path_join(hookdir, "prepare-commit-msg")
+
+    if exists(prep):
+        print("already exists: " + prep)
+
+    else:
+        with open(prep, "w") as f:
+            f.write('#!/bin/sh\ngit emoji --ed-commit-msg "$1"\n')
+        st = os_stat(prep)
+        chmod(prep, st.st_mode | S_IEXEC)
+
 our_args, args_to_pass = separate_arg_sets(argv)
 args = parse_args(our_args)
 
 if args.ed_commit_msg:
     ed_commit_msg(args)
+
+elif args.add_hook:
+    add_hook()
 
 elif args.rst_table:
     print({"rst": get_rst_table(),
