@@ -24,3 +24,7 @@ cdef class Estimate:
     @property
     def best (self):
         return 1
+
+    @property
+    def expected (self):
+        return 2

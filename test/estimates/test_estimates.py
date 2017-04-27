@@ -25,3 +25,4 @@ class NothingTest (unittest.TestCase):
     def test_properties_are_stored (self):
         e = Estimate(1, 2, 3)
         assert_that(e.best, is_(equal_to(1)))
+        assert_that(e.expected, is_(equal_to(2)))
