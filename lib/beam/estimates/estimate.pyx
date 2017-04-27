@@ -18,5 +18,5 @@
 
 cdef class Estimate:
 
-    def __init__ (self, best_case, expected_case, worst_case):
+    def __init__ (self, best, expected, worst):
         pass
