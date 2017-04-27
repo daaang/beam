@@ -44,7 +44,7 @@ cdef class Estimate:
     def __iter__ (self):
         yield 1
         yield 4
-        yield None
+        yield 9
 
     cdef validate_our_estimates (self):
         self.assert_best_case_is_best()

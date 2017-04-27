@@ -58,3 +58,4 @@ class GivenOneEstimate (unittest.TestCase):
         a, b, c = self.first
         assert_that(a, is_(equal_to(1)))
         assert_that(b, is_(equal_to(4)))
+        assert_that(c, is_(equal_to(9)))
