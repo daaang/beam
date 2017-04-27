@@ -20,7 +20,7 @@ import unittest
 
 from beam.estimates import Estimate
 
-class NothingTest (unittest.TestCase):
+class GivenNothing (unittest.TestCase):
 
     def test_properties_are_stored (self):
         e = Estimate(1, 2, 3)
@@ -48,3 +48,11 @@ class NothingTest (unittest.TestCase):
     def test_all_cases_must_be_greater_than_zero (self):
         assert_that(calling(Estimate).with_args(0, 1, 2),
                     raises(ValueError))
+
+class GivenOneEstimate (unittest.TestCase):
+
+    def setUp (self):
+        self.first = Estimate(1, 4, 9)
+
+    def test_can_set_as_triple (self):
+        a, b, c = self.first
