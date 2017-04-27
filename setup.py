@@ -118,6 +118,7 @@ setup(
     packages=[
         "beam",
         "beam.emoji_lib",
+        "beam.estimates",
         "beam.lilconf",
         "beam.lilconf.shell_generation",
     ],
