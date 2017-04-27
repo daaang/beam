@@ -67,3 +67,11 @@ class TestOneEstimate (GivenOneEstimate):
         assert_that(a, is_(equal_to(1)))
         assert_that(b, is_(equal_to(4)))
         assert_that(c, is_(equal_to(9)))
+
+class TestTwoEstimates (GivenTwoEstimates):
+
+    def test_can_set_as_triple (self):
+        a, b, c = self.second
+        assert_that(a, is_(equal_to(2)))
+        assert_that(b, is_(equal_to(3)))
+        assert_that(c, is_(equal_to(5)))
