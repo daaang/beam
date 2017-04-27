@@ -42,9 +42,7 @@ cdef class Estimate:
         return self.worst_case
 
     cdef assert_valid (self):
-        if self.best_case > self.expected_case:
-            raise ValueError("the best case must not be larger than"
-                    " either other case")
+        self.assert_best_case_is_best()
 
         if self.worst_case < self.expected_case:
             raise ValueError("the worst case must not be smaller than"
@@ -52,3 +50,8 @@ cdef class Estimate:
 
         if self.best_case < 1:
             raise ValueError("all estimates must be greater than zero")
+
+    cdef assert_best_case_is_best (self):
+        if self.best_case > self.expected_case:
+            raise ValueError("the best case must not be larger than"
+                    " either other case")
