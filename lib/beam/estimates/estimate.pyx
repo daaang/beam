@@ -43,7 +43,7 @@ cdef class Estimate:
 
     def __iter__ (self):
         yield 1
-        yield None
+        yield 4
         yield None
 
     cdef validate_our_estimates (self):
