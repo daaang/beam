@@ -41,3 +41,6 @@ class NothingTest (unittest.TestCase):
     def test_worst_case_cannot_be_better_than_expected_case (self):
         assert_that(calling(Estimate).with_args(1, 3, 2),
                     raises(ValueError))
+
+    def test_all_cases_can_be_equal (self):
+        e = Estimate(1, 1, 1) # no exception
