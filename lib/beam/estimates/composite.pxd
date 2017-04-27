@@ -19,4 +19,6 @@
 from .estimate cimport Estimate
 
 cdef class CompositeEstimate (Estimate):
-    pass
+
+    cdef inline int get_mean_times_six (self, estimate):
+        return estimate.best + (4*estimate.expected) + estimate.worst
