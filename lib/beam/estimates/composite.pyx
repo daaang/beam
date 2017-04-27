@@ -23,4 +23,6 @@ cdef class CompositeEstimate:
         cdef int stddevs = sum(e.worst - e.best for e in args)
         cdef int expected = sum(e.expected for e in args)
 
-        super().__init__(6, 7, 10)
+        super().__init__(self.ceiling_divide_by_six(means - stddevs),
+                         expected,
+                         self.ceiling_divide_by_six(means + stddevs))

@@ -22,3 +22,6 @@ cdef class CompositeEstimate (Estimate):
 
     cdef inline int get_mean_times_six (self, estimate):
         return estimate.best + (4*estimate.expected) + estimate.worst
+
+    cdef inline int ceiling_divide_by_six (self, int x):
+        return (x + 5) // 6

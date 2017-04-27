@@ -79,3 +79,9 @@ class TestTwoEstimates (GivenTwoEstimates):
     def test_can_become_composite (self):
         c = CompositeEstimate(self.first, self.second)
         assert_that(list(c), is_(equal_to([6, 7, 10])))
+
+    def test_a_larger_composite (self):
+        c = CompositeEstimate(self.first,
+                              self.second,
+                              Estimate(2, 3, 12))
+        assert_that(list(c), is_(equal_to([9, 10, 16])))
