@@ -20,4 +20,5 @@ from .estimate cimport Estimate
 
 cdef class CompositeEstimate (Estimate):
 
-    pass
+    def __init__ (self, *args):
+        super().__init__(1, 2, 3)

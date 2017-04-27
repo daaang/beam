@@ -76,6 +76,5 @@ class TestTwoEstimates (GivenTwoEstimates):
         assert_that(b, is_(equal_to(3)))
         assert_that(c, is_(equal_to(5)))
 
-    @unittest.skip
     def test_can_become_composite (self):
         a, b, c = CompositeEstimate(self.first, self.second)
