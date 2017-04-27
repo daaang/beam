@@ -49,6 +49,10 @@ class GivenNothing (unittest.TestCase):
         assert_that(calling(Estimate).with_args(0, 1, 2),
                     raises(ValueError))
 
+    def test_cannot_make_empty_composite_estimate (self):
+        assert_that(calling(CompositeEstimate).with_args(),
+                    raises(TypeError))
+
 class GivenOneEstimate (unittest.TestCase):
 
     def setUp (self):
