@@ -75,3 +75,6 @@ class TestTwoEstimates (GivenTwoEstimates):
         assert_that(a, is_(equal_to(2)))
         assert_that(b, is_(equal_to(3)))
         assert_that(c, is_(equal_to(5)))
+
+    def test_can_become_composite (self):
+        c = CompositeEstimate(self.first, self.second)
