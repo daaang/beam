@@ -44,3 +44,7 @@ class NothingTest (unittest.TestCase):
 
     def test_all_cases_can_be_equal (self):
         e = Estimate(1, 1, 1) # no exception
+
+    def test_all_cases_must_be_greater_than_zero (self):
+        assert_that(calling(Estimate).with_args(0, 1, 2),
+                    raises(ValueError))

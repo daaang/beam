@@ -35,6 +35,9 @@ cdef class Estimate:
             raise ValueError("the worst case must not be smaller than"
                     " either other case")
 
+        if self.best_case < 1:
+            raise ValueError("all estimates must be greater than zero")
+
     @property
     def best (self):
         return self.best_case
