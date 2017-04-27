@@ -20,3 +20,7 @@ cdef class Estimate:
 
     def __init__ (self, best, expected, worst):
         pass
+
+    @property
+    def best (self):
+        return 1
