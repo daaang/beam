@@ -18,7 +18,7 @@
 from hamcrest import *
 import unittest
 
-from beam.estimates import Estimate
+from beam.estimates import Estimate, CompositeEstimate
 
 class GivenNothing (unittest.TestCase):
 
