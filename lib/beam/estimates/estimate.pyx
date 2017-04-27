@@ -27,6 +27,10 @@ cdef class Estimate:
         self.expected_case = expected
         self.worst_case = worst
 
+        if self.best_case > self.expected_case:
+            raise ValueError("the best case must not be larger than"
+                    " either other case")
+
     @property
     def best (self):
         return self.best_case
