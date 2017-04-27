@@ -20,31 +20,14 @@ SETUP = $(PYTHON3) setup.py
 INSTALL = install
 bindir = ~/bin
 
-PY_FILES = setup.py
-PY_FILES += lib/beam/__init__.py
-PY_FILES += lib/beam/emoji_lib/__init__.py
-PY_FILES += lib/beam/estimates/__init__.py
-PY_FILES += lib/beam/lilconf/__init__.py
-PY_FILES += lib/beam/lilconf/shell_generation/__init__.py
+.PHONY: build install clean test
 
-PYX_FILES = lib/beam/config.pyx
-PYX_FILES += lib/beam/rst_table.pyx
-PYX_FILES += lib/beam/emoji_lib/duples.pyx
-PYX_FILES += lib/beam/emoji_lib/git.pyx
-PYX_FILES += lib/beam/emoji_lib/sub.pyx
-PYX_FILES += lib/beam/estimates/composite.pyx
-PYX_FILES += lib/beam/estimates/estimate.pyx
-PYX_FILES += lib/beam/lilconf/shell_generation/shell_literal.pyx
-PYX_FILES += lib/beam/lilconf/shell_generation/structures.pyx
-
-build: setup.py $(PY_FILES) $(PYX_FILES)
+build:
 	$(SETUP) build
 
 dist: build
 	$(SETUP) sdist
 	$(SETUP) bdist_wheel
-
-.PHONY: install clean test
 
 install: build
 	$(SETUP) install
