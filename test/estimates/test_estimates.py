@@ -37,3 +37,7 @@ class NothingTest (unittest.TestCase):
     def test_best_case_cannot_be_worse_than_expected_case (self):
         assert_that(calling(Estimate).with_args(2, 1, 3),
                     raises(ValueError))
+
+    def test_worst_case_cannot_be_better_than_expected_case (self):
+        assert_that(calling(Estimate).with_args(1, 3, 2),
+                    raises(ValueError))
