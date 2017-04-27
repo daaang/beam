@@ -27,7 +27,7 @@ cdef class Estimate:
         self.expected_case = expected
         self.worst_case = worst
 
-        self.assert_valid()
+        self.validate_our_estimates()
 
     @property
     def best (self):
@@ -41,7 +41,7 @@ cdef class Estimate:
     def worst (self):
         return self.worst_case
 
-    cdef assert_valid (self):
+    cdef validate_our_estimates (self):
         self.assert_best_case_is_best()
         self.assert_worst_case_is_worst()
         self.assert_all_estimates_are_positive()
