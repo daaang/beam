@@ -27,3 +27,10 @@ class NothingTest (unittest.TestCase):
         assert_that(e.best, is_(equal_to(1)))
         assert_that(e.expected, is_(equal_to(2)))
         assert_that(e.worst, is_(equal_to(3)))
+
+    @unittest.skip
+    def test_different_properties_are_stored (self):
+        e = Estimate(2, 4, 8)
+        assert_that(e.best, is_(equal_to(2)))
+        assert_that(e.expected, is_(equal_to(4)))
+        assert_that(e.worst, is_(equal_to(8)))
