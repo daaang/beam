@@ -22,4 +22,5 @@ from beam.estimates import Estimate
 
 class NothingTest (unittest.TestCase):
 
-    def test_nothing (self): pass
+    def test_properties_are_stored (self):
+        e = Estimate(1, 2, 3)

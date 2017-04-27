@@ -16,4 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
-Estimate = None
+cdef class Estimate:
+
+    def __init__ (self, best_case, expected_case, worst_case):
+        pass
