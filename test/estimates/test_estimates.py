@@ -54,6 +54,14 @@ class GivenOneEstimate (unittest.TestCase):
     def setUp (self):
         self.first = Estimate(1, 4, 9)
 
+class GivenTwoEstimates (GivenOneEstimate):
+
+    def setUp (self):
+        super().setUp()
+        self.second = Estimate(2, 3, 5)
+
+class TestOneEstimate (GivenOneEstimate):
+
     def test_can_set_as_triple (self):
         a, b, c = self.first
         assert_that(a, is_(equal_to(1)))
