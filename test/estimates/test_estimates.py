@@ -26,3 +26,4 @@ class NothingTest (unittest.TestCase):
         e = Estimate(1, 2, 3)
         assert_that(e.best, is_(equal_to(1)))
         assert_that(e.expected, is_(equal_to(2)))
+        assert_that(e.worst, is_(equal_to(3)))
