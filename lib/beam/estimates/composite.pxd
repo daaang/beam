@@ -16,11 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
-cdef class CompositeEstimate:
+from .estimate cimport Estimate
 
-    def __init__ (self, *args):
-        cdef int means = sum(e.best + (4*e.expected) + e.worst for e in args)
-        cdef int stddevs = sum(e.worst - e.best for e in args)
-        cdef int expected = sum(e.expected for e in args)
-
-        super().__init__(6, 7, 10)
+cdef class CompositeEstimate (Estimate):
+    pass
