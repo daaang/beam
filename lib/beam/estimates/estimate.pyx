@@ -29,12 +29,12 @@ cdef class Estimate:
 
     @property
     def best (self):
-        return 1
+        return self.best_case
 
     @property
     def expected (self):
-        return 2
+        return self.expected_case
 
     @property
     def worst (self):
-        return 3
+        return self.worst_case
