@@ -21,4 +21,8 @@ from .estimate cimport Estimate
 cdef class CompositeEstimate (Estimate):
 
     def __init__ (self, *args):
+        cdef int means = sum(e.best + (4*e.expected) + e.worst for e in args)
+        cdef int stddevs = sum(e.worst - e.best for e in args)
+        cdef int expected = sum(e.expected for e in args)
+
         super().__init__(6, 7, 10)
