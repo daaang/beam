@@ -27,16 +27,7 @@ cdef class Estimate:
         self.expected_case = expected
         self.worst_case = worst
 
-        if self.best_case > self.expected_case:
-            raise ValueError("the best case must not be larger than"
-                    " either other case")
-
-        if self.worst_case < self.expected_case:
-            raise ValueError("the worst case must not be smaller than"
-                    " either other case")
-
-        if self.best_case < 1:
-            raise ValueError("all estimates must be greater than zero")
+        self.assert_valid()
 
     @property
     def best (self):
@@ -49,3 +40,15 @@ cdef class Estimate:
     @property
     def worst (self):
         return self.worst_case
+
+    cdef assert_valid (self):
+        if self.best_case > self.expected_case:
+            raise ValueError("the best case must not be larger than"
+                    " either other case")
+
+        if self.worst_case < self.expected_case:
+            raise ValueError("the worst case must not be smaller than"
+                    " either other case")
+
+        if self.best_case < 1:
+            raise ValueError("all estimates must be greater than zero")
