@@ -18,10 +18,6 @@
 
 cdef class Estimate:
 
-    cdef int best_case
-    cdef int expected_case
-    cdef int worst_case
-
     def __init__ (self, best, expected, worst):
         self.best_case = best
         self.expected_case = expected

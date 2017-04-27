@@ -16,8 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
-from .estimate cimport Estimate
+cdef class Estimate:
+    cdef int best_case
+    cdef int expected_case
+    cdef int worst_case
 
-cdef class CompositeEstimate (Estimate):
-
-    pass
+    cdef validate_our_estimates (self)
+    cdef assert_best_case_is_best (self)
+    cdef assert_worst_case_is_worst (self)
+    cdef assert_all_estimates_are_positive (self)
