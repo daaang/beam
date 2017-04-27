@@ -21,4 +21,4 @@ from .estimate cimport Estimate
 cdef class CompositeEstimate (Estimate):
 
     def __init__ (self, *args):
-        super().__init__(1, 2, 3)
+        super().__init__(6, 7, 10)
