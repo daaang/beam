@@ -72,6 +72,10 @@ class TestOneEstimate (GivenOneEstimate):
         assert_that(b, is_(equal_to(4)))
         assert_that(c, is_(equal_to(9)))
 
+    def test_same_as_composite (self):
+        assert_that(list(CompositeEstimate(self.first)),
+                    is_(equal_to([1, 4, 9])))
+
 class TestTwoEstimates (GivenTwoEstimates):
 
     def test_can_set_as_triple (self):
