@@ -56,3 +56,4 @@ class GivenOneEstimate (unittest.TestCase):
 
     def test_can_set_as_triple (self):
         a, b, c = self.first
+        assert_that(a, is_(equal_to(1)))

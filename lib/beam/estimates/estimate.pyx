@@ -42,7 +42,9 @@ cdef class Estimate:
         return self.worst_case
 
     def __iter__ (self):
-        return iter((None,) * 3)
+        yield 1
+        yield None
+        yield None
 
     cdef validate_our_estimates (self):
         self.assert_best_case_is_best()
