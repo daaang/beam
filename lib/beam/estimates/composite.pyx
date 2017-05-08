@@ -36,15 +36,9 @@ cdef class CompositeEstimate:
 
         expected += sum(e.expected for e in args)
 
-        if args:
-            super().__init__(self.ceiling_divide_by_six(means - stddevs),
-                             expected,
-                             self.ceiling_divide_by_six(means + stddevs))
-
-        else:
-            super().__init__(first_estimate.best,
-                             first_estimate.expected,
-                             first_estimate.worst)
+        super().__init__(self.ceiling_divide_by_six(means - stddevs),
+                         expected,
+                         self.ceiling_divide_by_six(means + stddevs))
 
     cdef int get_sum_of_means_times_six (self, estimates):
         return sum(self.get_mean_times_six(x) for x in estimates)
