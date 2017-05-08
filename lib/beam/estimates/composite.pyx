@@ -19,6 +19,15 @@
 cdef class CompositeEstimate:
 
     def __init__ (self, first_estimate, *args):
+        if args:
+            self.init_with_many_estimates(first_estimate, *args)
+
+        else:
+            super().__init__(first_estimate.best,
+                             first_estimate.expected,
+                             first_estimate.worst)
+
+    def init_with_many_estimates (self, first_estimate, *args):
         cdef int means = self.get_sum_of_means_times_six(
                                 (first_estimate,) + args)
         cdef int stddevs = self.get_sum_of_standard_deviations_times_six(
