@@ -19,7 +19,7 @@
 cdef class CompositeEstimate:
 
     def __init__ (self, first_estimate, *args):
-        cdef int means = self.get_all_means_times_six(
+        cdef int means = self.get_sum_of_means_times_six(
                                 (first_estimate,) + args)
         cdef int stddevs = first_estimate.worst - first_estimate.best
         cdef int expected = first_estimate.expected
@@ -37,5 +37,5 @@ cdef class CompositeEstimate:
                              first_estimate.expected,
                              first_estimate.worst)
 
-    cdef int get_all_means_times_six (self, args):
+    cdef int get_sum_of_means_times_six (self, args):
         return sum(self.get_mean_times_six(x) for x in args)
