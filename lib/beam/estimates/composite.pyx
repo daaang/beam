@@ -20,21 +20,17 @@ cdef class CompositeEstimate:
 
     def __init__ (self, first_estimate, *args):
         if args:
-            self.init_with_many_estimates(first_estimate, *args)
+            self.init_with_many_estimates((first_estimate,) + args)
 
         else:
             super().__init__(first_estimate.best,
                              first_estimate.expected,
                              first_estimate.worst)
 
-    def init_with_many_estimates (self, first_estimate, *args):
-        cdef int means = self.get_sum_of_means_times_six(
-                                (first_estimate,) + args)
-        cdef int stddevs = self.get_sum_of_standard_deviations_times_six(
-                                (first_estimate,) + args)
-        cdef int expected = first_estimate.expected
-
-        expected += sum(e.expected for e in args)
+    def init_with_many_estimates (self, args):
+        cdef int means = self.get_sum_of_means_times_six(args)
+        cdef int stddevs = self.get_sum_of_standard_deviations_times_six(args)
+        cdef int expected = sum(x.expected for x in args)
 
         super().__init__(self.ceiling_divide_by_six(means - stddevs),
                          expected,
