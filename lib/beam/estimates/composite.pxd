@@ -25,3 +25,5 @@ cdef class CompositeEstimate (Estimate):
 
     cdef inline int ceiling_divide_by_six (self, int x):
         return (x + 5) // 6
+
+    cdef int get_all_means_times_six (self, args)
