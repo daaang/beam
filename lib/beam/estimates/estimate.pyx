@@ -40,6 +40,9 @@ cdef class Estimate:
     def get_mean_times_six (self):
         return 4*self.expected + self.best + self.worst
 
+    def get_standard_deviation_times_six (self):
+        return self.worst - self.best
+
     def __iter__ (self):
         yield self.best
         yield self.expected

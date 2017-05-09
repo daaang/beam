@@ -36,16 +36,18 @@ cdef class CompositeEstimate:
     def expected (self):
         return sum(x.expected for x in self.sub_estimates)
 
+    def get_mean_times_six (self):
+        return sum(x.get_mean_times_six()
+                   for x in self.sub_estimates)
+
+    def get_standard_deviation_times_six (self):
+        return sum(x.get_standard_deviation_times_six()
+                   for x in self.sub_estimates)
+
     def init_with_many_estimates (self):
-        cdef int means = self.get_sum_of_means_times_six()
-        cdef int stddevs = self.get_sum_of_standard_deviations_times_six()
+        cdef int means = self.get_mean_times_six()
+        cdef int stddevs = self.get_standard_deviation_times_six()
 
         super().__init__(ceiling_divide_by_six(means - stddevs),
                          ceiling_divide_by_six(means),
                          ceiling_divide_by_six(means + stddevs))
-
-    cdef int get_sum_of_means_times_six (self):
-        return sum(x.get_mean_times_six() for x in self.sub_estimates)
-
-    cdef int get_sum_of_standard_deviations_times_six (self):
-        return sum(x.worst - x.best for x in self.sub_estimates)

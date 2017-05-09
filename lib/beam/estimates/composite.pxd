@@ -21,6 +21,3 @@ from .estimate cimport Estimate
 cdef class CompositeEstimate (Estimate):
 
     cdef tuple sub_estimates
-
-    cdef int get_sum_of_means_times_six (self)
-    cdef int get_sum_of_standard_deviations_times_six (self)
