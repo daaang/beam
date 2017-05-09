@@ -24,14 +24,6 @@ cdef class CompositeEstimate:
     def __init__ (self, first_estimate, *args):
         self.sub_estimates = (first_estimate,) + args
 
-        if args:
-            self.init_with_many_estimates()
-
-        else:
-            super().__init__(first_estimate.best,
-                             first_estimate.expected,
-                             first_estimate.worst)
-
     @property
     def best (self):
         if len(self.sub_estimates) == 1:
@@ -61,11 +53,3 @@ cdef class CompositeEstimate:
     def get_standard_deviation_times_six (self):
         return sum(x.get_standard_deviation_times_six()
                    for x in self.sub_estimates)
-
-    def init_with_many_estimates (self):
-        cdef int means = self.get_mean_times_six()
-        cdef int stddevs = self.get_standard_deviation_times_six()
-
-        super().__init__(ceiling_divide_by_six(means - stddevs),
-                         ceiling_divide_by_six(means),
-                         ceiling_divide_by_six(means + stddevs))
