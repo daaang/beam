@@ -37,6 +37,9 @@ cdef class Estimate:
     def worst (self):
         return self.worst_case
 
+    def get_mean_times_six (self):
+        return 4*self.expected + self.best + self.worst
+
     def __iter__ (self):
         yield self.best
         yield self.expected

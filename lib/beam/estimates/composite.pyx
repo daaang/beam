@@ -16,6 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
+cdef inline int ceiling_divide_by_six (x):
+    return (x + 5) // 6
+
 cdef class CompositeEstimate:
 
     def __init__ (self, first_estimate, *args):
@@ -37,12 +40,12 @@ cdef class CompositeEstimate:
         cdef int means = self.get_sum_of_means_times_six()
         cdef int stddevs = self.get_sum_of_standard_deviations_times_six()
 
-        super().__init__(self.ceiling_divide_by_six(means - stddevs),
-                         self.ceiling_divide_by_six(means),
-                         self.ceiling_divide_by_six(means + stddevs))
+        super().__init__(ceiling_divide_by_six(means - stddevs),
+                         ceiling_divide_by_six(means),
+                         ceiling_divide_by_six(means + stddevs))
 
     cdef int get_sum_of_means_times_six (self):
-        return sum(self.get_mean_times_six(x) for x in self.sub_estimates)
+        return sum(x.get_mean_times_six() for x in self.sub_estimates)
 
     cdef int get_sum_of_standard_deviations_times_six (self):
         return sum(x.worst - x.best for x in self.sub_estimates)
