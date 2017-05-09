@@ -94,7 +94,6 @@ class TestTwoEstimates (GivenTwoEstimates):
                               Estimate(2, 3, 12))
         assert_that(list(c), is_(equal_to([9, 10, 16])))
 
-    @unittest.skip
     def test_composites_can_nest (self):
         third = Estimate(2, 3, 12)
 
