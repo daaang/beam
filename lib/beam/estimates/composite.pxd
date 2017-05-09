@@ -20,11 +20,13 @@ from .estimate cimport Estimate
 
 cdef class CompositeEstimate (Estimate):
 
+    cdef tuple sub_estimates
+
     cdef inline int get_mean_times_six (self, estimate):
         return estimate.best + (4*estimate.expected) + estimate.worst
 
     cdef inline int ceiling_divide_by_six (self, int x):
         return (x + 5) // 6
 
-    cdef int get_sum_of_means_times_six (self, estimates)
-    cdef int get_sum_of_standard_deviations_times_six (self, estimates)
+    cdef int get_sum_of_means_times_six (self)
+    cdef int get_sum_of_standard_deviations_times_six (self)

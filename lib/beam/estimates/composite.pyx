@@ -19,25 +19,27 @@
 cdef class CompositeEstimate:
 
     def __init__ (self, first_estimate, *args):
+        self.sub_estimates = (first_estimate,) + args
+
         if args:
-            self.init_with_many_estimates((first_estimate,) + args)
+            self.init_with_many_estimates()
 
         else:
             super().__init__(first_estimate.best,
                              first_estimate.expected,
                              first_estimate.worst)
 
-    def init_with_many_estimates (self, args):
-        cdef int means = self.get_sum_of_means_times_six(args)
-        cdef int stddevs = self.get_sum_of_standard_deviations_times_six(args)
-        cdef int expected = sum(x.expected for x in args)
+    def init_with_many_estimates (self):
+        cdef int means = self.get_sum_of_means_times_six()
+        cdef int stddevs = self.get_sum_of_standard_deviations_times_six()
+        cdef int expected = sum(x.expected for x in self.sub_estimates)
 
         super().__init__(self.ceiling_divide_by_six(means - stddevs),
                          expected,
                          self.ceiling_divide_by_six(means + stddevs))
 
-    cdef int get_sum_of_means_times_six (self, estimates):
-        return sum(self.get_mean_times_six(x) for x in estimates)
+    cdef int get_sum_of_means_times_six (self):
+        return sum(self.get_mean_times_six(x) for x in self.sub_estimates)
 
-    cdef int get_sum_of_standard_deviations_times_six (self, estimates):
-        return sum(x.worst - x.best for x in estimates)
+    cdef int get_sum_of_standard_deviations_times_six (self):
+        return sum(x.worst - x.best for x in self.sub_estimates)
