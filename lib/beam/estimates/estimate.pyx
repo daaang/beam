@@ -60,24 +60,7 @@ cdef class Estimate:
                 or self.worst != rhs.worst
 
         else:
-            self_avg = 4*self.expected + self.best + self.worst
-            rhs_avg = 4*rhs.expected + rhs.best + rhs.worst
-
-            if comparison_id == 0:
-                return self_avg < rhs_avg
-
-            elif comparison_id == 1:
-                return self_avg <= rhs_avg
-
-            elif comparison_id == 4:
-                return self_avg > rhs_avg
-
-            elif comparison_id == 5:
-                return self_avg >= rhs_avg
-
-            else:
-                raise ValueError("Unexpected compare: {:d}".format(
-                                comparison_id))
+            return False
 
     def __repr__ (self):
         return "<{} {:d} {:d} {:d}>".format(
