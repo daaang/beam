@@ -29,13 +29,16 @@ cdef class CompositeEstimate:
                              first_estimate.expected,
                              first_estimate.worst)
 
+    @property
+    def expected (self):
+        return sum(x.expected for x in self.sub_estimates)
+
     def init_with_many_estimates (self):
         cdef int means = self.get_sum_of_means_times_six()
         cdef int stddevs = self.get_sum_of_standard_deviations_times_six()
-        cdef int expected = sum(x.expected for x in self.sub_estimates)
 
         super().__init__(self.ceiling_divide_by_six(means - stddevs),
-                         expected,
+                         self.ceiling_divide_by_six(means),
                          self.ceiling_divide_by_six(means + stddevs))
 
     cdef int get_sum_of_means_times_six (self):

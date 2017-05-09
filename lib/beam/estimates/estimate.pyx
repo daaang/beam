@@ -38,9 +38,9 @@ cdef class Estimate:
         return self.worst_case
 
     def __iter__ (self):
-        yield self.best_case
-        yield self.expected_case
-        yield self.worst_case
+        yield self.best
+        yield self.expected
+        yield self.worst
 
     def __richcmp__ (self, rhs, comparison_id):
         if comparison_id == 2:
