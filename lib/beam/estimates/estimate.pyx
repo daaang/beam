@@ -42,6 +42,44 @@ cdef class Estimate:
         yield self.expected_case
         yield self.worst_case
 
+    def __richcmp__ (self, rhs, comparison_id):
+        if comparison_id == 2:
+            return self.best == rhs.best \
+               and self.expected == rhs.expected \
+               and self.worst == rhs.worst
+
+        elif comparison_id == 3:
+            return self.best != rhs.best \
+                or self.expected != rhs.expected \
+                or self.worst != rhs.worst
+
+        else:
+            self_avg = 4*self.expected + self.best + self.worst
+            rhs_avg = 4*rhs.expected + rhs.best + rhs.worst
+
+            if comparison_id == 0:
+                return self_avg < rhs_avg
+
+            elif comparison_id == 1:
+                return self_avg <= rhs_avg
+
+            elif comparison_id == 4:
+                return self_avg > rhs_avg
+
+            elif comparison_id == 5:
+                return self_avg >= rhs_avg
+
+            else:
+                raise ValueError("Unexpected compare: {:d}".format(
+                                comparison_id))
+
+    def __repr__ (self):
+        return "<{} {:d} {:d} {:d}>".format(
+                self.__class__.__name__,
+                self.best,
+                self.expected,
+                self.worst)
+
     cdef validate_our_estimates (self):
         self.assert_best_case_is_best()
         self.assert_worst_case_is_worst()
