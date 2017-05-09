@@ -33,6 +33,15 @@ cdef class CompositeEstimate:
                              first_estimate.worst)
 
     @property
+    def best (self):
+        if len(self.sub_estimates) == 1:
+            return self.sub_estimates[0].best
+
+        else:
+            return ceiling_divide_by_six(self.get_mean_times_six()
+                    - self.get_standard_deviation_times_six())
+
+    @property
     def expected (self):
         return sum(x.expected for x in self.sub_estimates)
 
