@@ -41,9 +41,6 @@ clean:
 test: build
 	(for libdir in build/lib*; do \
 	  echo "PYTHONPATH=\"$$libdir\""; \
-	  PYTHONPATH="$$libdir" $(PYTHON3) -m unittest || exit; done)
-	(for libdir in build/lib*; do \
-	  echo "PYTHONPATH=\"$$libdir\""; \
 	  PYTHONPATH="$$libdir" mamba || exit; done)
 	find test -name '*.bats' | xargs bats
 
