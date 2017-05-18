@@ -16,40 +16,46 @@
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
 
-source test/bats/git-emoji/includes.sh
+source test/git-emoji/includes.sh
 
 setup() {
   filename="`mktemp XXXXXX.txt`"
+  cat <<EOF > "$filename"
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+#
+# Changes to be committed:
+#	[etc]
+#
+# ------------------------ >8 ------------------------
+# Do not touch the line above.
+# Everything below will be removed.
+maybe some diff stuff here
+EOF
+  git_emoji --ed-commit-msg "$filename"
+  status="$?"
 }
 
 teardown() {
   rm "$filename"
 }
 
-@test "git-emoji --ed-commit-msg appends to weird commit messages" {
-  cat <<\EOF > "$filename"
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-# On branch master
-maybe some diff stuff here
-EOF
-  git_emoji --ed-commit-msg "$filename"
+@test "git-emoji --ed-commit-msg succeeds" {
+  [ "$status" = 0 ]
+}
+
+@test "git-emoji --ed-commit-msg doesn't change the last line" {
+  [ "`tail -n 1 $filename`" = "maybe some diff stuff here" ]
+}
+
+@test "git-emoji --ed-commit-msg doesn't change the first ten lines" {
+  run cat "$filename"
+  [ "${lines[9]}" = "# Everything below will be removed." ]
+}
+
+@test "git-emoji --ed-commit-msg does add the table" {
   run cat "$filename"
   pattern='^# =* =* =* =*$'
-  [ "${lines[3]}" = "maybe some diff stuff here" ]
-  [[ ${lines[5]} =~ $pattern ]]
-}
-
-@test "git-emoji --ed-commit-msg can deal with noeol files" {
-  echo -n "no trailing newline" > "$filename"
-  git_emoji --ed-commit-msg "$filename"
-  run cat "$filename"
-  [ "${lines[0]}" = "no trailing newline" ]
-  [ "${lines[1]}" = "#" ]
-}
-
-@test "git-emoji | head catches BrokenPipeError" {
-  git_emoji 2> "$filename" | head -n 1
-  cat "$filename"
-  ! [ -s "$filename" ]
+  [[ ${lines[11]} =~ $pattern ]]
 }
