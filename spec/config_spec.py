@@ -15,7 +15,10 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with beam. If not, see <http://www.gnu.org/licenses/>.
+from hamcrest import *
 
-with description("nothing"):
-    with it("passes"):
-        pass
+from beam.config import Configuration
+
+with description("Configuration"):
+    with it("can be created"):
+        config = Configuration()
