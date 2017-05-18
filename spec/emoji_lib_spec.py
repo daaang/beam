@@ -81,3 +81,12 @@ with description("the sub_emoji() method"):
     with it("can deal with multiple emojis and text"):
         assert_that(sub_emoji("both :art: and :muscle: at once"),
                     is_(equal_to("both 🎨 and 💪 at once")))
+
+with description("the sub_emoji_term_io() method"):
+    with it("adds space to emoji"):
+        assert_that(
+                sub_emoji_term_io("both :art: and :muscle: at once"),
+                is_(equal_to("both 🎨  and 💪  at once")))
+
+    with it("strips trailing newlines"):
+        assert_that(sub_emoji_term_io("hey\n"), "hey")
