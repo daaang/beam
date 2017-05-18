@@ -20,7 +20,7 @@ SETUP = $(PYTHON3) setup.py
 INSTALL = install
 bindir = ~/bin
 
-.PHONY: build install clean test
+.PHONY: build install clean test describe
 
 build:
 	$(SETUP) build
@@ -46,3 +46,8 @@ test: build
 	  echo "PYTHONPATH=\"$$libdir\""; \
 	  PYTHONPATH="$$libdir" mamba || exit; done)
 	find test -name '*.bats' | xargs bats
+
+describe: build
+	(for libdir in build/lib*; do \
+	  echo "PYTHONPATH=\"$$libdir\""; \
+	  PYTHONPATH="$$libdir" mamba -f documentation || exit; done)
