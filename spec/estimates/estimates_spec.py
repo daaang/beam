@@ -19,43 +19,41 @@ from hamcrest import *
 
 from beam.estimates import Estimate, CompositeEstimate
 
-class Mod: pass
-
 with description("an Estimate object"):
     with context("inited with (1, 2, 3)"):
         with before.each:
-            Mod.e = Estimate(1, 2, 3)
+            self.e = Estimate(1, 2, 3)
 
         with it("has a best case of 1"):
-            assert_that(Mod.e.best, is_(equal_to(1)))
+            assert_that(self.e.best, is_(equal_to(1)))
 
         with it("has an expected case of 2"):
-            assert_that(Mod.e.expected, is_(equal_to(2)))
+            assert_that(self.e.expected, is_(equal_to(2)))
 
         with it("has a worst case of 3"):
-            assert_that(Mod.e.worst, is_(equal_to(3)))
+            assert_that(self.e.worst, is_(equal_to(3)))
 
         with it("can be set as a triple"):
-            a, b, c = Mod.e
+            a, b, c = self.e
             assert_that(a, is_(equal_to(1)))
             assert_that(b, is_(equal_to(2)))
             assert_that(c, is_(equal_to(3)))
 
     with context("inited with (2, 4, 8)"):
         with before.each:
-            Mod.e = Estimate(2, 4, 8)
+            self.e = Estimate(2, 4, 8)
 
         with it("has a best case of 2"):
-            assert_that(Mod.e.best, is_(equal_to(2)))
+            assert_that(self.e.best, is_(equal_to(2)))
 
         with it("has an expected case of 4"):
-            assert_that(Mod.e.expected, is_(equal_to(4)))
+            assert_that(self.e.expected, is_(equal_to(4)))
 
         with it("has a worst case of 8"):
-            assert_that(Mod.e.worst, is_(equal_to(8)))
+            assert_that(self.e.worst, is_(equal_to(8)))
 
         with it("can be set as a triple"):
-            a, b, c = Mod.e
+            a, b, c = self.e
             assert_that(a, is_(equal_to(2)))
             assert_that(b, is_(equal_to(4)))
             assert_that(c, is_(equal_to(8)))
@@ -82,34 +80,34 @@ with description("a CompositeEstimate object"):
 
     with context("an estimate of (1, 4, 9) exists"):
         with before.each:
-            Mod.first = Estimate(1, 4, 9)
+            self.first = Estimate(1, 4, 9)
 
         with it("a one-item composite copies its only child"):
-            assert_that(CompositeEstimate(Mod.first),
-                        is_(equal_to(Mod.first)))
+            assert_that(CompositeEstimate(self.first),
+                        is_(equal_to(self.first)))
 
         with context("a second estimate of (2, 3, 5) exists"):
             with before.each:
-                Mod.second = Estimate(2, 3, 5)
+                self.second = Estimate(2, 3, 5)
 
             with it("their composite is (6, 7, 10)"):
-                assert_that(CompositeEstimate(Mod.first, Mod.second),
+                assert_that(CompositeEstimate(self.first, self.second),
                             is_(equal_to(Estimate(6, 7, 10))))
 
             with context("a third estimate of (2, 3, 12) exists"):
                 with before.each:
-                    Mod.third = Estimate(2, 3, 12)
-                    Mod.all_three = CompositeEstimate(Mod.first,
-                                                      Mod.second,
-                                                      Mod.third)
+                    self.third = Estimate(2, 3, 12)
+                    self.all_three = CompositeEstimate(self.first,
+                                                       self.second,
+                                                       self.third)
 
                 with it("their composite is (6, 7, 10)"):
-                    assert_that(Mod.all_three,
+                    assert_that(self.all_three,
                                 is_(equal_to(Estimate(9, 10, 16))))
 
                 with it("can produce an identical nested composite"):
                     assert_that(CompositeEstimate(
-                                    CompositeEstimate(Mod.first,
-                                                      Mod.second),
-                                    Mod.third),
-                                is_(equal_to(Mod.all_three)))
+                                    CompositeEstimate(self.first,
+                                                      self.second),
+                                    self.third),
+                                is_(equal_to(self.all_three)))

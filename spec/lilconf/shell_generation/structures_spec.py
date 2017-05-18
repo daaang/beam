@@ -19,53 +19,51 @@ from hamcrest import *
 
 from beam.lilconf.shell_generation.structures import BaseStructure
 
-class Mod:
-    pass
-
 with description("default BaseStructure object"):
     with before.each:
-        Mod.structure = BaseStructure()
+        self.structure = BaseStructure()
 
     with it("evaluates to false"):
-        assert_that(bool(Mod.structure), is_(equal_to(False)))
+        assert_that(bool(self.structure), is_(equal_to(False)))
 
     with it("converts to an empty str"):
-        assert_that(Mod.structure, has_string(""))
+        assert_that(self.structure, has_string(""))
 
     with it("has an empty indent str"):
-        assert_that(Mod.structure.indent, is_(equal_to("")))
+        assert_that(self.structure.indent, is_(equal_to("")))
 
     with it("has a two-space tab"):
-        assert_that(Mod.structure.tab, is_(equal_to("  ")))
+        assert_that(self.structure.tab, is_(equal_to("  ")))
 
     with it("doesn't allow indent deletion"):
-        assert_that(calling(delattr).with_args(Mod.structure, "indent"),
+        assert_that(calling(delattr).with_args(self.structure,
+                                               "indent"),
                     raises(NotImplementedError))
 
     with it("doesn't allow tab deletion"):
-        assert_that(calling(delattr).with_args(Mod.structure, "tab"),
+        assert_that(calling(delattr).with_args(self.structure, "tab"),
                     raises(NotImplementedError))
 
     with context("when setting a new indent"):
         with before.each:
-            Mod.structure.indent = "tabtabtab"
+            self.structure.indent = "tabtabtab"
 
         with it("remembers its indent"):
-            assert_that(Mod.structure.indent,
+            assert_that(self.structure.indent,
                         is_(equal_to("tabtabtab")))
 
         with it("still converts to an empty str"):
-            assert_that(Mod.structure, has_string(""))
+            assert_that(self.structure, has_string(""))
 
     with context("when setting a new tab"):
         with before.each:
-            Mod.structure.tab = "\t"
+            self.structure.tab = "\t"
 
         with it("remembers its tab"):
-            assert_that(Mod.structure.tab, is_(equal_to("\t")))
+            assert_that(self.structure.tab, is_(equal_to("\t")))
 
         with it("still has an empty indent"):
-            assert_that(Mod.structure.indent, is_(equal_to("")))
+            assert_that(self.structure.indent, is_(equal_to("")))
 
         with it("still converts to an empty str"):
-            assert_that(Mod.structure, has_string(""))
+            assert_that(self.structure, has_string(""))
