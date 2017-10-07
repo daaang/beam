@@ -38,6 +38,23 @@ def sh_quote (s):
     else:
         return "'{}'".format(s)
 
+def commit_unless_flocking():
+    proc = Popen(["git", "log", "--oneline", "--color=never"],
+                 stdout=PIPE)
+    output = proc.communicate()[0]
+    lines = output.split(b"\n")
+
+    for emoji in (line.split(b" ")[1] for line in lines):
+        if emoji == b":construction:":
+            return False
+
+        if emoji == b":muscle:":
+            continue
+
+        break
+
+    return commit()
+
 def commit():
     command = ["git commoji"]
     command.extend(sh_quote(x) for x in argv[1:])
@@ -50,7 +67,7 @@ if shell_success("make test"):
     if changes_have_been_made():
         shell_success("git add .")
 
-        if commit():
+        if commit_unless_flocking():
             shell_success("git vain")
             show_history()
             raise SystemExit(0)
