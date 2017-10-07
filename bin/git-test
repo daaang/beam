@@ -48,7 +48,7 @@ def commit_unless_flocking():
         if emoji == b":construction:":
             return False
 
-        if emoji == b":muscle:":
+        if emoji in (b":muscle:", b"Merge"):
             continue
 
         break
